@@ -17,7 +17,7 @@ if(isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_d
 
         $consultaEstudiante = "SELECT IDENTIDAD, CONTRA FROM ESTUDIANTES WHERE IDENTIDAD = \"$identidad\";";
 
-        $consultar = mysqli_query($connAdmin, $consultaEstudiante);
+        $consultar = mysqli_query($conn, $consultaEstudiante);
         $numero_resultados = mysqli_num_rows($consultar);
         $pedirOrden = mysqli_fetch_array($consultar);
         
@@ -43,7 +43,7 @@ if(isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_d
 
         $consultaDirectivo = "SELECT IDENTIDAD, CONTRA FROM DIRECTIVOS WHERE IDENTIDAD = \"$identidad\";";
 
-        $consultar = mysqli_query($connAdmin, $consultaDirectivo);
+        $consultar = mysqli_query($conn, $consultaDirectivo);
 
         $numero_resultados = mysqli_num_rows($consultar);
 
@@ -61,7 +61,7 @@ if(isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_d
     if(isset($_POST['iniciar_sesion_adminstradores'])){
 
         $consultaAdministrador = "SELECT IDENTIDAD, CONTRA FROM ADMINS WHERE IDENTIDAD = \"$identidad\";";
-        $consultar = mysqli_query($connAdmin, $consultaAdministrador);
+        $consultar = mysqli_query($conn, $consultaAdministrador);
         $numero_resultados = mysqli_num_rows($consultar);
         $pedirOrden = mysqli_fetch_array($consultar);
 
@@ -72,9 +72,6 @@ if(isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_d
             echo "fail admin";
         }
     }
-}else{
-        // echo "no trae nada";
-
 }
 
-mysqli_close($connAdmin);
+mysqli_close($conn);

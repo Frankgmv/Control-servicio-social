@@ -26,7 +26,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
 
         $verif = "SELECT CLAVE_ESTUDIANTES  FROM SUPER_ADMINS WHERE IDENTIDAD = '1011';";
 
-        $result = mysqli_query($connEstudiante, $verif);
+        $result = mysqli_query($conn, $verif);
 
         $guar = mysqli_fetch_array($result);
 
@@ -38,7 +38,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
             $consultaEstudiantes = "INSERT INTO ESTUDIANTES (IDENTIDAD, NOMBRES, APELLIDOS, EDAD, FECHA_REGISTRO, CELULAR, CORREO, ROL, GRADO, NOMBRE_TECNICA, CONTRA, TYC)
              VALUES ('$identidad', '$nombres', '$apellidos', $edad, '$fecha_actual', '$celular', '$correo', '$rol', '$grado', '$nombre_tecnica', '$contra_segura', '$tyc');";
 
-            $return = mysqli_query($connEstudiante, $consultaEstudiantes);
+            $return = mysqli_query($conn, $consultaEstudiantes);
 
             if (!$return) {
                 #mensaje de error
@@ -82,7 +82,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
 
         $verif = "SELECT CLAVE_DIRECTIVOS FROM SUPER_ADMINS WHERE IDENTIDAD = '1011';";
 
-        $result = mysqli_query($connDirectivo, $verif);
+        $result = mysqli_query($conn, $verif);
 
         $guar = mysqli_fetch_array($result);
 
@@ -93,7 +93,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
             $consulta = "INSERT INTO DIRECTIVOS (IDENTIDAD, NOMBRES, APELLIDOS, EDAD, FECHA_REGISTRO, CELULAR, CORREO, ROL, DONDE_LABORA, OCUPACION, CONTRA, TYC)
             VALUES ('$identidad', '$nombres', '$apellidos', $edad, '$fecha_actual', '$celular', '$correo', '$rol', '$Establecimiento', '$ocupacion', '$contra_segura', '$tyc');";
 
-            $return = mysqli_query($connDirectivo, $consulta);
+            $return = mysqli_query($conn, $consulta);
             echo "Entre: " . $guar['CLAVE_DIRECTIVOS'];
             if (!$return) {
                 #mensaje de error
@@ -138,7 +138,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
 
         $verificacion = "SELECT CLAVE_ADMINS FROM SUPER_ADMINS WHERE IDENTIDAD = '1011';";
 
-        $return = mysqli_query($connAdmin, $verificacion);
+        $return = mysqli_query($conn, $verificacion);
 
         $guardarAca = mysqli_fetch_array($return);
 
@@ -149,7 +149,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
             $consulta =  "INSERT INTO ADMINS (IDENTIDAD, NOMBRES, APELLIDOS, EDAD, FECHA_REGISTRO, CELULAR, CORREO, ROL, DONDE_LABORA, OCUPACION, CONTRA, TYC) VALUES('$identidad', '$nombres', '$apellidos', $edad, '$fecha_actual', '$celular', '$correo', '$rol', '$Establecimiento', '$ocupacion', '$contra_segura', '$tyc');";
 
 
-            $return = mysqli_query($connAdmin, $consulta);
+            $return = mysqli_query($conn, $consulta);
 
 
             if (!$return) {
@@ -179,6 +179,4 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
     header("Location:errores.php");
 }
 
-mysqli_close($connAdmin);
-mysqli_close($connDirectivo);
-mysqli_close($connEstudiante);
+mysqli_close($conn);

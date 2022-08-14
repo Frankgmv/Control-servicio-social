@@ -1,6 +1,10 @@
 -- https://www.db4free.net/signup.php
-create database control_servicio_social;
- use control_servicio_social;
+
+-- D2~+6SrMBnnPS[ZE
+
+-- create database control_servicio_social;
+-- use control_servicio_social;
+-- use id19409844_controlserviciosocial;
 
 CREATE TABLE SUPER_ADMINS(
 	IDENTIDAD VARCHAR(15) NOT NULL PRIMARY KEY,

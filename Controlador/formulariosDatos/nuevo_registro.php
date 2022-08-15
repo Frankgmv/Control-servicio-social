@@ -220,21 +220,21 @@ session_start();
 
                                 <div class="row my-3">
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="text" autofocus name="nombres" placeholder=" Nombres" class="text-center rounded-pill form-control form-control-sm mb-1 border ">
+                                        <input required type="text" autofocus name="nombres" placeholder=" Nombres" class="text-center rounded-pill form-control form-control-sm mb-1 border ">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                        <input type="text" autofocus name="apellidos" placeholder=" Apellidos" class="text-center rounded-pill form-control form-control-sm mb-1 border ">
+                                        <input required type="text" autofocus name="apellidos" placeholder=" Apellidos" class="text-center rounded-pill form-control form-control-sm mb-1 border ">
                                     </div>
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 ">
-                                        <input type="text" autofocus name="identidad" placeholder=" Identidad" class=" text-center rounded-pill form-control-sm form-control">
+                                        <input required type="text" autofocus name="identidad" placeholder=" Identidad" class=" text-center rounded-pill form-control-sm form-control">
                                     </div>
                                     <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                                        <input type="number" autofocus name="edad" placeholder=" Edad" class="rounded-pill form-control form-control-sm text-center">
+                                        <input required type="number" autofocus name="edad" placeholder=" Edad" class="rounded-pill form-control form-control-sm text-center">
                                     </div>
                                     <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                                        <input type="number" autofocus name="celular" placeholder=" Celular" class="rounded-pill form-control-sm form-control text-center">
+                                        <input required type="number" autofocus name="celular" placeholder=" Celular" class="rounded-pill form-control-sm form-control text-center">
                                     </div>
                                 </div>
                                 <div class="row mb-2">
@@ -244,17 +244,17 @@ session_start();
                                     <input type="hidden" readonly name="rol" value="<?php echo $_SESSION['rol']; ?>">
 
                                     <div class="col-12 px-4">
-                                        <input type="email" autofocus name="correo" placeholder=" Correo" class="text-center rounded-pill form-control form-control-sm mb-1 border ">
+                                        <input required type="email" autofocus name="correo" placeholder=" Correo" class="text-center rounded-pill form-control form-control-sm mb-1 border ">
                                     </div>
                                 </div>
                                 <div class="row mb-2">
 
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                         <!-- Labor -->
-                                        <input type="text" autofocus name="ocupacion" placeholder="Profesión" class=" text-center rounded-pill form-control form-control-sm ">
+                                        <input required type="text" autofocus name="ocupacion" placeholder="Profesión" class=" text-center rounded-pill form-control form-control-sm ">
                                     </div>
                                     <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                        <select name="donde_labora" autofocus class="text-center text-muted form-select form-select-sm rounded-pill">
+                                        <select required name="donde_labora" autofocus class="text-center text-muted form-select form-select-sm rounded-pill">
                                             <option value="0" selected disabled>¿En qué parte labora?</option>
                                             <option value="P. educativa">Parte educativa</option>
                                             <option value="P. recreativa">Parte recreativa</option>
@@ -267,15 +267,15 @@ session_start();
                             </div>
                             <div class="row">
                                 <div class="input-group small">
-                                    <input type="password" id="muestrate3" autofocus name="contra" placeholder="Crea tu contraseña" pattern="[A-Za-z0-9@#$%]{8-20}" title="" class="text-center rounded-pill mt-2 ms-2 bg-body mb-1 ps-3 border text-start rounded form-control form-control-sm input-group-text">
-                                    <input type="password" id="ClaveEspecial" autofocus name="ClaveEspecial" placeholder="Inserte la clave especial" title="Sin no la conoce solicítela al super administrador" class="bg-body rounded-pill mt-2 ms-2 mb-1 ps-3 border form-control-sm text-start rounded text-center form-control input-group-text">
+                                    <input required type="password" id="muestrate3" autofocus name="contra" placeholder="Crea tu contraseña" pattern="[A-Za-z0-9@#$%]{8-20}" title="" class="text-center rounded-pill mt-2 ms-2 bg-body mb-1 ps-3 border text-start rounded form-control form-control-sm input-group-text">
+                                    <input required type="password" id="ClaveEspecial" autofocus name="ClaveEspecial" placeholder="Inserte la clave especial" title="Sin no la conoce solicítela al super administrador" class="bg-body rounded-pill mt-2 ms-2 mb-1 ps-3 border form-control-sm text-start rounded text-center form-control input-group-text">
                                     <button onclick="Muestrate()" id="muestrate3" name="ver" type="button" class="btn btn-outline-body btn-sm border-0 rounded rounded-circle  input-group-text"><i class="fa-solid fa-eye"></i></button>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-evenly align-items-center">
                                 <div class="">
                                     <div class="form-check form-switch mt-sm-3">
-                                        <input type="checkbox" name="tyc" id="tyc" value="acepto" checked class="form-check form-switch ms-2 form-check-input ">
+                                        <input required type="checkbox" name="tyc" id="tyc" value="acepto" checked class="form-check form-switch ms-2 form-check-input ">
                                         <label for="tyc" class="ms-1 mt-1 form-check-label">Acepta T & C</label>
                                     </div>
                                 </div>

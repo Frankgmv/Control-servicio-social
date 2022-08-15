@@ -7,21 +7,14 @@ session_start();
 <head>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="Controlador/includes/recursos/faviivon.ico" type="image/x-icon">
     <link rel="stylesheet" href="Vista/custome_bootstrap/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Comforter&family=Supermercado+One&display=swap" rel="stylesheet">
     <title>Inicio</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--  font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://kit.fontawesome.com/aba0542b3c.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="">
@@ -138,15 +131,13 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-
-
     <?php if (isset($_SESSION['mensajeDeAlerta'])) { ?>
 
         <script>
             swal("<?php print $_SESSION['tituloDeAlerte']; ?>", " <?php print $_SESSION['mensajeDeAlerta']; ?> "
-                <?php if (isset($_SESSION['tipoAlerta'])) { ?>, "<?php print $_SESSION['tipoAlerta']; ?>"<?php } ?>
-                );
+                <?php if (isset($_SESSION['tipoAlerta'])) { ?>, "<?php print $_SESSION['tipoAlerta']; ?>"
+                <?php } ?>
+            );
         </script>
     <?php unset($_SESSION['mensajeDeAlerta'], $_SESSION['tituloDeAlerte'], $_SESSION['tipoAlerta']);
     } ?>

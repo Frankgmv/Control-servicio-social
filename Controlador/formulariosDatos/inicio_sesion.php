@@ -10,21 +10,14 @@ session_start();
 <html lang="en">
 
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../includes/recursos/faviivon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../Vista/custome_bootstrap/style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Comforter&family=Supermercado+One&display=swap" rel="stylesheet">
     <title>Inicio de sesión</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/aba0542b3c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://kit.fontawesome.com/aba0542b3c.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -83,6 +76,7 @@ session_start();
         </div>
     </main>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
         function Cambiar() {
             var elemento = document.getElementById('ver');
@@ -93,6 +87,19 @@ session_start();
             }
         }
     </script>
-</body> 
+
+
+    <?php if (isset($_SESSION['mensajeInicio'])) { ?>
+        <script>
+            swal("<?php print $_SESSION['tituloInicio']; ?>", " <?php print $_SESSION['mensajeInicio']; ?> "
+                <?php if (isset($_SESSION['tipoAlertaInicio'])) { ?>, "<?php print $_SESSION['tipoAlertaInicio']; ?>"
+                <?php } ?>
+            );
+        </script>
+    <?php unset($_SESSION['mensajeInicio'], $_SESSION['tituloInicio'], $_SESSION['tipoAlertaInicio']);
+    } ?>
+
+
+</body>
 
 </html>

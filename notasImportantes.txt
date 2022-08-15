@@ -1,5 +1,0 @@
-22/07/22  inicio el repositorio de Control del servicio social
-
-25/07 Se organizó el modelo MVC
-- TODO ajustar la nueva base de datos a los registros e inicios de sesión 
-

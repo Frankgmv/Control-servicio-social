@@ -14,9 +14,6 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
     $_SESSION['id'] = $identidad;
 
-    $_REQUEST['id'] = $identidad;
-
-
     if (isset($_POST['iniciar_sesion_estudiantes'])) {
 
         $consultaEstudiante = "SELECT IDENTIDAD, CONTRA FROM ESTUDIANTES WHERE IDENTIDAD = \"$identidad\";";
@@ -27,16 +24,13 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del estudiante
-            header('Location:../../Vista/perfiles/perfil_estudiante.php');
+            header('Location:../RecogerDatos/datos_estudiante.php');
         } else {
             // fail estudiante 
-            echo "paila $identidad <br>";
-            // mostrar las alertas al formulario de inicio
             $_SESSION['tipoAlertaInicio'] = "error";
             $_SESSION['tituloInicio'] = "Error";
             $_SESSION['mensajeInicio'] = "Usuario o Contraseña son incorrectos. ";
             header('Location:inicio_sesion.php');
-
         }
     }
 
@@ -52,13 +46,13 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del directivo
-            header('Location:../../Vista/perfiles/perfil_directivo.php');
+            header('Location:../RecogerDatos/datos_directivo.php');
         } else {
-            // La pelaste
-            echo "fail directivo";
-            $_SESSION['tipoAlerta'] = "error";
-            $_SESSION['titulo'] = "Error";
-            $_SESSION['mensajee'] = "Usuario o Contraseña son incorrectos. ";
+            // fail directivo 
+            $_SESSION['tipoAlertaInicio'] = "error";
+            $_SESSION['tituloInicio'] = "Error";
+            $_SESSION['mensajeInicio'] = "Usuario o Contraseña son incorrectos. ";
+            header('Location:inicio_sesion.php');
         }
     }
 
@@ -71,12 +65,13 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del admin
-            header('Location:../../Vista/perfiles/perfil_admin.php');
+            header('Location:../RecogerDatos/datos_admin.php');
         } else {
-            echo "fail admin";
-            $_SESSION['tipoAlerta'] = "error";
-            $_SESSION['titulo'] = "Error";
-            $_SESSION['mensajee'] = "Usuario o Contraseña son incorrectos. ";
+            // fail admin
+            $_SESSION['tipoAlertaInicio'] = "error";
+            $_SESSION['tituloInicio'] = "Error";
+            $_SESSION['mensajeInicio'] = "Usuario o Contraseña son incorrectos. ";
+            header('Location:inicio_sesion.php');
         }
     }
 }

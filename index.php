@@ -10,7 +10,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="Controlador/includes/recursos/faviivon.ico" type="image/x-icon">
     <link rel="stylesheet" href="Vista/custome_bootstrap/style.css">
-    <title>Inicio</title>
+    <title>Control de Servicio Social</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

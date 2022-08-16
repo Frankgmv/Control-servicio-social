@@ -24,7 +24,7 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del estudiante
-            header('Location:../RecogerDatos/datos_estudiante.php');
+            header('Location:../RecogerDatos/datos_estudiante/datos.php');
         } else {
             // fail estudiante 
             $_SESSION['tipoAlertaInicio'] = "error";
@@ -46,7 +46,7 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del directivo
-            header('Location:../RecogerDatos/datos_directivo.php');
+            header('Location:../RecogerDatos/datos_directivo/datos.php');
         } else {
             // fail directivo 
             $_SESSION['tipoAlertaInicio'] = "error";
@@ -65,7 +65,7 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del admin
-            header('Location:../RecogerDatos/datos_admin.php');
+            header('Location:../RecogerDatos/datos_admin/datos.php');
         } else {
             // fail admin
             $_SESSION['tipoAlertaInicio'] = "error";

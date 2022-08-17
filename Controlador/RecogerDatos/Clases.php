@@ -1,10 +1,10 @@
 <?php
  
- class Estudiante {
+//  class Estudiante {
     // Propiedades
 
     // métodos
- }
+//  }
 
 
 

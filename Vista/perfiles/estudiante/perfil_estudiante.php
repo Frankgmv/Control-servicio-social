@@ -2,6 +2,13 @@
 // include_once "../../Controlador/RecogerDatos/estudiante/datos.php";
 session_start();
 
+// cierre de sesiones
+if(isset($_SESSION['id'])) {
+    // include "../../../index.php";
+    // $_SESSION['mensajeDeAlerta'] = 
+    // $_SESSION['tipoAlerta']
+    // $_SESSION['tituloDeAlerte']
+}
 
 ?>
 
@@ -65,6 +72,7 @@ session_start();
         </div>
 
         <!-- style next to the comment -->
+        
 
     </main>
 
@@ -76,3 +84,6 @@ session_start();
 </body>
 
 </html>
+
+<?php // } 
+?>

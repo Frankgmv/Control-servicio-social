@@ -44,7 +44,7 @@
                     </p>
                     <div class="row pt-3">
                         <div class="col text-center">
-                            <a href="../../index.php" class="btn btn-outline-success     border-1 border-success rounded-pill btn-sm ">Volver al inicio.</a>
+                            <a href="../index.php" class="btn btn-outline-success     border-1 border-success rounded-pill btn-sm ">Volver al inicio.</a>
                         </div>
                         <div class="col text-center">
                             <!-- Button trigger modal -->

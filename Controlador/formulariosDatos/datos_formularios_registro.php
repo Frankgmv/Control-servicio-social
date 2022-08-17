@@ -175,8 +175,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
         }
     }
 } else {
-
-    header("Location:errores.php");
+    header("Location:../../Vista/errores.php");
 }
 
 mysqli_close($conn);

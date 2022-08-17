@@ -1,6 +1,8 @@
 <?php
 // include_once "../../Controlador/RecogerDatos/estudiante/datos.php";
 session_start();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +22,8 @@ session_start();
 </head>
 
 <body>
-    <header>
-
-        <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary  ">
+    <header class="container-fluid">
+        <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
             <a class="navbar-brand" href="#">
                 <div class="row">
 
@@ -31,26 +32,24 @@ session_start();
                     </div>
                     <h4 class="col-auto d-flex  align-items-center justify-content-start p-0 m-0 text-capitalize">
                         <strong class="d-none d-sm-block"><em> control de servicio social.</em></strong>
-                        <strong class="d-block d-sm-none"><em> Control De S. S.</em></strong>
+                        <strong class="d-block d-sm-none"><em> Control de S.</em></strong>
                     </h4>
                 </div>
             </a>
             <button class="navbar-toggler me-4" data-bs-target="#navegacion" data-bs-toggle="collapse" aria-controls="navegacion" aria-expanded="false" aria-label="menu de navegacion">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div id="navegacion" class="justify-content-lg-end collapse navbar-collapse ">
-                <ul class="h4 navbar-nav  mt-3">
-                    <!-- list-group-horizontal en el ul para abrir horizontal  -->
-                    <li class="nav-item text-start mx-1   text-capitalize">
-                        <a class=" text-light nav-link active   d-sm-inline  d-md-inline " href="/">Perfil.</a>
+            <div id="navegacion" class=" justify-content-sm-end collapse navbar-collapse">
+                <ul class="h4 navbar-nav  mt-3 list-group-horizontal justify-content-end">
+                    <li class="nav-item text-start mx-2">
+                        <a class="text-light nav-link active d-sm-inline  d-md-inline " title="Perfil" href="perfil_estudiante.php"><i class="fa-solid fa-circle-user" title="Perfil"></i></a>
                     </li>
-                    <li class="nav-item text-start mx-1   ">
-                        <a class="text-light nav-link active   d-sm-inline  d-md-inline" href="/">Tareas.</a>
-                        </a>
+                    <li class="nav-item text-start mx-2">
+                        <a class="text-light nav-link active d-sm-inline d-md-inline" href="tareas.php" title="Tareas"><i class="fa-solid fa-book"></i></a></a>
                     </li>
-                    <li class="nav-item text-start mx-1   ">
-                        <a class="text-light nav-link active   d-sm-inline  d-md-inline" href="/">Cerrar sesión.</a>
-                        </i>
+                    <li class="nav-item text-start mx-2">
+                        <a class="text-light nav-link active d-sm-inline d-md-inline" href="../Cerrar_sesiones.php" title="Cerrar sesión"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -58,12 +57,7 @@ session_start();
     <main>
 
     </main>
-    <!-- footer -->
-    <footer class="mt-3">
-    </footer>
-
-
-
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>

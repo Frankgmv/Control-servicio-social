@@ -1,29 +1,9 @@
 <?php
-
+include_once "../../../Modelo /conexion_db.php";
 // Clases para el estudiante.
+include_once "../Clases.php";
 
-'
-class Estudiante
-{
-    // Propiedades
-    
 
-    function __construct($id, )
-    {
-        $identidad =
-        $nombre =
-        $apellido =
-        $edad = 
-
-        
-    }
-    
-
-    // métodos
-}
-';
-
-include_once "../../../Modelo/conexion_db.php";
 
 $id = $_SESSION['id'];
 
@@ -40,15 +20,36 @@ if (isset($_SESSION['id'])) {
     foreach ($DatosPerfil as $key => $value) {
         echo $key . " : " . $value . " <br>";
     }
-    
-    var_dump($Datos_estudiante);
 } else {
     echo "<script> alert(\"Se produjo un error al extraer los datos del estudiante, Carpeta:Controlador/RecogerDatos/estudiante/datos.php\")</script>";
     header("Location:../../../index.php");
 }
 
-// $Datos_estudiante = new Estudiante();
+// $DatosPerfil['NOMBRES'];
+// $DatosPerfil['APELLIDOS'];
+// $DatosPerfil['EDAD'];
+// $DatosPerfil['FECHA_REGISTRO'];
+// $DatosPerfil['CELULAR'];
+// $DatosPerfil['CORREO'];
+// $DatosPerfil['ROL'];
+// $DatosPerfil['GRADO'];
+// $DatosPerfil['NOMBRE_TECNICA '];
 
-header("Location:../../../Vista/perfiles/estudiante/perfil_estudiante.php");
+
+// Creando instancia estudiante
+$Datos_estudiante = new Estudiante(
+$id,
+$DatosPerfil['NOMBRES'],
+$DatosPerfil['APELLIDOS'],
+$DatosPerfil['EDAD'],
+$DatosPerfil['FECHA_REGISTRO'],
+$DatosPerfil['CELULAR'],
+$DatosPerfil['CORREO'],
+$DatosPerfil['ROL'],
+$DatosPerfil['GRADO'],
+$DatosPerfil['NOMBRE_TECNICA ']
+);
+
+// header("Location:../../../Vista/perfiles/estudiante/perfil_estudiante.php");
 
 // include "../../../Vista/perfiles/estudiante/perfil_estudiante.php":

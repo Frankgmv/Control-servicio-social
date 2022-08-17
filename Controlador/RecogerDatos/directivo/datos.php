@@ -20,3 +20,7 @@ if(isset($_SESSION['id'])){
     
     
 } 
+
+header("../../../Vista/perfiles/directivo/perfil_directivo.php");
+
+// include "../../../Vista/perfiles/directivo/perfil_directivo.php";

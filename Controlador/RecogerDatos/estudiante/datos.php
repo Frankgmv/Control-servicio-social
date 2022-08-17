@@ -21,7 +21,6 @@ class Estudiante
 
     // métodos
 }
-
 ';
 
 include_once "../../../Modelo/conexion_db.php";
@@ -50,4 +49,6 @@ if (isset($_SESSION['id'])) {
 
 // $Datos_estudiante = new Estudiante();
 
-header("Location:../../../Vista/perfiles/perfil_estudiante.php");
+header("Location:../../../Vista/perfiles/estudiante/perfil_estudiante.php");
+
+// include "../../../Vista/perfiles/estudiante/perfil_estudiante.php":

@@ -15,29 +15,17 @@ if (isset($_SESSION['id'])) {
     $RetornoDatosPersonales = mysqli_query($conn, $datosPersonales);
     $DatosPerfil = mysqli_fetch_assoc($RetornoDatosPersonales);
 
-
-
+    $vector = [];
     foreach ($DatosPerfil as $key => $value) {
-        echo $key . " : " . $value . " <br>";
+        $vector[$key] = $value;
     }
-} else {
-    echo "<script> alert(\"Se produjo un error al extraer los datos del estudiante, Carpeta:Controlador/RecogerDatos/estudiante/datos.php\")</script>";
-    header("Location:../../../index.php");
-}
 
-// $DatosPerfil['NOMBRES'];
-// $DatosPerfil['APELLIDOS'];
-// $DatosPerfil['EDAD'];
-// $DatosPerfil['FECHA_REGISTRO'];
-// $DatosPerfil['CELULAR'];
-// $DatosPerfil['CORREO'];
-// $DatosPerfil['ROL'];
-// $DatosPerfil['GRADO'];
-// $DatosPerfil['NOMBRE_TECNICA '];
 
+
+echo "hola estudiante. <br>";
 
 // Creando instancia estudiante
-$Datos_estudiante = new Estudiante(
+$Estudiante = new Estudiante(
 $id,
 $DatosPerfil['NOMBRES'],
 $DatosPerfil['APELLIDOS'],
@@ -47,9 +35,16 @@ $DatosPerfil['CELULAR'],
 $DatosPerfil['CORREO'],
 $DatosPerfil['ROL'],
 $DatosPerfil['GRADO'],
-$DatosPerfil['NOMBRE_TECNICA ']
+$DatosPerfil['NOMBRE_TECNICA'],
 );
 
-// header("Location:../../../Vista/perfiles/estudiante/perfil_estudiante.php");
 
-// include "../../../Vista/perfiles/estudiante/perfil_estudiante.php":
+$_SESSION['vector'] = $vector;
+
+
+header("Location:../../../Vista/perfiles/estudiante/perfil_estudiante.php");
+
+} else {
+    echo "<script> alert(\"Se produjo un error al extraer los datos del estudiante, Carpeta:Controlador/RecogerDatos/estudiante/datos.php\")</script>";
+    header("Location:../../../index.php");
+}

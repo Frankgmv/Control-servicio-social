@@ -40,7 +40,7 @@ if (isset($_SESSION['id'])) {
     $_SESSION['vector'] = $vector;
 
 
-    // header("Location:../../../Vista/perfiles/estudiante/perfil_estudiante.php");
+    header("Location:../../../Vista/perfiles/estudiante/perfil_estudiante.php");
 
 } else {
     echo "<script> alert(\"Se produjo un error al extraer los datos del estudiante, Carpeta:Controlador/RecogerDatos/estudiante/datos.php\")</script>";

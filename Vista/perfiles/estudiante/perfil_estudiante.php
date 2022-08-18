@@ -47,14 +47,14 @@ if (isset($_SESSION['id'])) {
                 </button>
                 <div id="navegacion" class=" justify-content-sm-end collapse navbar-collapse">
                     <ul class="h4 navbar-nav  mt-3 list-group-horizontal justify-content-end">
-                        <li class="nav-item text-start mx-2">
-                            <a class="text-light nav-link active d-sm-inline  d-md-inline " title="Perfil" href="#"><i class="fa-solid fa-circle-user" title="Perfil"></i></a>
+                        <li class="nav-item text-start mx-2 h2">
+                            <a class=" text-light nav-link active d-sm-inline  d-md-inline  text-black-50" title="Perfil" href="#"><i class="fa-solid fa-circle-user" title="Perfil"></i></a>
                         </li>
-                        <li class="nav-item text-start mx-2">
-                            <a class="text-light nav-link active d-sm-inline d-md-inline" href="tareas.php" title="Tareas"><i class="fa-solid fa-book"></i></a></a>
+                        <li class="nav-item text-start mx-2 h2">
+                            <a class="text-light nav-link active d-sm-inline d-md-inline text-opacity-75" href="tareas.php" title="Tareas"><i class="fa-solid fa-book"></i></a></a>
                         </li>
-                        <li class="nav-item text-start mx-2">
-                            <a class="text-light nav-link active d-sm-inline d-md-inline" href="../Cerrar_sesiones.php" title="Cerrar sesión"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                        <li class="nav-item text-start mx-2 h2">
+                            <a class="text-light nav-link active d-sm-inline d-md-inline text-opacity-75" href="../Cerrar_sesiones.php" title="Cerrar sesión"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -73,81 +73,95 @@ if (isset($_SESSION['id'])) {
 
             <!-- style next to the comment -->
             <div class="border border-4 border-primary rounded-3">
-                <div class="bg-warning border-bottom border-3 border-primary text-center py-2">
+                <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
                     <!-- TODO utilizar una función para cambiar el icono de caras por otras -->
-                    <h1 class="text-light "><i class="fa-solid fa-user-astronaut"><b> <?php echo "Frank"; ?></b></i></h1>
+                    <!-- <h1 class="text-light "><i class="fa-solid fa-user-astronaut"><b> <?php echo ""; ?></b></i></h1> -->
+                    <h1 class="text-light "><i class="fa-solid fa-user-astronaut"></i> <b> <?php echo " Perfil de Frank "; ?></b> <i class="fa-solid fa-user-ninja"></i>
+                </h1>
                 </div>
                 <div class="mx-2">
                     <!-- hilera 1 -->
-                    <div class="row my-2">
-                        <div class="col-12 col-md-4 mb-2">
-                            <!-- Nombres -->
+                    <div class="row my-sm-3">
+                        <!-- Nombres -->
+                        <div class="col-12 col-sm-6 col-md-5 offset-md-1 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0">Nombres </span>
-                                <input type="text" value="<?php echo "Frank Giovany"; ?>" class="border-0 form-control rounded-4 text-center" readonly>
+                                <input type="text" value="<?php echo "Frank Giovany"; ?>" class=" border-0 form-control rounded-4 text-center" readonly>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 mb-2">
-                            <!-- Apellidos -->
+                        <!-- Apellidos -->
+                        <div class="col-12 col-sm-6 col-md-5 mb-2">
                             <div class="input-group">
-                                <span class="input-group-text">Apellidos </span>
-                                <input type="text" value="<?php echo "Muriel Velásquez"; ?>" class="form-control rounded-4 text-center" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-1">
-                            <!-- Identidad -->
-                            <div class="input-group">
-                                <span class="input-group-text">ID </span>
-                                <input type="text" value="<?php echo "1011689172"; ?>" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-1">
-                            <!-- Fecha de registro -->
-                            <div class="input-group">
-                                <span class="input-group-text">Fecha de registro </span>
-                                <input type="text" value="<?php echo "12-21-43"; ?>" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-1">
-                            <!-- celular -->
-                            <div class="input-group">
-                                <span class="input-group-text">Celular</span>
-                                <input type="text" value="<?php echo "30420403033"; ?>" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-1">
-                            <!-- horas totales -->
-                            <div class="input-group">
-                                <span class="input-group-text">Horas</span>
-                                <input type="text" value="<?php echo "12"; ?>" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-1">
-                            <!-- grado -->
-                            <div class="input-group">
-                                <span class="input-group-text">Grado</span>
-                                <input type="text" value="<?php echo "10°"; ?>" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-1">
-                            <!-- Media técnica -->
-                            <div class="input-group">
-                                <span class="input-group-text">Media técnica</span>
-                                <input type="text" value="<?php echo "Desarrollo de software"; ?>" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-1">
-                            <!-- Correo -->
-                            <div class="input-group">
-                                <span class="input-group-text">Correo </span>
-                                <input type="text" value="<?php echo "giovanyvelasquez200523@gmail.com"; ?>" class="form-control" readonly>
+                                <span class="input-group-text border-0">Apellidos </span>
+                                <input type="text" value="<?php echo "Muriel Velásquez"; ?>" class="border-0 form-control rounded-4 text-center" readonly>
                             </div>
                         </div>
                     </div>
+                    <!-- hilera 2 -->
+                    <div class="row my-sm-3">
+                        <!-- Identidad -->
+                        <div class="col-12 col-sm-4 col-md-4 offset-md-1 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text border-0"><i class="fa-solid fa-address-card"></i></span>
+                                <input type="text" value="<?php echo "1011689172"; ?>" class=" border-0 form-control text-center" readonly>
+                            </div>
+                        </div>
+                        <!-- Fecha de registro -->
+                        <div class="col-12 col-sm-4 col-md-3 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-calendar-days"></i></span>
+                                <input type="text" value="<?php echo "22-8-22"; ?>" class=" border-0 form-control text-center" readonly>
+                            </div>
+                        </div>
+                        <!-- grado -->
+                        <div class="col-12 col-sm-4 col-md-3 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text border-0 ">Grado</span>
+                                <input type="text" value="<?php echo "10°"; ?>" class=" border-0 form-control text-center" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- hilera 3 -->
+                    <div class="row my-sm-3">
+                        <!-- celular -->
+                        <div class="col-12 col-sm-6 offset-sm-1 col-lg-5 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-phone"></i></span>
+                                <input type="text" value="<?php echo "30420403033"; ?>" class=" border-0 form-control text-center" readonly>
+                            </div>
+                        </div>
+                        <div class="d-none d-lg-block col-2  text-center">
+                            <span class="border-0 h4"><i class="fa-solid fa-face-grin-beam-sweat"></i></span>
+                        </div>
+                        <!-- horas totales -->
+                        <div class="col-12 col-sm-4 col-lg-3  mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Horas</b></i> </span>
+                                <input type="text" value="<?php echo "12"; ?>" class=" border-0 form-control text-center" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- hilera 4 -->
+                    <div class="row my-sm-3">
+                        <!-- Media técnica -->
+                        <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-2  mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-chalkboard-user"><b> Técnica</b></i></span>
+                                <input type="text" value="<?php echo "Desarrollo de software"; ?>" class=" border-0 form-control text-center" readonly>
+                            </div>
+                        </div>
+                        <!-- Correo -->
+                        <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-0 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-at"></i></span>
+                                <input type="text" value="<?php echo "giovanyvelasquez200523@gmail.com"; ?>" class=" border-0 form-control text-center" readonly>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-
-
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

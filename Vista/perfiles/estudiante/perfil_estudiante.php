@@ -158,9 +158,9 @@ if (isset($_SESSION['id'])) {
                     <div class="row">
                         <?php $variable = 0;
                         // utilizar foreach
-                        while ($variable <= 4) { 
+                        while ($variable <= 4) {
                             $color = "success";
-                            ?>
+                        ?>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xx-3 col-xl-4 ">
                                 <div class=" border border-3 border-<?php echo $color ?> bg-secondary rounded-3 mb-2">
                                     <div class="row px-2 mt-1">

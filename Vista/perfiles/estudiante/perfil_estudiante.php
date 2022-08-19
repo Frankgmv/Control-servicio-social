@@ -80,7 +80,7 @@ if (!isset($_SESSION['id'])) {
                     </div>
                 </a>
                 <!-- <div class="mx-2 collapse show " id="perfil"> -->
-                <div class="mx-2 collapse" id="perfil">
+                <div class="mx-2 collapse show" id="perfil">
                     <!-- hilera 1 -->
                     <div class="row my-sm-3">
                         <!-- Nombres -->
@@ -171,66 +171,66 @@ if (!isset($_SESSION['id'])) {
                         </h2>
                     </div>
                 </a>
-                <div class="mx-2 my-2 px-2 collapse show " id="tareas">
-                    <div class="row ">
-                        <div class="col-12 col-sm-6 col-md-6 col-lg col-xl border border-3 border-<?php echo $color?> bg-secondary rounded-3  p-1 mb-1">
-                            <div class="row px-2 mt-1">
-                                <!-- nombre tarea -->
-                                <div class="col text-danger">
-                                    <h6><b class=" bg-warning rounded px-1" ><?php echo "Limpiar el jardín"; ?></b></h4>
-                                </div>
-                                <!-- estado de tarea -->
-                                <div class="col  text-end">
-                                    <p><b><?php echo "Activa "; ?><i class="text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
-                                </div>
-                            </div>
-                            <div class="row px-2">
-                                <!-- Nombre creador de tarea -->
-                                <div class="col  text-center ">
-                                    <h6 class="small"><i>De <?php echo " Nancy Ramirez"; ?></i></h6>
-                                </div>
-                                <!-- fecha creación -->
-                                <div class="col  text-center ">
-                                    <h6><i class="small fa-solid fa-calendar-days"><i> <?php echo "2022-08-23"; ?></i></i></h6>
-                                </div>
-                            </div>
-                            <div class="row px-2">
-                                <!-- Número de horas -->
-                                <div class="col  pe-5 d-flex align-items-center justify-content-end">
-                                    <h6 class="mt-2" ><i class="border border-1 border-warning bg-warning rounded p-1 fa-solid fa-clock"><b> <?php echo 5; ?></b></i></h6>
-                                </div>
-                                <!-- Boton para ver toda la información -->
-                                <div class="col text-sm-start">
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-outline border-0 rounded-circle btn-lg" data-bs-toggle="modal" data-bs-target="#infoTareas">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                    </button>
+                <div class="mx-1 my-2 collapse show " id="tareas">
+                    <div class="row">
+                        <?php $variable = 0;
+                        while ($variable <= 10) { ?>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xx-3 col-xl-4 ">
+                                <div class=" border border-3 border-<?php echo $color ?> bg-secondary rounded-3 mb-1">
+                                    <div class="row px-2 mt-1">
+                                        <!-- nombre tarea -->
+                                        <div class="col text-danger">
+                                            <h6><b class=" bg-opacity-100 rounded px-1"><?php echo "Limpiar el jardín"; ?></b></h4>
+                                        </div>
+                                        <!-- estado de tarea -->
+                                        <div class="col text-end">
+                                            <p><b><?php echo "Activa "; ?><i class="text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
+                                        </div>
+                                    </div>
+                                    <div class="row px-2">
+                                        <!-- Nombre creador de tarea -->
+                                        <div class="col  text-center ">
+                                            <h6 class="small"><i>De <?php echo " Nancy Ramirez"; ?></i></h6>
+                                        </div>
+                                        <!-- fecha creación -->
+                                        <div class="col  text-center ">
+                                            <h6><i class="small fa-solid fa-calendar-days"><i> <?php echo "2022-08-23"; ?></i></i></h6>
+                                        </div>
+                                    </div>
+                                    <!-- input group -->
+                                    <div class="row px-2">
+                                        <div class="col-6 offset-3  text-center">
+                                            <i class=" border border-1 border-warning bg-warning rounded p-1 me-3 fa-solid fa-clock"><b> <?php echo 5; ?></b></i>
+                                            <button type="button" class="btn btn-outline border-0 rounded-circle btn-lg input-group-text" data-bs-toggle="modal" data-bs-target="#infoTareas">
+                                                <i class="fa-solid fa-circle-info"></i>
+                                            </button>
+                                            <div class="modal fade" id="infoTareas" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                                <div class="modal-dialog modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">modal-sm</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="infoTareas" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                                        <div class="modal-dialog modal-md" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">modal-sm</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                                                </div>
-                                                <div class="modal-body"> 
-                                                    Body
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Body
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Fin modal -->
                             </div>
-                        </div>
+                        <?php $variable++;
+                        } ?>
                     </div>
                 </div>
             </div>
+                <a href="tareas.php" class="d-block btn btn-outline-primary mt-1 mb-3 border-0 "><i class="fa-solid fa-book"><b> Ver tareas para hacer</b></i></a>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

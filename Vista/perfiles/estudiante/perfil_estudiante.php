@@ -1,15 +1,9 @@
 <?php
-// session_start();
-include_once "../../../Modelo/conexion_db.php";
-$color = "success";
+include_once "Recibir_datos.php";
 
 // cierre de sesiones
-if (!isset($_SESSION['id'])) {
-    // include "../../../index.php";
-    // $_SESSION['mensajeDeAlerta'] = 
-    // $_SESSION['tipoAlerta']
-    // $_SESSION['tituloDeAlerte']
-} else {
+if (isset($_SESSION['id'])) {
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -230,7 +224,7 @@ if (!isset($_SESSION['id'])) {
                     </div>
                 </div>
             </div>
-                <a href="tareas.php" class="d-block btn btn-outline-primary mt-1 mb-3 border-0 "><i class="fa-solid fa-book"><b> Ver tareas para hacer</b></i></a>
+            <a href="tareas.php" class="d-block btn btn-outline-primary mt-1 mb-3 border-0 "><i class="fa-solid fa-book"><b> Ver tareas para hacer</b></i></a>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -241,5 +235,13 @@ if (!isset($_SESSION['id'])) {
 
     </html>
 
-    <!-- Cierre de sesión por medio de las mismas. -->
-<?php  }  ?>
+<?php
+} else {
+
+    header("Location:../../../index.php");
+    // include "../../../index.php";
+    $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
+    $_SESSION['tipoAlerta'] = "warning";
+    $_SESSION['tituloDeAlerte'] ="Ingreso fallido";
+
+} ?>

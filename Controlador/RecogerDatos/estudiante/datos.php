@@ -41,6 +41,7 @@ if (isset($_SESSION['id'])) {
 
 
     header("Location:../../../Vista/perfiles/estudiante/perfil_estudiante.php");
+    include "../../../Vista/perfiles/estudiante/Recibir_datos.php";
 
 } else {
     echo "<script> alert(\"Se produjo un error al extraer los datos del estudiante, Carpeta:Controlador/RecogerDatos/estudiante/datos.php\")</script>";

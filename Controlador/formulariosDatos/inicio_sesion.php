@@ -50,14 +50,14 @@ session_start();
 
                                     <!-- user -->
                                     <div class="form-floating mb-3">
-                                        <input required type="text" name="documento" class="form-control" id="floatingInput" placeholder="Documento">
+                                        <input required autofocus type="text" name="documento" class="form-control" id="floatingInput" placeholder="Documento">
                                         <label for="floatingInput">Documento</label>
                                     </div>
                                 </div>
                                 <!-- password -->
                                 <div class="col-12 px-5 my-1">
                                     <div class="form-floating mb-3">
-                                        <input required type="password" id="ver" name="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+                                        <input required autofocus type="password" id="ver" name="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
                                         <label for="floatingPassword">Contraseña</label>
                                     </div>
                                 </div>

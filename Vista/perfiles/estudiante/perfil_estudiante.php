@@ -55,17 +55,6 @@ if (isset($_SESSION['id'])) {
         </header>
         <!-- Contenido principal -->
         <main class="mt-5 pt-4 px-sm-2">
-            <!-- mostrar campo de prueba -->
-            <div class="d-none col-6 offset-5">
-                <?php
-                foreach ($_SESSION['vector'] as $key => $value) {
-                    echo $key . " == " . $value . " <br>";
-                }
-
-                ?>
-            </div>
-
-            <!-- style next to the comment -->
             <div class="border border-4 border-primary rounded-3">
                 <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#perfil" aria-expanded="false" aria-controls="perfil">
                     <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
@@ -168,7 +157,10 @@ if (isset($_SESSION['id'])) {
                 <div class="mx-1 my-2 collapse show " id="tareas">
                     <div class="row">
                         <?php $variable = 0;
-                        while ($variable <= 4) { ?>
+                        // utilizar foreach
+                        while ($variable <= 4) { 
+                            $color = "success";
+                            ?>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xx-3 col-xl-4 ">
                                 <div class=" border border-3 border-<?php echo $color ?> bg-secondary rounded-3 mb-2">
                                     <div class="row px-2 mt-1">
@@ -223,43 +215,28 @@ if (isset($_SESSION['id'])) {
                                                                     </div>
                                                                     <!-- estado de la tarea -->
                                                                     <div class="col">
-                                                                        <p><b class="border rounded bg-secondary p-1 "><?php echo "Activa "; ?><i class=" text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
+                                                                        <p><b class="border rounded bg-secondary p-1 "><?php echo "Activa "; ?><i class="text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <!-- titular de la tarea -->
                                                                     <div class="col-8  text-start">
-                                                                        <h6 class="bg-secondary p-1"><i class=" fa-solid fa-calendar-days"><b class="ms-2 text-decoration-underline"> <?php echo "2022-08-23"; ?></b></i> hasta <b class="text-decoration-underline ">2022-08-29</b></h6>
+                                                                        <h6 class=" p-1"><i class=" fa-solid fa-calendar-days"><b class="ms-2 text-decoration-line-through"> <?php echo "2022-08-23"; ?></b></i> hasta <b class="text-decoration-underline ">2022-08-29</b></h6>
                                                                     </div>
                                                                     <!-- estado de la tarea -->
-                                                                    <div class="col">
-                                                                        <div class=" input-group">
+                                                                    <div class="col px-md-5">
+                                                                        <div class="col-12 input-group border-0">
                                                                             <!-- horas -->
-                                                                            <span class="  input-group-text">
+                                                                            <span class="input-group-text bg-body border-0">
                                                                                 <i class=" fa-solid fa-clock "><b> <?php echo 5; ?> h</b></i>
                                                                             </span>
                                                                             <!-- Grupos -->
-                                                                            <span class="input-group-text">
+                                                                            <span class=" input-group-text bg-body border-0">
                                                                                 <i class=" fa-solid fa-users-line "><b> <?php echo "11°"; ?></b></i>
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <!-- <div class="row d-none">
-                                                                    <div class="col-12 col-sm d-flex justify-content-center align-items-end mb-2">
-                                                                        <h6><i class=" fa-solid fa-calendar-days"><b class="ms-2 text-decoration-underline"> <?php echo "2022-08-23"; ?></b></i> hasta <b class="text-decoration-underline ">2022-08-29</b></h6>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row text-center d-none">
-                                                                    <div class="col-12 col-sm ms-5 ps-4">
-                                                                        <div class=" input-group input-group-sm ">
-                                                                            <i class="  input-group-text fa-solid fa-clock"><b> <?php echo 5; ?> h</b></i>
-                                                                            <span class="input-group-text">
-                                                                                <i class=" fa-solid fa-users-line "><b> <?php echo "11°"; ?></b></i>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> -->
                                                                 <div class="row mx-2 text-start mt-4">
                                                                     <!-- descripción -->
                                                                     <div class="col-12 border-1 border bg-secondary px-2 mb-3 rounded-3 ">
@@ -304,10 +281,9 @@ if (isset($_SESSION['id'])) {
 
 <?php
 } else {
+    header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
 
-    header("Location:../../../index.php");
-    // include "../../../index.php";
-    $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tipoAlerta'] = "warning";
-    $_SESSION['tituloDeAlerte'] = "Ingreso fallido";
+    $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";
+    $_SESSION['tipoAlertaInicio'] = "warning";
+    $_SESSION['tituloInicio'] = "Reingreso fallido";
 } ?>

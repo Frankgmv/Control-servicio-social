@@ -53,7 +53,9 @@ if (isset($_SESSION['id'])) {
         </header>
         <!-- Contenido principal -->
         <main class="mt-5 pt-3 px-sm-4 ">
-            <div class="border">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis officia dolorem facere tempore eius nostrum repudiandae veritatis iure cum molestiae mollitia, id itaque repellendus possimus! Doloremque nihil voluptates porro dignissimos.lore Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora eius corrupti illum at dolorem voluptatibus dolor sit ad eveniet, sequi voluptatem sint? Accusamus vitae vel hic quae aut consectetur beatae.</div>
+            <div class="row">
+                
+            </div>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -68,8 +70,9 @@ if (isset($_SESSION['id'])) {
 <?php
 
 } else {
-    header("Location:../../../index.php");
-    $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tipoAlerta'] = "warning";
-    $_SESSION['tituloDeAlerte'] = "Ingreso fallido";
+    header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
+
+    $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";
+    $_SESSION['tipoAlertaInicio'] = "warning";
+    $_SESSION['tituloInicio'] = "Reingreso fallido";
 }  ?>

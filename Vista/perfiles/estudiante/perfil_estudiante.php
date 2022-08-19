@@ -1,16 +1,16 @@
 <?php
-// include_once "../../Controlador/RecogerDatos/estudiante/datos.php";
-session_start();
+// session_start();
+include_once "../../../Modelo/conexion_db.php";
+$color = "success";
 
 // cierre de sesiones
-if (isset($_SESSION['id'])) {
+if (!isset($_SESSION['id'])) {
     // include "../../../index.php";
     // $_SESSION['mensajeDeAlerta'] = 
     // $_SESSION['tipoAlerta']
     // $_SESSION['tituloDeAlerte']
-
+} else {
 ?>
-
     <!DOCTYPE html>
     <html lang="en">
 
@@ -31,8 +31,7 @@ if (isset($_SESSION['id'])) {
         <header class="container-fluid">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
                 <a class="navbar-brand" href="#">
-                    <div class="row">
-
+                    <div class="row ">
                         <div class="col-auto text-start d-inline">
                             <img src="../../../Controlador/includes/recursos/img-cabecera.png" class="i" width="auto" height="80" alt="logo sistema">
                         </div>
@@ -43,7 +42,7 @@ if (isset($_SESSION['id'])) {
                     </div>
                 </a>
                 <button class="navbar-toggler me-4" data-bs-target="#navegacion" data-bs-toggle="collapse" aria-controls="navegacion" aria-expanded="false" aria-label="menu de navegacion">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class=" navbar-toggler-icon"></span>
                 </button>
                 <div id="navegacion" class=" justify-content-sm-end collapse navbar-collapse">
                     <ul class="h4 navbar-nav  mt-3 list-group-horizontal justify-content-end">
@@ -60,6 +59,7 @@ if (isset($_SESSION['id'])) {
                 </div>
             </nav>
         </header>
+        <!-- Contenido principal -->
         <main class="mt-5 pt-3 px-sm-2">
             <!-- mostrar campo de prueba -->
             <div class="d-none col-6 offset-5">
@@ -73,13 +73,14 @@ if (isset($_SESSION['id'])) {
 
             <!-- style next to the comment -->
             <div class="border border-4 border-primary rounded-3">
-                <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
-                    <!-- TODO utilizar una función para cambiar el icono de caras por otras -->
-                    <!-- <h1 class="text-light "><i class="fa-solid fa-user-astronaut"><b> <?php echo ""; ?></b></i></h1> -->
-                    <h1 class="text-light "><i class="fa-solid fa-user-astronaut"></i> <b> <?php echo " Perfil de Frank "; ?></b> <i class="fa-solid fa-user-ninja"></i>
-                </h1>
-                </div>
-                <div class="mx-2">
+                <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#perfil" aria-expanded="false" aria-controls="perfil">
+                    <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
+                        <h2 class="text-light text-white-50"><i class="small fa-solid fa-user-ninja"></i> <b class="text-light">DATOS PERSONALES <?php echo ""; ?></b> <i class=" small fa-solid fa-user-ninja"></i>
+                        </h2>
+                    </div>
+                </a>
+                <!-- <div class="mx-2 collapse show " id="perfil"> -->
+                <div class="mx-2 collapse" id="perfil">
                     <!-- hilera 1 -->
                     <div class="row my-sm-3">
                         <!-- Nombres -->
@@ -136,7 +137,7 @@ if (isset($_SESSION['id'])) {
                         <!-- horas totales -->
                         <div class="col-12 col-sm-4 col-lg-3  mb-2">
                             <div class="input-group">
-                                <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Horas</b></i> </span>
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Horas</b></i></span>
                                 <input type="text" value="<?php echo "12"; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
@@ -162,8 +163,75 @@ if (isset($_SESSION['id'])) {
                     </div>
                 </div>
             </div>
-        </main>
+            <!-- Tareas del estudiante. -->
+            <div class="border border-4 border-primary rounded-3 mt-1">
+                <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#tareas" aria-expanded="false" aria-controls="tareas">
+                    <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
+                        <h2 class="text-white-50"><i class="fa-solid fa-book"></i><b class="text-light"> Mis tareas<?php echo ""; ?></b>
+                        </h2>
+                    </div>
+                </a>
+                <div class="mx-2 my-2 px-2 collapse show " id="tareas">
+                    <div class="row ">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg col-xl border border-3 border-<?php echo $color?> bg-secondary rounded-3  p-1 mb-1">
+                            <div class="row px-2 mt-1">
+                                <!-- nombre tarea -->
+                                <div class="col text-danger">
+                                    <h6><b class=" bg-warning rounded px-1" ><?php echo "Limpiar el jardín"; ?></b></h4>
+                                </div>
+                                <!-- estado de tarea -->
+                                <div class="col  text-end">
+                                    <p><b><?php echo "Activa "; ?><i class="text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
+                                </div>
+                            </div>
+                            <div class="row px-2">
+                                <!-- Nombre creador de tarea -->
+                                <div class="col  text-center ">
+                                    <h6 class="small"><i>De <?php echo " Nancy Ramirez"; ?></i></h6>
+                                </div>
+                                <!-- fecha creación -->
+                                <div class="col  text-center ">
+                                    <h6><i class="small fa-solid fa-calendar-days"><i> <?php echo "2022-08-23"; ?></i></i></h6>
+                                </div>
+                            </div>
+                            <div class="row px-2">
+                                <!-- Número de horas -->
+                                <div class="col  pe-5 d-flex align-items-center justify-content-end">
+                                    <h6 class="mt-2" ><i class="border border-1 border-warning bg-warning rounded p-1 fa-solid fa-clock"><b> <?php echo 5; ?></b></i></h6>
+                                </div>
+                                <!-- Boton para ver toda la información -->
+                                <div class="col text-sm-start">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-outline border-0 rounded-circle btn-lg" data-bs-toggle="modal" data-bs-target="#infoTareas">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                    </button>
 
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="infoTareas" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                        <div class="modal-dialog modal-md" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">modal-sm</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                                </div>
+                                                <div class="modal-body"> 
+                                                    Body
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fin modal -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
@@ -173,4 +241,5 @@ if (isset($_SESSION['id'])) {
 
     </html>
 
+    <!-- Cierre de sesión por medio de las mismas. -->
 <?php  }  ?>

@@ -12,7 +12,7 @@ if (isset($_SESSION['id'])) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="../../../Controlador/includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title>Perfil</title>
+        <title>Tareas</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,8 @@ if (isset($_SESSION['id'])) {
             </nav>
         </header>
         <!-- Contenido principal -->
-        <main class="mt-5 pt-3 px-sm-2">
+        <main class="mt-5 pt-3 px-sm-4 ">
+            <div class="border">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis officia dolorem facere tempore eius nostrum repudiandae veritatis iure cum molestiae mollitia, id itaque repellendus possimus! Doloremque nihil voluptates porro dignissimos.lore Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora eius corrupti illum at dolorem voluptatibus dolor sit ad eveniet, sequi voluptatem sint? Accusamus vitae vel hic quae aut consectetur beatae.</div>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

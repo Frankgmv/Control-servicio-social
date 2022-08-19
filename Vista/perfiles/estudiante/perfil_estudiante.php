@@ -21,10 +21,10 @@ if (isset($_SESSION['id'])) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
-    <body class="pt-5">
+    <body class="pt-5 ">
         <header class="container-fluid">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="tareas.php">
                     <div class="row ">
                         <div class="col-auto text-start d-inline">
                             <img src="../../../Controlador/includes/recursos/img-cabecera.png" class="i" width="auto" height="80" alt="logo sistema">
@@ -54,7 +54,7 @@ if (isset($_SESSION['id'])) {
             </nav>
         </header>
         <!-- Contenido principal -->
-        <main class="mt-5 pt-3 px-sm-2">
+        <main class="mt-5 pt-4 px-sm-2">
             <!-- mostrar campo de prueba -->
             <div class="d-none col-6 offset-5">
                 <?php
@@ -158,7 +158,7 @@ if (isset($_SESSION['id'])) {
                 </div>
             </div>
             <!-- Tareas del estudiante. -->
-            <div class="border border-4 border-primary rounded-3 mt-1">
+            <div class="border border-4 border-primary rounded-3 mt-3">
                 <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#tareas" aria-expanded="false" aria-controls="tareas">
                     <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
                         <h2 class="text-white-50"><i class="fa-solid fa-book"></i><b class="text-light"> Mis tareas<?php echo ""; ?></b>
@@ -168,9 +168,9 @@ if (isset($_SESSION['id'])) {
                 <div class="mx-1 my-2 collapse show " id="tareas">
                     <div class="row">
                         <?php $variable = 0;
-                        while ($variable <= 10) { ?>
+                        while ($variable <= 4) { ?>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xx-3 col-xl-4 ">
-                                <div class=" border border-3 border-<?php echo $color ?> bg-secondary rounded-3 mb-1">
+                                <div class=" border border-3 border-<?php echo $color ?> bg-secondary rounded-3 mb-2">
                                     <div class="row px-2 mt-1">
                                         <!-- nombre tarea -->
                                         <div class="col text-danger">
@@ -192,25 +192,92 @@ if (isset($_SESSION['id'])) {
                                         </div>
                                     </div>
                                     <!-- input group -->
-                                    <div class="row px-2">
-                                        <div class="col-6 offset-3  text-center">
-                                            <i class=" border border-1 border-warning bg-warning rounded p-1 me-3 fa-solid fa-clock"><b> <?php echo 5; ?></b></i>
-                                            <button type="button" class="btn btn-outline border-0 rounded-circle btn-lg input-group-text" data-bs-toggle="modal" data-bs-target="#infoTareas">
-                                                <i class="fa-solid fa-circle-info"></i>
-                                            </button>
-                                            <div class="modal fade" id="infoTareas" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                                                <div class="modal-dialog modal-md" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">modal-sm</h5>
+                                    <div class="row px-3">
+                                        <div class="col-12 text-center">
+                                            <div class="row">
+                                                <div class="col pt-2">
+                                                    <i class="border border-1 small border-warning bg-warning rounded p-1 fa-solid fa-clock"><b> <?php echo 5; ?> h</b></i>
+                                                </div>
+                                                <div class="col">
+                                                    <button type="button" class="btn btn-outline-dark border-0 rounded-pill btn-sm my-1" data-bs-toggle="modal" data-bs-target="#infoTareas">
+                                                        <i class="fa-solid fa-circle-info"> <i class="small"> Detalles.</i></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade " id="infoTareas" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable  modal-lg" role="document">
+                                                    <div class="modal-content rounded-3 border-<?php echo "primary"; ?> border-4 ">
+                                                        <!-- header -->
+                                                        <div class="modal-header bg-<?php echo "primary"; ?>">
+                                                            <h5 class="modal-title  text-light"><b><?php echo "Limpiar el jardín"; ?></b></h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
 
-                                                        </div>
+                                                        <!-- body -->
                                                         <div class="modal-body">
-                                                            Body
+                                                            <div class="mx-sm-2">
+                                                                <div class="row">
+                                                                    <!-- titular de la tarea -->
+                                                                    <div class="col-8  text-start">
+                                                                        <h6><i class="fa-solid fa-user-tag"><i> <?php echo "Mercedes coordinadora" ?></i></i></h6>
+                                                                    </div>
+                                                                    <!-- estado de la tarea -->
+                                                                    <div class="col">
+                                                                        <p><b class="border rounded bg-secondary p-1 "><?php echo "Activa "; ?><i class=" text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <!-- titular de la tarea -->
+                                                                    <div class="col-8  text-start">
+                                                                        <h6 class="bg-secondary p-1"><i class=" fa-solid fa-calendar-days"><b class="ms-2 text-decoration-underline"> <?php echo "2022-08-23"; ?></b></i> hasta <b class="text-decoration-underline ">2022-08-29</b></h6>
+                                                                    </div>
+                                                                    <!-- estado de la tarea -->
+                                                                    <div class="col">
+                                                                        <div class=" input-group">
+                                                                            <!-- horas -->
+                                                                            <span class="  input-group-text">
+                                                                                <i class=" fa-solid fa-clock "><b> <?php echo 5; ?> h</b></i>
+                                                                            </span>
+                                                                            <!-- Grupos -->
+                                                                            <span class="input-group-text">
+                                                                                <i class=" fa-solid fa-users-line "><b> <?php echo "11°"; ?></b></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="row d-none">
+                                                                    <div class="col-12 col-sm d-flex justify-content-center align-items-end mb-2">
+                                                                        <h6><i class=" fa-solid fa-calendar-days"><b class="ms-2 text-decoration-underline"> <?php echo "2022-08-23"; ?></b></i> hasta <b class="text-decoration-underline ">2022-08-29</b></h6>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row text-center d-none">
+                                                                    <div class="col-12 col-sm ms-5 ps-4">
+                                                                        <div class=" input-group input-group-sm ">
+                                                                            <i class="  input-group-text fa-solid fa-clock"><b> <?php echo 5; ?> h</b></i>
+                                                                            <span class="input-group-text">
+                                                                                <i class=" fa-solid fa-users-line "><b> <?php echo "11°"; ?></b></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
+                                                                <div class="row mx-2 text-start mt-4">
+                                                                    <!-- descripción -->
+                                                                    <div class="col-12 border-1 border bg-secondary px-2 mb-3 rounded-3 ">
+                                                                        <h6 class="text-danger"><b>DESCRIPCIÓN.</b></h6>
+                                                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae autem, sit, doloremque eos doloribus corrupti quod a vero perspiciatis fugiat quas commodi vitae esse animi veritatis quia libero modi iusto!</p>
+                                                                    </div>
+                                                                    <!-- Objetivo -->
+                                                                    <div class="col-12 border-1 border bg-secondary rounded-3 ">
+                                                                        <h6 class="text-danger"><b>OBJETIVO.</b></h6>
+                                                                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum quasi optio eos ab molestias doloribus adipisci. Veritatis, placeat eius sunt </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                                        <!-- footer -->
+                                                        <div class="modal-footer bg-<?php echo "primary"; ?>">
+                                                            <button type="button" class="btn btn-outline-secondary small btn-sm rounded-pill" data-bs-dismiss="modal">Cerrar</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -224,7 +291,7 @@ if (isset($_SESSION['id'])) {
                     </div>
                 </div>
             </div>
-            <a href="tareas.php" class="d-block btn btn-outline-primary mt-1 mb-3 border-0 "><i class="fa-solid fa-book"><b> Ver tareas para hacer</b></i></a>
+            <a href="tareas.php" class="d-block btn btn-outline-primary mt-3 mb-3 border-0 "><b><i class="fa-brands fa-teamspeak"> <b> Ver tareas nuevas de la plataforma.</b></i></b></a>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -242,6 +309,5 @@ if (isset($_SESSION['id'])) {
     // include "../../../index.php";
     $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
     $_SESSION['tipoAlerta'] = "warning";
-    $_SESSION['tituloDeAlerte'] ="Ingreso fallido";
-
+    $_SESSION['tituloDeAlerte'] = "Ingreso fallido";
 } ?>

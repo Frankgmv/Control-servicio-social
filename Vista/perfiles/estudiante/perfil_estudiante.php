@@ -268,7 +268,9 @@ if (isset($_SESSION['id'])) {
                     </div>
                 </div>
             </div>
-            <a href="tareas.php" class="d-block btn btn-outline-primary mt-3 mb-3 border-0 "><b><i class="fa-brands fa-teamspeak"> <b> Ver tareas nuevas de la plataforma.</b></i></b></a>
+            <div class="text-center">
+                <a href="tareas.php" class="col-12 col-sm-6 offset-sm-3 col-md-4 offset-md-4 col-lg-3 offset-lg-4  d-block btn btn-outline-primary mt-3 mb-3 border-0 "><b><i class="fa-brands fa-teamspeak"> <b> Ver tareas nuevas de la plataforma.</b></i></b></a>
+            </div>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

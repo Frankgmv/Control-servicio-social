@@ -13,6 +13,7 @@
     var $rol;
     var $grado;
     var $nombre_tecnica;
+    var $horasTotales;
 
      // Propiedades 
      function __construct($identidad, $nombres, $apellidos, $edad, $fecha_actual, $celular, $correo, $rol, $grado, $nombre_tecnica)
@@ -27,16 +28,15 @@
          $rol = $rol;
          $grado = $grado;
          $nombre_tecnica = $nombre_tecnica;
+
       }
-      
+   
 
      // métodos
 
      function Ver_mis_datos (){
 
-
         // return $vector;
-
      }
      function Postularse_a_tarea (){
 

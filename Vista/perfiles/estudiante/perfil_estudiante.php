@@ -2,6 +2,7 @@
 include_once "Recibir_datos.php";
 
 // cierre de sesiones
+// $_SESSION[]
 if (isset($_SESSION['id'])) {
 
 ?>
@@ -14,7 +15,7 @@ if (isset($_SESSION['id'])) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="../../../Controlador/includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title>Perfil</title>
+        <title>Perfil de <?php echo $datosEstudiante['NOMBRES'];?></title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,7 +59,7 @@ if (isset($_SESSION['id'])) {
             <div class="border border-4 border-primary rounded-3">
                 <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#perfil" aria-expanded="false" aria-controls="perfil">
                     <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
-                        <h2 class="text-light text-white-50"><i class="small fa-solid fa-user-ninja"></i> <b class="text-light">DATOS PERSONALES <?php echo ""; ?></b> <i class=" small fa-solid fa-user-ninja"></i>
+                        <h2 class="text-light text-white-50"><i class="small fa-solid fa-user-ninja"></i> <b class="text-light">DATOS PERSONALES</b> <i class=" small fa-solid fa-user-ninja"></i>
                         </h2>
                     </div>
                 </a>
@@ -70,14 +71,14 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12 col-sm-6 col-md-5 offset-md-1 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0">Nombres </span>
-                                <input type="text" value="<?php echo "Frank Giovany"; ?>" class=" border-0 form-control rounded-4 text-center" readonly>
+                                <input type="text" value="<?php echo $datosEstudiante['NOMBRES']; ?>" class=" border-0 form-control rounded-4 text-center" readonly>
                             </div>
                         </div>
                         <!-- Apellidos -->
                         <div class="col-12 col-sm-6 col-md-5 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0">Apellidos </span>
-                                <input type="text" value="<?php echo "Muriel Velásquez"; ?>" class="border-0 form-control rounded-4 text-center" readonly>
+                                <input type="text" value="<?php echo $datosEstudiante['APELLIDOS']; ?>" class="border-0 form-control rounded-4 text-center" readonly>
                             </div>
                         </div>
                     </div>
@@ -87,21 +88,21 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12 col-sm-4 col-md-4 offset-md-1 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0"><i class="fa-solid fa-address-card"></i></span>
-                                <input type="text" value="<?php echo "1011689172"; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $datosEstudiante['IDENTIDAD']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                         <!-- Fecha de registro -->
                         <div class="col-12 col-sm-4 col-md-3 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-calendar-days"></i></span>
-                                <input type="text" value="<?php echo "22-8-22"; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $datosEstudiante['FECHA_REGISTRO']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                         <!-- grado -->
                         <div class="col-12 col-sm-4 col-md-3 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 ">Grado</span>
-                                <input type="text" value="<?php echo "10°"; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $datosEstudiante['GRADO']."°"; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                     </div>
@@ -111,7 +112,7 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12 col-sm-6 offset-sm-1 col-lg-5 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-phone"></i></span>
-                                <input type="text" value="<?php echo "30420403033"; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $datosEstudiante['CELULAR']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                         <div class="d-none d-lg-block col-2  text-center">
@@ -120,6 +121,7 @@ if (isset($_SESSION['id'])) {
                         <!-- horas totales -->
                         <div class="col-12 col-sm-4 col-lg-3  mb-2">
                             <div class="input-group">
+                                <!-- TODO extraer las horas del totales -->
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Horas</b></i></span>
                                 <input type="text" value="<?php echo "12"; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
@@ -132,14 +134,14 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-2  mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-chalkboard-user"><b> Técnica</b></i></span>
-                                <input type="text" value="<?php echo "Desarrollo de software"; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $datosEstudiante['NOMBRE_TECNICA']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                         <!-- Correo -->
                         <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-0 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-at"></i></span>
-                                <input type="text" value="<?php echo "giovanyvelasquez200523@gmail.com"; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $datosEstudiante['CORREO']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
 
@@ -150,7 +152,7 @@ if (isset($_SESSION['id'])) {
             <div class="border border-4 border-primary rounded-3 mt-3">
                 <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#tareas" aria-expanded="false" aria-controls="tareas">
                     <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
-                        <h2 class="text-white-50"><i class="fa-solid fa-book"></i><b class="text-light"> Mis tareas<?php echo ""; ?></b>
+                        <h2 class="text-white-50"><i class="fa-solid fa-book"></i><b class="text-light"> Mis tareas</b>
                         </h2>
                     </div>
                 </a>

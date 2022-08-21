@@ -251,7 +251,6 @@ if (isset($_SESSION['id'])) {
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <!-- footer -->
                                                         <div class="modal-footer bg-<?php echo "primary"; ?>">
                                                             <button type="button" class="btn btn-outline-secondary small btn-sm rounded-pill" data-bs-dismiss="modal">Cerrar</button>

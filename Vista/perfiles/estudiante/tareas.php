@@ -26,8 +26,8 @@ if (isset($_SESSION['id'])) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
-    <body class="pt-5">
-        <header class="container-fluid">
+    <body class="pt-5 mt-2 mt-md-0">
+        <header class="container-fluid ">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
                 <a class="navbar-brand" href="#">
                     <div class="row ">
@@ -60,7 +60,7 @@ if (isset($_SESSION['id'])) {
         </header>
         <!-- Contenido principal -->
 
-        <main class="mt-5 pt-3 px-4 px-sm-4">
+        <main class="mt-5 pt-3 px-3 px-sm-4">
             <!-- contenedor -->
             <div class="row border border-3 border-primary rounded">
                 <!-- titulo superior -->
@@ -73,59 +73,70 @@ if (isset($_SESSION['id'])) {
                     $ides = "tareasN_" . $id_collapse;
                 ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
-                        <div class="border border-2 border-dark rounded-3 p-0">
-                            <a class="nav-link p-0 m-0" data-bs-toggle="collapse" data-bs-target="#<?php echo $ides; ?>" aria-expanded="false" aria-controls="<?php echo $ides; ?>">
-                                <div class="bg-secondary border-bottom border-1 border-dark text-center py-2">
-                                    <h6 class="text-dark"><b><?php echo "Regar las macetas del jardín."; ?></b></h6>
+                        <div class="border border-1  border-dark rounded-3 p-0">
+                            <a class="nav-link p-0 m-0 " data-bs-toggle="collapse" data-bs-target="#<?php echo $ides; ?>" aria-expanded="false" aria-controls="<?php echo $ides; ?>">
+                                <div class=" border-bottom border-1 border-dark text-center py-2" style="background-color: #008080 ;">
+                                    <h6 class="text-light"><b><?php echo "Regar las macetas del jardín."; ?></b></h6>
                                 </div>
                             </a>
-                            <div class="mx-2 collapse bg-light <?php echo $Mostrar; ?>" id="<?php echo $ides; ?>">
-                                <div class="mx-sm-2 my-3 ">
-                                    <div class="row">
+                            <div class=" collapse bg-light  <?php echo $Mostrar; ?>" id="<?php echo $ides; ?>">
+                                <div class="mx-2 mx-sm-2 my-3 ">
+                                    <div class="row ">
                                         <!-- titular de la tarea -->
-                                        <div class="col-8  text-start">
-                                            <h6><i class="fa-solid fa-user-tag"><i> <?php echo "Mercedes coordinadora" ?></i></i></h6>
+                                        <div class="col-8 ps-4 pb-0  text-start  ">
+                                            <h6>
+                                                <p class=" text-success d-inline"><i class="fa-solid fa-user-tag"> </i></p> <b> <?php echo "Mercedes coordinadora" ?></b>
+                                            </h6>
                                         </div>
                                         <!-- estado de la tarea -->
-                                        <div class="col">
+                                        <div class="col  pb-0">
                                             <p><b class="border rounded bg-secondary p-1 "><?php echo "Activa "; ?><i class="text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <!-- fecha de inicio -->
-                                        <div class="col-12  text-center px-5">
-                                            <!-- <div class="mx-2 collapse show " id="perfil"> ///////////////////////////////// -->
-                                            <h6 class="p-1 border border-top-2 border-bottom-2 border-start-0 border-end-0  border-dark my-1"><i class=" fa-solid fa-calendar-days"><b class="ms-3 text-primary"> <?php echo "2022-08-23"; ?></b></i> <i class="fa-solid fa-arrow-right-long"> <b class="text-danger"><?php echo "2022-08-29"; ?></b></i></h6>
+                                        <div class="col-12 px-4">
+                                            <h6 class=" mb-2 d-flex justify-content-between justify-content-md-around">
+                                                <b class=" text-primary me-1"><b class="text-center text-dark d-block  d-sm-block"> Inicio</b> <i class="fa-solid fa-calendar-days"></i> <?php echo "2022-08-29"; ?></b>
+                                                <b class="ps-1 text-danger"><b class="text-center text-dark d-block d-sm-block"> Fin </b> <i class="fa-solid fa-calendar-days"></i> <?php echo "2022-08-29"; ?></b>
+                                            </h6>
                                         </div>
                                         <!-- estado de la tarea -->
-                                        <div class="col px-md-5">
-                                            <div class="col-12 input-group border-0">
-                                                <!-- horas -->
-                                                <span class="input-group-text bg-body border-0">
-                                                    <i class=" fa-solid fa-clock "><b> <?php echo 5; ?> h</b></i>
-                                                </span>
-                                                <!-- Grupos -->
-                                                <span class=" input-group-text bg-body border-0">
-                                                    <i class=" fa-solid fa-users-line "><b> <?php echo "11°"; ?></b></i>
-                                                </span>
-                                            </div>
+                                        <div class="col px-md-5 d-flex justify-content-around align-items-center">
+                                            <!-- horas -->
+                                            <span class=" border border-1 p-1 rounded-pill bg-secondary">
+                                                <div class="mx-2">
+                                                    <p class="d-inline text-success"><i class=" fa-solid fa-clock"></i></p><b> <?php echo 5; ?> h</b>
+                                                </div>
+                                            </span>
+                                            <!-- Grupos -->
+                                            <span class=" border border-1 p-1  rounded-pill bg-secondary">
+                                                <div class="mx-2">
+                                                    <p class="d-inline text-success "><i class=" fa-solid fa-users-line"></i></p><b> <?php echo "11°"; ?></b>
+                                                </div>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="row mx-2 text-start mt-4">
                                         <!-- descripción -->
-                                        <div class="col-12 border-1 border bg-secondary px-2 mb-3 rounded-3 ">
-                                            <h6 class="text-danger"><b>DESCRIPCIÓN.</b></h6>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae autem, sit, doloremque eos doloribus corrupti quod a vero perspiciatis fugiat quas commodi vitae esse animi veritatis quia libero modi iusto!</p>
+                                        <div class="col-12 border-1 border bg-secondary  px-2 mb-3 rounded-3 ">
+                                            <h6 class="text-danger mt-2"><b>DESCRIPCIÓN.</b></h6>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae autem, sit, doloremque eos doloribus corrupti quod a vero pers</p>
                                         </div>
                                         <!-- Objetivo -->
                                         <div class="col-12 border-1 border bg-secondary rounded-3 ">
-                                            <h6 class="text-danger"><b>OBJETIVO.</b></h6>
-                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum quasi optio eos ab molestias doloribus adipisci. Veritatis, placeat eius sunt </p>
+                                            <h6 class="text-danger mt-2"><b>OBJETIVO.</b></h6>
+                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum quasi optio eos ab molestias </p>
                                         </div>
                                     </div>
                                 </div>
+                                <form action="">
+                                    <div class="d-flex justify-content-end align-items-center" style="background-color: #008080 ;">
+                                        <input type="hidden" style="background-color: #008080;" class="border-0 text-center" name="id" readonly value="<?php echo $_SESSION['id']; ?>">
+
+                                        <button type="submit" name="Postularse" class="btn btn-outline-light my-2 me-4 rounded-pill btn-sm">Postularse</button>
+                                    </div>
+                                </form>
                             </div>
-                            <!-- /////////////////////////////////////////////////// -->
                         </div>
                     </div>
                 <?php $contador++;

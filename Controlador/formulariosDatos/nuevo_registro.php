@@ -117,8 +117,8 @@ session_start();
                                 </div>
                                 <div class="row ">
                                     <div class="input-group">
-                                        <input type="password" id="muestrate" class="bg-body input-group-text text-center rounded-pill mt-2 ms-2 mb-1 ps-3 border text-start rounded form-control" required autofocus name="contra" placeholder="Crea tu contraseña" title="contraseña">
-                                        <input type="password" id="clavess" class="bg-body input-group-text rounded-pill mt-2 ms-2 mb-1 ps-3 border text-start rounded form-control text-center" required autofocus name="claveEspecial3" placeholder="Inserte la clave especial" title="Sin no la conoce solicítela al super administrador">
+                                        <input type="password" id="muestrate" class="bg-body input-group-text text-center rounded-pill mt-2 ms-2 mb-1 ps-3 border text-start rounded form-control" required autofocus name="contra" placeholder="Contraseña" title="contraseña">
+                                        <input type="password" id="clavess" class="bg-body input-group-text rounded-pill mt-2 ms-2 mb-1 ps-3 border text-start rounded form-control text-center" required autofocus name="claveEspecial3" placeholder="Clave admin" title="Sin no la conoce solicítela al super administrador">
                                         <button onclick="Muestrate()" id="muestrate" name="ver" type="button" class="btn btn-outline-body btn-sm border-0 rounded rounded-circle img-thumbnail input-group-text"><i class="fa-solid fa-eye"></i></button>
                                     </div>
                                 </div>
@@ -129,7 +129,7 @@ session_start();
                                             <label for="tyc" class="ms-1 mt-1 form-check-label">Acepta T & C</label>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-outline-primary m-1 mt-4 border border-1 border-primary rounded-pill " name="Crear_estudiantes"><i class="fa-solid fa-user-plus"><b> Crear usuario.</b></i></button>
+                                    <button type="submit" class="btn btn-outline-primary m-1 mt-4 border border-1 border-primary rounded-pill " name="Crear_estudiantes"><i class="fa-solid fa-user-plus"><b> Registrar.</b></i></button>
                                 </div>
                             </div>
                             <p class="text-center mt-3"><a href="../../index.php" class=" text-muted btn border-0 btn-outline-secondary btn-sm rounded rounded-pill"><i class="fa-solid fa-user-large"> <i> Ya tengo cuenta</i></i></a></p>
@@ -192,7 +192,7 @@ session_start();
                             </div>
                             <div class="row">
                                 <div class="input-group small">
-                                    <input type="password" id="muestrate2" required autofocus name="contra" placeholder="Crea tu contraseña" pattern="[A-Za-z0-9@#$%]{8-20}" title="" class="text-center rounded-pill mt-2 ms-2 bg-body mb-1 ps-3 border text-start rounded form-control form-control-sm input-group-text">
+                                    <input type="password" id="muestrate2" required autofocus name="contra" placeholder="Contraseña" pattern="[A-Za-z0-9@#$%]{8-20}" title="" class="text-center rounded-pill mt-2 ms-2 bg-body mb-1 ps-3 border text-start rounded form-control form-control-sm input-group-text">
                                     <input type="password" id="ClaveEspecial2" required autofocus name="claveEspecial2" placeholder="Inserte la clave especial" title="Sin no la conoce solicítela al super administrador" class="bg-body rounded-pill mt-2 ms-2 mb-1 ps-3 border form-control-sm text-start rounded text-center form-control input-group-text">
                                     <button onclick="Muestrate()" id="muestrate2" name="ver" type="button" class="btn btn-outline-body btn-sm border-0 rounded rounded-circle  input-group-text"><i class="fa-solid fa-eye"></i></button>
                                 </div>
@@ -204,7 +204,7 @@ session_start();
                                         <label for="tyc" class="ms-1 mt-1 form-check-label">Acepta T & C</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-outline-primary m-1 mt-4 border border-1 border-primary rounded-pill " name="Crear_directivos"><i class="fa-solid fa-user-plus"><b> Crear usuario.</b></i></button>
+                                <button type="submit" class="btn btn-outline-primary m-1 mt-4 border border-1 border-primary rounded-pill " name="Crear_directivos"><i class="fa-solid fa-user-plus"><b> Registrar.</b></i></button>
                             </div>
                             <p class="text-center mt-3"><a href="../../index.php" class=" text-muted btn border-0 btn-outline-secondary btn-sm rounded rounded-pill"><i class="fa-solid fa-user-large"> <i> Ya tengo cuenta</i></i></a></p>
                         </div>
@@ -267,7 +267,7 @@ session_start();
                             </div>
                             <div class="row">
                                 <div class="input-group small">
-                                    <input required type="password" id="muestrate3" autofocus name="contra" placeholder="Crea tu contraseña" pattern="[A-Za-z0-9@#$%]{8-20}" title="" class="text-center rounded-pill mt-2 ms-2 bg-body mb-1 ps-3 border text-start rounded form-control form-control-sm input-group-text">
+                                    <input required type="password" id="muestrate3" autofocus name="contra" placeholder="Contraseña" pattern="[A-Za-z0-9@#$%]{8-20}" title="" class="text-center rounded-pill mt-2 ms-2 bg-body mb-1 ps-3 border text-start rounded form-control form-control-sm input-group-text">
                                     <input required type="password" id="ClaveEspecial" autofocus name="ClaveEspecial" placeholder="Inserte la clave especial" title="Sin no la conoce solicítela al super administrador" class="bg-body rounded-pill mt-2 ms-2 mb-1 ps-3 border form-control-sm text-start rounded text-center form-control input-group-text">
                                     <button onclick="Muestrate()" id="muestrate3" name="ver" type="button" class="btn btn-outline-body btn-sm border-0 rounded rounded-circle  input-group-text"><i class="fa-solid fa-eye"></i></button>
                                 </div>
@@ -279,7 +279,7 @@ session_start();
                                         <label for="tyc" class="ms-1 mt-1 form-check-label">Acepta T & C</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-outline-primary m-1 mt-4 border border-1 border-primary rounded-pill " name="Crear_admins"><i class="fa-solid fa-user-plus"><b> Crear usuario.</b></i></button>
+                                <button type="submit" class="btn btn-outline-primary m-1 mt-4 border border-1 border-primary rounded-pill " name="Crear_admins"><i class="fa-solid fa-user-plus"><b> Registrar.</b></i></button>
                             </div>
                             <p class="text-center mt-3"><a href="../../index.php" class=" text-muted btn border-0 btn-outline-secondary btn-sm rounded rounded-pill"><i class="fa-solid fa-user-large"> <i> Ya tengo cuenta</i></i></a></p>
                         </div>

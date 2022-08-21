@@ -75,7 +75,7 @@ if (isset($_SESSION['id'])) {
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
                         <div class="border border-1  border-dark rounded-3 p-0">
                             <a class="nav-link p-0 m-0 " data-bs-toggle="collapse" data-bs-target="#<?php echo $ides; ?>" aria-expanded="false" aria-controls="<?php echo $ides; ?>">
-                                <div class=" border-bottom border-1 border-dark text-center py-2" style="background-color: #008080 ;">
+                                <div class="bg- border-bottom border-1 border-dark text-center py-2" style="background-color: #90A2C0 ;">
                                     <h6 class="text-light"><b><?php echo "Regar las macetas del jardín."; ?></b></h6>
                                 </div>
                             </a>
@@ -111,7 +111,7 @@ if (isset($_SESSION['id'])) {
                                             <!-- Grupos -->
                                             <span class=" border border-1 p-1  rounded-pill bg-secondary">
                                                 <div class="mx-2">
-                                                    <p class="d-inline text-success "><i class=" fa-solid fa-users-line"></i></p><b> <?php echo "11°"; ?></b>
+                                                    <p class="d-inline text-success "><i class=" fa-solid fa-users-line"></i></p> <b class="ms-2"> <?php echo "11°"; ?></b>
                                                 </div>
                                             </span>
                                         </div>
@@ -133,7 +133,7 @@ if (isset($_SESSION['id'])) {
                                     <div class="d-flex justify-content-end align-items-center" style="background-color: #008080 ;">
                                         <input type="hidden" style="background-color: #008080;" class="border-0 text-center" name="id" readonly value="<?php echo $_SESSION['id']; ?>">
 
-                                        <button type="submit" name="Postularse" class="btn btn-outline-light my-2 me-4 rounded-pill btn-sm">Postularse</button>
+                                        <button type="submit" name="Postularse" class="btn btn-outline-light my-2 me-4 rounded-pill btn-sm"><i class="fa-solid fa-circle-plus"> <b>Postularse</b></i></button>
                                     </div>
                                 </form>
                             </div>

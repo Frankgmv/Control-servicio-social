@@ -4,11 +4,7 @@ include_once "Recibir_datos.php";
 if (isset($_SESSION['id'])) {
 
     // variables del html
-    $Mostrar = "show";
-    $Mostrar = " ";
-    $contador = 0;
-    $id_collapse = 2;
-    $color = "warning";
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -27,6 +23,7 @@ if (isset($_SESSION['id'])) {
     </head>
 
     <!-- d-none -->
+
     <body class="pt-5 mt-2 mt-md-0">
         <header class="container-fluid ">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
@@ -67,17 +64,34 @@ if (isset($_SESSION['id'])) {
                 <!-- titulo superior -->
                 <div class="bg-primary  text-center py-2  rounded-top mb-2">
                     <h6 class="text-light text-white-50 my-2">
-                        Postulate a las tareas para terminar tus horas.
+                        Postulate a las <?php echo $ConteoDeActivas['Activas']; ?> tareas activas que hay para terminar tus horas.
                     </h6>
+
                 </div>
-                <?php while ($contador <= 5) {
-                    $ides = "tareasN_".$id_collapse;
+                <?php
+                $contador = 0;
+                $id_collapse = 2;
+
+                while ($TAREA = mysqli_fetch_array($result3)) {
+                    $NoMostrar = " ";
+                    $Mostrar = "show";
+                    $color = "warning";
+                    $disable = "disabled";
+
+                    $ides = "tareasN_" . $id_collapse;
+                    $getCreador = $TAREA['ID_CREADOR'];
+                    $SLQ1 = "SELECT CONCAT(NOMBRES,' ', APELLIDOS) AS NOMBRES FROM DIRECTIVOS WHERE IDENTIDAD = '$getCreador';";
+                    $query = mysqli_query($connN, $SLQ1);
+                    $CreadorTarea = mysqli_fetch_array($query);
+
+                    // if(){}
                 ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
                         <div class="border border-1  border-dark rounded-3 p-0">
                             <a class="nav-link p-0 m-0 " data-bs-toggle="collapse" data-bs-target="#<?php echo $ides; ?>" aria-expanded="false" aria-controls="<?php echo $ides; ?>">
-                                <div class="bg- border-bottom border-1 border-dark text-center py-2" style="background-color: #90A2C0 ;">
-                                    <h6 class="text-light"><b><?php echo "Regar las macetas del jardín."; ?></b></h6>
+                                <div class="bg- border-bottom border-1 border-dark text-center py-2 " style="background-color: #90A2C0 ;">
+                                    <h6 class="text-light"><b><?php echo $TAREA['NOMBRE_TAREA']; ?></b></h6>
+
                                 </div>
                             </a>
                             <div class=" collapse bg-light  <?php echo $Mostrar; ?>" id="<?php echo $ides; ?>">
@@ -86,19 +100,19 @@ if (isset($_SESSION['id'])) {
                                         <!-- titular de la tarea -->
                                         <div class="col-8 ps-4 pb-0  text-start  ">
                                             <h6>
-                                                <p class=" text-success d-inline"><i class="fa-solid fa-user-tag"> </i></p> <b> <?php echo "Mercedes coordinadora" ?></b>
+                                                <p class=" text-success d-inline"><i class="fa-solid fa-user-tag"> </i></p> <b class=" text-capitalize"> <?php echo $CreadorTarea['NOMBRES'];  ?></b>
                                             </h6>
                                         </div>
                                         <!-- estado de la tarea -->
                                         <div class="col  pb-0">
-                                            <p><b class="border rounded bg-secondary p-1 "><?php echo "Activa "; ?><i class="text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
+                                            <p><b class="border rounded bg-secondary p-1 text-capitalize"><?php echo $TAREA['ESTADO_TAREA']; ?><i class="ms-1 text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 px-4">
                                             <h6 class=" mb-2 d-flex justify-content-between justify-content-md-around">
-                                                <b class=" text-primary me-1"><b class="text-center text-dark d-block  d-sm-block"> Inicio</b> <i class="fa-solid fa-calendar-days"></i> <?php echo "2022-08-29"; ?></b>
-                                                <b class="ps-1 text-danger"><b class="text-center text-dark d-block d-sm-block"> Fin </b> <i class="fa-solid fa-calendar-days"></i> <?php echo "2022-08-29"; ?></b>
+                                                <b class=" text-primary me-1"><b class="text-center text-dark d-block  d-sm-block"> Inicio</b> <i class="fa-solid fa-calendar-days"></i> <?php echo $TAREA['FECHA_CREACION']; ?></b>
+                                                <b class="ps-1 text-danger"><b class="text-center text-dark d-block d-sm-block"> Fin </b> <i class="fa-solid fa-calendar-days"></i> <?php echo $TAREA['FECHA_LIMITE']; ?></b>
                                             </h6>
                                         </div>
                                         <!-- estado de la tarea -->
@@ -106,13 +120,13 @@ if (isset($_SESSION['id'])) {
                                             <!-- horas -->
                                             <span class=" border border-1 p-1 rounded-pill bg-secondary">
                                                 <div class="mx-2">
-                                                    <p class="d-inline text-success"><i class=" fa-solid fa-clock"></i></p><b> <?php echo 5; ?> h</b>
+                                                    <p class="d-inline text-success"><i class=" fa-solid fa-clock"></i></p><b> <?php echo $TAREA['NUMERO_HORAS']; ?> h</b>
                                                 </div>
                                             </span>
                                             <!-- Grupos -->
                                             <span class=" border border-1 p-1  rounded-pill bg-secondary">
                                                 <div class="mx-2">
-                                                    <p class="d-inline text-success "><i class=" fa-solid fa-users-line"></i></p> <b class="ms-2"> <?php echo "11°"; ?></b>
+                                                    <p class="d-inline text-success "><i class=" fa-solid fa-users-line"></i></p> <b class="ms-2 text-capitalize    "> <?php echo $TAREA['PARA_QUE_GRADO']; ?></b>
                                                 </div>
                                             </span>
                                         </div>
@@ -121,26 +135,26 @@ if (isset($_SESSION['id'])) {
                                         <!-- descripción -->
                                         <div class="col-12 border-1 border bg-secondary  px-2 mb-3 rounded-3 ">
                                             <h6 class="text-danger mt-2"><b>DESCRIPCIÓN.</b></h6>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae autem, sit, doloremque eos doloribus corrupti quod a vero pers</p>
+                                            <p><?php echo $TAREA['DESCRIPCION']; ?></p>
                                         </div>
                                         <!-- Objetivo -->
                                         <div class="col-12 border-1 border bg-secondary rounded-3 ">
                                             <h6 class="text-danger mt-2"><b>OBJETIVO.</b></h6>
-                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum quasi optio eos ab molestias </p>
+                                            <p><?php echo $TAREA['OBJETIVO']; ?></p>
                                         </div>
                                     </div>
                                 </div>
-                                <form action="">
+                                <form action="Postulaciones.php">
                                     <div class="d-flex justify-content-end align-items-center" style="background-color: #008080 ;">
                                         <input type="hidden" style="background-color: #008080;" class="border-0 text-center" name="id" readonly value="<?php echo $_SESSION['id']; ?>">
 
-                                        <button type="submit" name="Postularse" class="btn btn-outline-light my-2 me-4 rounded-pill btn-sm"><i class="fa-solid fa-circle-plus"> <b>Postularse</b></i></button>
+                                        <button type="submit" name="Postularse" <?php echo $disable; ?> class="btn btn-outline-light my-2 me-4 rounded-pill btn-sm"><i class="fa-solid fa-circle-plus"> <b>Postularse</b></i></button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                <?php $contador++;
+                <?php
                     $id_collapse++;
                 } ?>
             </div>

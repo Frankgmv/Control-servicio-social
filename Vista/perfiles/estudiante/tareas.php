@@ -1,10 +1,8 @@
 <?php
 include_once "Recibir_datos.php";
+
 // cierre de sesiones
 if (isset($_SESSION['id'])) {
-
-    // variables del html
-
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -73,10 +71,9 @@ if (isset($_SESSION['id'])) {
                 $id_collapse = 2;
 
                 while ($TAREA = mysqli_fetch_array($result3)) {
-                    $NoMostrar = " ";
-                    $Mostrar = "show";
-                    $color = "warning";
+
                     $disable = "disabled";
+                    $disable = " ";
 
                     $ides = "tareasN_" . $id_collapse;
                     $getCreador = $TAREA['ID_CREADOR'];
@@ -84,7 +81,13 @@ if (isset($_SESSION['id'])) {
                     $query = mysqli_query($connN, $SLQ1);
                     $CreadorTarea = mysqli_fetch_array($query);
 
-                    // if(){}
+                    // $Conocer_postulados 
+
+                    if ($TAREA['N_PERSONAS']) {
+                        $color = "success";
+                    } else {
+                        $color = "danger";
+                    }
                 ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
                         <div class="border border-1  border-dark rounded-3 p-0">
@@ -94,7 +97,7 @@ if (isset($_SESSION['id'])) {
 
                                 </div>
                             </a>
-                            <div class=" collapse bg-light  <?php echo $Mostrar; ?>" id="<?php echo $ides; ?>">
+                            <div class=" collapse bg-light  show " id="<?php echo $ides; ?>">
                                 <div class="mx-2 mx-sm-2 my-3 ">
                                     <div class="row ">
                                         <!-- titular de la tarea -->
@@ -144,11 +147,14 @@ if (isset($_SESSION['id'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <form action="Postulaciones.php">
-                                    <div class="d-flex justify-content-end align-items-center" style="background-color: #008080 ;">
-                                        <input type="hidden" style="background-color: #008080;" class="border-0 text-center" name="id" readonly value="<?php echo $_SESSION['id']; ?>">
-
-                                        <button type="submit" name="Postularse" <?php echo $disable; ?> class="btn btn-outline-light my-2 me-4 rounded-pill btn-sm"><i class="fa-solid fa-circle-plus"> <b>Postularse</b></i></button>
+                                <form action="Postulaciones.php" method="POST">
+                                    <div class="d-flex justify-content-around align-items-center " style="background-color: #008080 ;">
+                                        <label for="" class="text-light"><i class="fa-solid fa-users"></i> <b class="ms-2"><?php echo "3 Postulados"; ?></b></label>
+                                        <input type="hidden" name="id_tarea" style="background-color: #008080;" class="border-0 text-center" readonly value="<?php echo $TAREA['ID_TAREA']; ?>">
+                                        <input type="hidden" name="id_estudiantes" style="background-color: #008080;" class="border-0 text-center" readonly value="<?php echo $_SESSION['id']; ?>">
+                                        <div class="d-flex- justify-content-end">
+                                            <button type="submit" name="Postularse" <?php echo $disable; ?> class=" btn btn-outline-light my-2 me-4 rounded-pill btn-sm"><i class="fa-solid fa-circle-plus"> <b>Postularse</b></i></button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -164,6 +170,17 @@ if (isset($_SESSION['id'])) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <?php if (isset($_SESSION['mensajeDeTareas'])) { ?>
+
+            <script>
+                swal("<?php print $_SESSION['tituloDeTareas']; ?>", " <?php print $_SESSION['mensajeDeTareas']; ?> "
+                    <?php if (isset($_SESSION['tipoTareas'])) { ?>, "<?php print $_SESSION['tipoTareas']; ?>"
+                    <?php } ?>
+                );
+            </script>
+        <?php unset($_SESSION['mensajeDeTareas'], $_SESSION['tituloDeTareas'], $_SESSION['tipoTareas']);
+        } ?>
     </body>
 
     </html>

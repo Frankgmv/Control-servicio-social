@@ -7,7 +7,7 @@ $datosEstudiante = $_SESSION['vector'];
 
 $connN = $conn;
 // Mostrar tareas disponibles.
-$SQL =  "SELECT * FROM TAREAS;";
+$SQL =  "SELECT * FROM TAREAS WHERE ESTADO_TAREA LIKE \"A%\" ;";
 $result3 = mysqli_query($conn, $SQL);
 $num = mysqli_num_rows($result3);
 

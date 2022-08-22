@@ -13,7 +13,7 @@ if (isset($_SESSION['id'])) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="../../../Controlador/includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title>Tareas</title>
+        <title>Tareas (<?php echo $ConteoDeActivas['Activas']; ?>)</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,22 +71,31 @@ if (isset($_SESSION['id'])) {
                 $id_collapse = 2;
 
                 while ($TAREA = mysqli_fetch_array($result3)) {
-
-                    $disable = "disabled";
-                    $disable = " ";
-
+                    // variables operadores de código 
+                    $ID_TAREA = $TAREA['ID_TAREA'];
                     $ides = "tareasN_" . $id_collapse;
+
+                    // Obtener el nombre del creador
                     $getCreador = $TAREA['ID_CREADOR'];
-                    $SLQ1 = "SELECT CONCAT(NOMBRES,' ', APELLIDOS) AS NOMBRES FROM DIRECTIVOS WHERE IDENTIDAD = '$getCreador';";
-                    $query = mysqli_query($connN, $SLQ1);
+                    $SQL1 = "SELECT CONCAT(NOMBRES,' ', APELLIDOS) AS NOMBRES FROM DIRECTIVOS WHERE IDENTIDAD = '$getCreador';";
+                    $query = mysqli_query($connN, $SQL1);
                     $CreadorTarea = mysqli_fetch_array($query);
 
                     // $Conocer_postulados 
+                    $SQL3 = "SELECT COUNT(ESTADO_POSTULACION) AS POSTULADOS FROM POSTULADOS WHERE ESTADO_POSTULACION LIKE 'A%' AND ID_TAREA = '$ID_TAREA';";
+                    $query1 = mysqli_query($connN, $SQL3);
+                    $EST_POSTULADOS = mysqli_fetch_array($query1);
 
-                    if ($TAREA['N_PERSONAS']) {
+
+                    // verificar el número de estudiantes postulados
+                    if ($EST_POSTULADOS['POSTULADOS'] < $TAREA['N_PERSONAS']) {
+                        $fondo = "secondary";
                         $color = "success";
+                        $disable = " ";
                     } else {
-                        $color = "danger";
+                        $fondo = "primary";
+                        $color = "warning";
+                        $disable = "disabled";
                     }
                 ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
@@ -108,7 +117,7 @@ if (isset($_SESSION['id'])) {
                                         </div>
                                         <!-- estado de la tarea -->
                                         <div class="col  pb-0">
-                                            <p><b class="border rounded bg-secondary p-1 text-capitalize"><?php echo $TAREA['ESTADO_TAREA']; ?><i class="ms-1 text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
+                                            <p><b class="border rounded bg-secondary p-1 text-capitalize"><?php echo $TAREA['ESTADO_TAREA']; ?><i class="ms-1 text-<?php echo $color ?> fa-solid fa-circle"></i></b></p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -149,7 +158,7 @@ if (isset($_SESSION['id'])) {
                                 </div>
                                 <form action="Postulaciones.php" method="POST">
                                     <div class="d-flex justify-content-around align-items-center " style="background-color: #008080 ;">
-                                        <label for="" class="text-light"><i class="fa-solid fa-users"></i> <b class="ms-2"><?php echo "3 Postulados"; ?></b></label>
+                                        <label title="Número de estudiantes postulados a <?php echo $TAREA['NOMBRE_TAREA']; ?>" class="text-light"><i class="fa-solid fa-users"></i> <b class="ms-2"><?php echo  $EST_POSTULADOS['POSTULADOS'] . " / " . $TAREA['N_PERSONAS']; ?> POSTULADOS</b></label>
                                         <input type="hidden" name="id_tarea" style="background-color: #008080;" class="border-0 text-center" readonly value="<?php echo $TAREA['ID_TAREA']; ?>">
                                         <input type="hidden" name="id_estudiantes" style="background-color: #008080;" class="border-0 text-center" readonly value="<?php echo $_SESSION['id']; ?>">
                                         <div class="d-flex- justify-content-end">
@@ -181,6 +190,7 @@ if (isset($_SESSION['id'])) {
             </script>
         <?php unset($_SESSION['mensajeDeTareas'], $_SESSION['tituloDeTareas'], $_SESSION['tipoTareas']);
         } ?>
+
     </body>
 
     </html>

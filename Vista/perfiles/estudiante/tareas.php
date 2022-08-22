@@ -26,6 +26,7 @@ if (isset($_SESSION['id'])) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
+    <!-- d-none -->
     <body class="pt-5 mt-2 mt-md-0">
         <header class="container-fluid ">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
@@ -70,7 +71,7 @@ if (isset($_SESSION['id'])) {
                     </h6>
                 </div>
                 <?php while ($contador <= 5) {
-                    $ides = "tareasN_" . $id_collapse;
+                    $ides = "tareasN_".$id_collapse;
                 ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
                         <div class="border border-1  border-dark rounded-3 p-0">

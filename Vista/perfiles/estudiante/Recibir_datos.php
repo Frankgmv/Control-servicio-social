@@ -8,8 +8,9 @@ $datosEstudiante = $_SESSION['vector'];
 // CONEXIÓN HABILITADA PARA EL DOCUMENTO DE TAREAS Y ESTUDIANTES.
 $connN = $conn;
 
-// Mostrar tareas ACTIVAS.
-$SQL =  "SELECT * FROM TAREAS WHERE ESTADO_TAREA LIKE \"A%\" ;";
+// Seleccionar tareas ACTIVAS.
+// $SQL =  "SELECT * FROM TAREAS WHERE ESTADO_TAREA LIKE \"A%\" OR \"T%\" ;";
+$SQL =  "SELECT * FROM TAREAS ORDER BY ESTADO_TAREA ;";
 $result3 = mysqli_query($conn, $SQL);
 $num = mysqli_num_rows($result3);
 
@@ -17,10 +18,6 @@ $num = mysqli_num_rows($result3);
 $SQL2 = "SELECT COUNT(ESTADO_TAREA) as Activas FROM TAREAS WHERE ESTADO_TAREA LIKE \"A%\";";
 $result4 = mysqli_query($conn, $SQL2);
 $ConteoDeActivas = mysqli_fetch_array($result4);
-// $num = mysqli_num_rows($);
-
-
-
 
 
 ?>

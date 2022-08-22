@@ -85,8 +85,6 @@ if (isset($_SESSION['id'])) {
                     $SQL3 = "SELECT COUNT(ESTADO_POSTULACION) AS POSTULADOS FROM POSTULADOS WHERE ESTADO_POSTULACION LIKE 'A%' AND ID_TAREA = '$ID_TAREA';";
                     $query1 = mysqli_query($connN, $SQL3);
                     $EST_POSTULADOS = mysqli_fetch_array($query1);
-
-
                     // verificar el número de estudiantes postulados
                     if ($EST_POSTULADOS['POSTULADOS'] < $TAREA['N_PERSONAS']) {
                         $fondo = "secondary";
@@ -97,16 +95,27 @@ if (isset($_SESSION['id'])) {
                         $color = "warning";
                         $disable = "disabled";
                     }
+                    
+                    if(strtolower($TAREA['ESTADO_TAREA']) == "terminada"){
+                        $mostrar = " ";
+                        $fondo = "bg-success";
+
+                    }else{
+                        $mostrar = "show";
+                        $fondo = " ";
+                    }
+
+
                 ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
                         <div class="border border-1  border-dark rounded-3 p-0">
                             <a class="nav-link p-0 m-0 " data-bs-toggle="collapse" data-bs-target="#<?php echo $ides; ?>" aria-expanded="false" aria-controls="<?php echo $ides; ?>">
-                                <div class="bg- border-bottom border-1 border-dark text-center py-2 " style="background-color: #90A2C0 ;">
+                                <div class="bg- border-bottom border-1 border-dark text-center py-2 <?php echo $fondo;?> " style="background-color: #90A2C0 ;">
                                     <h6 class="text-light"><b><?php echo $TAREA['NOMBRE_TAREA']; ?></b></h6>
 
                                 </div>
                             </a>
-                            <div class=" collapse bg-light  show " id="<?php echo $ides; ?>">
+                            <div class=" collapse bg-light  <?php echo $mostrar; ?> " id="<?php echo $ides; ?>">
                                 <div class="mx-2 mx-sm-2 my-3 ">
                                     <div class="row ">
                                         <!-- titular de la tarea -->

@@ -15,7 +15,7 @@ if (isset($_SESSION['id'])) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="../../  ../Controlador/includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title>Perfil de <?php echo $datosEstudiante['NOMBRES'];?></title>
+        <title>Perfil de <?php echo $datosEstudiante['NOMBRES']; ?></title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,7 +102,7 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12 col-sm-4 col-md-3 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 ">Grado</span>
-                                <input type="text" value="<?php echo $datosEstudiante['GRADO']."°"; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $datosEstudiante['GRADO'] . "°"; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,8 @@ if (isset($_SESSION['id'])) {
                             <div class="input-group">
                                 <!-- TODO extraer las horas del totales -->
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Horas</b></i></span>
-                                <input type="text" value="<?php echo "12"; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo "12"; //TODO sacar el total 
+                                                            ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
 
@@ -148,6 +149,8 @@ if (isset($_SESSION['id'])) {
                     </div>
                 </div>
             </div>
+
+            <!-- TODO mostrar las tareas a las cuales esta postulado y sus detalles. -->
             <!-- Tareas del estudiante. -->
             <div class="border border-4 border-primary rounded-3 mt-3">
                 <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#tareas" aria-expanded="false" aria-controls="tareas">
@@ -158,31 +161,57 @@ if (isset($_SESSION['id'])) {
                 </a>
                 <div class="mx-1 my-2 collapse show " id="tareas">
                     <div class="row">
-                        <?php $variable = 0;
-                        // utilizar foreach
-                        while ($variable <= 4) {
-                            $color = "success";
+                        <?php
+
+                        $variable = 0;
+                        while ($tareasEnProceso = mysqli_fetch_array($result5)) {
+                            // IDs del modal
+                            $id_modal = "Modal_N_" . $variable;
+                            $id_modal2 = "Modal_N2_" . $variable;
+
+                            // tareas a las que estoy postulado
+
+                            $ID_TAREA_MIA = $tareasEnProceso['ID_TAREA'];
+                            $SQL6 = "SELECT * FROM TAREAS WHERE ID_TAREA = '$ID_TAREA_MIA';";
+                            $result6 = mysqli_query($connN, $SQL6);
+                            $mis_tareas = mysqli_fetch_array($result6);
+
+                            // Nombre del creador
+                            $ElCreador = $mis_tareas['ID_CREADOR'];
+                            $SQL7 = "SELECT CONCAT(NOMBRES,' ', APELLIDOS) AS NOMBRES FROM DIRECTIVOS WHERE IDENTIDAD = '$ElCreador';";
+                            $queryC = mysqli_query($connN, $SQL7);
+                            $CreadorDeTarea = mysqli_fetch_array($queryC);
+
+                            if (strtolower($mis_tareas['ESTADO_TAREA']) == "activa") {
+                                $color = "warning";
+                                $ModalColor = "warning";
+                            } else {
+
+                                $ModalColor = "success";
+                                $color = "success";
+                            }
                         ?>
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xx-3 col-xl-4 ">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xl-4">
                                 <div class=" border border-3 border-<?php echo $color ?> bg-secondary rounded-3 mb-2">
                                     <div class="row px-2 mt-1">
                                         <!-- nombre tarea -->
                                         <div class="col text-danger">
-                                            <h6><b class=" bg-opacity-100 rounded px-1"><?php echo "Limpiar el jardín"; ?></b></h4>
+                                            <h6><b class=" bg-opacity-100 rounded px-1 text-capitalize"><?php echo $mis_tareas['NOMBRE_TAREA']; ?></b></h4>
                                         </div>
                                         <!-- estado de tarea -->
                                         <div class="col text-end">
-                                            <p><b><?php echo "Activa "; ?><i class="text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
+                                            <p><b class=" text-capitalize"><?php echo $mis_tareas['ESTADO_TAREA']; ?><i class="text-<?php echo $color; ?> ms-1 fa-solid fa-circle"></i></b></p>
                                         </div>
                                     </div>
                                     <div class="row px-2">
                                         <!-- Nombre creador de tarea -->
                                         <div class="col  text-center ">
-                                            <h6 class="small"><i>De <?php echo " Nancy Ramirez"; ?></i></h6>
+                                            <h6 class="small"><i>De <?php echo $CreadorDeTarea['NOMBRES']; ?></i></h6>
                                         </div>
                                         <!-- fecha creación -->
-                                        <div class="col  text-center ">
-                                            <h6><i class="small fa-solid fa-calendar-days"><i> <?php echo "2022-08-23"; ?></i></i></h6>
+                                        <div class="col  text-center small">
+                                            <label for="" class=" d-inline small"><b>Limite</b></label>
+                                            <h6><i class="small fa-solid fa-calendar-days"><i> <?php echo $mis_tareas['FECHA_LIMITE']; ?></i></i></h6>
                                         </div>
                                     </div>
                                     <!-- input group -->
@@ -190,20 +219,20 @@ if (isset($_SESSION['id'])) {
                                         <div class="col-12 text-center">
                                             <div class="row">
                                                 <div class="col pt-2">
-                                                    <i class="border border-1 small border-warning bg-warning rounded p-1 fa-solid fa-clock"><b> <?php echo 5; ?> h</b></i>
+                                                    <i class="border border-1 small  bg-<?php echo $color; ?> rounded p-1 fa-solid fa-clock"><b> <?php echo $mis_tareas['NUMERO_HORAS']; ?> h</b></i>
                                                 </div>
                                                 <div class="col">
-                                                    <button type="button" class="btn btn-outline-dark border-0 rounded-pill btn-sm my-1" data-bs-toggle="modal" data-bs-target="#infoTareas">
-                                                        <i class="fa-solid fa-circle-info"> <i class="small"> Detalles.</i></i>
+                                                    <button type="button" class="btn border-0 rounded-pill btn-sm my-1" data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal; ?>">
+                                                        <i class="fa-solid fa-circle-info"> <b class="small mb-1"> Leer más...</b></i>
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div class="modal fade " id="infoTareas" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                            <div class="modal fade " id="<?php echo $id_modal; ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-scrollable  modal-lg" role="document">
-                                                    <div class="modal-content rounded-3 border-<?php echo "primary"; ?> border-4 ">
+                                                    <div class="modal-content rounded-3 border-<?php echo $ModalColor; ?> border-4 ">
                                                         <!-- header -->
-                                                        <div class="modal-header bg-<?php echo "primary"; ?>">
-                                                            <h5 class="modal-title  text-light"><b><?php echo "Limpiar el jardín"; ?></b></h5>
+                                                        <div class="modal-header bg-<?php echo $ModalColor; ?>">
+                                                            <h5 class="modal-title  text-light"><b><?php echo $mis_tareas['NOMBRE_TAREA']; ?></b></h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
 
@@ -211,30 +240,28 @@ if (isset($_SESSION['id'])) {
                                                         <div class="modal-body">
                                                             <div class="mx-sm-2">
                                                                 <div class="row">
-                                                                    <!-- titular de la tarea -->
-                                                                    <div class="col-8  text-start">
-                                                                        <h6><i class="fa-solid fa-user-tag"><i> <?php echo "Mercedes coordinadora" ?></i></i></h6>
-                                                                    </div>
-                                                                    <!-- estado de la tarea -->
-                                                                    <div class="col">
-                                                                        <p><b class="border rounded bg-secondary p-1 "><?php echo "Activa "; ?><i class="text-<?php echo $color; ?> fa-solid fa-circle"></i></b></p>
+                                                                    <div class="d-flex justify-content-around align-content-center">
+                                                                        <!-- titular de la tarea -->
+                                                                        <h6><i class="fa-solid fa-user-tag"><i> <?php echo $CreadorDeTarea['NOMBRES']; ?></i></i></h6>
+                                                                        <!-- fechas  -->
+                                                                        <p><b class="border rounded bg-secondary p-1 small"><?php echo $mis_tareas['ESTADO_TAREA'];; ?><i class="text-<?php echo $color; ?> ms-1 fa-solid fa-circle"></i></b></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <!-- titular de la tarea -->
                                                                     <div class="col-8  text-start">
-                                                                        <h6 class=" p-1"><i class=" fa-solid fa-calendar-days"><b class="ms-2 text-decoration-line-through"> <?php echo "2022-08-23"; ?></b></i> hasta <b class="text-decoration-underline ">2022-08-29</b></h6>
+                                                                        <h6 class=" p-1"><i class=" fa-solid fa-calendar-days"> <b class="ms-2 text-primary text-decoration-underline"> <?php echo $mis_tareas['FECHA_CREACION']; ?></b></i> <b> al </b> <b class=" text-danger text-decoration-underline "><?php echo $mis_tareas['FECHA_LIMITE']; ?></b></h6>
                                                                     </div>
                                                                     <!-- estado de la tarea -->
                                                                     <div class="col px-md-5">
                                                                         <div class="col-12 input-group border-0">
                                                                             <!-- horas -->
                                                                             <span class="input-group-text bg-body border-0">
-                                                                                <i class=" fa-solid fa-clock "><b> <?php echo 5; ?> h</b></i>
+                                                                                <i class=" fa-solid fa-clock "><b> <?php echo $mis_tareas['NUMERO_HORAS']; ?> h</b></i>
                                                                             </span>
                                                                             <!-- Grupos -->
                                                                             <span class=" input-group-text bg-body border-0">
-                                                                                <i class=" fa-solid fa-users-line "><b> <?php echo "11°"; ?></b></i>
+                                                                                <i class=" fa-solid fa-users-viewfinder "><b class="ms-1 text-capitalize"> <?php echo $mis_tareas['PARA_QUE_GRADO']; ?></b></i>
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -243,19 +270,43 @@ if (isset($_SESSION['id'])) {
                                                                     <!-- descripción -->
                                                                     <div class="col-12 border-1 border bg-secondary px-2 mb-3 rounded-3 ">
                                                                         <h6 class="text-danger"><b>DESCRIPCIÓN.</b></h6>
-                                                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae autem, sit, doloremque eos doloribus corrupti quod a vero perspiciatis fugiat quas commodi vitae esse animi veritatis quia libero modi iusto!</p>
+                                                                        <p><?php echo $mis_tareas['DESCRIPCION']; ?></p>
                                                                     </div>
                                                                     <!-- Objetivo -->
                                                                     <div class="col-12 border-1 border bg-secondary rounded-3 ">
                                                                         <h6 class="text-danger"><b>OBJETIVO.</b></h6>
-                                                                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum quasi optio eos ab molestias doloribus adipisci. Veritatis, placeat eius sunt </p>
+                                                                        <p><?php echo $mis_tareas['OBJETIVO']; ?></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <!-- footer -->
-                                                        <div class="modal-footer bg-<?php echo "primary"; ?>">
-                                                            <button type="button" class="btn btn-outline-secondary small btn-sm rounded-pill" data-bs-dismiss="modal">Cerrar</button>
+                                                        <div class="modal-footer bg-<?php echo $ModalColor; ?>">
+                                                            <form action="Postulaciones.php" method="POST">
+                                                                <input type="hidden" name="id_user" value="<?php echo $id; ?>">
+                                                                <input type="hidden" name="id_tarea" value="<?php echo $mis_tareas['ID_TAREA']; ?>">
+
+                                                                <button name="Anular_postulacion" type="button" class="btn btn-light small btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal2; ?>">Anular Postulación.</button>
+
+                                                                <div class="modal fade mt-5 pt-5 " id="<?php echo $id_modal2; ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                                                    <div class="modal-dialog " role="document mt-5">
+                                                                        <div class="modal-content modal-md border border-4 border-danger mt-5">
+                                                                            <div class="modal-header bg-danger">
+                                                                                <h5 class="modal-title text-light   "><b>Anular postulación.</b></h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Si continuar dejarás de participar en la tarea de <b><?php echo $mis_tareas['NOMBRE_TAREA']; ?> </b>
+                                                                            </div>
+                                                                            <div class="modal-footer bg-danger">
+                                                                                <button type="button" class="btn btn-light small btn-sm " data-bs-dismiss="modal"><i class="fa-solid fa-xmark"> <b>No</b></i></button>
+                                                                                <button name="Anular_postulacion" type="submit" class="btn btn-outline-light small btn-sm rounded"> <i class="fa-solid fa-check "><b> SI</b></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -278,6 +329,17 @@ if (isset($_SESSION['id'])) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <?php if (isset($_SESSION['mensajeDePerfil'])) { ?>
+
+            <script>
+                swal("<?php print $_SESSION['tituloDePerfil']; ?>", " <?php print $_SESSION['mensajeDePerfil']; ?> "
+                    <?php if (isset($_SESSION['tipoPerfil'])) { ?>, "<?php print $_SESSION['tipoPerfil']; ?>"
+                    <?php } ?>
+                );
+            </script>
+        <?php unset($_SESSION['mensajeDePerfil'], $_SESSION['tituloDePerfil'], $_SESSION['tipoPerfil']);
+        } ?>
     </body>
 
     </html>

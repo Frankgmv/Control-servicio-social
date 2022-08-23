@@ -85,32 +85,50 @@ if (isset($_SESSION['id'])) {
                     $SQL3 = "SELECT COUNT(ESTADO_POSTULACION) AS POSTULADOS FROM POSTULADOS WHERE ESTADO_POSTULACION LIKE 'A%' AND ID_TAREA = '$ID_TAREA';";
                     $query1 = mysqli_query($connN, $SQL3);
                     $EST_POSTULADOS = mysqli_fetch_array($query1);
+
                     // verificar el número de estudiantes postulados
                     if ($EST_POSTULADOS['POSTULADOS'] < $TAREA['N_PERSONAS']) {
                         $fondo = "secondary";
                         $color = "success";
                         $disable = " ";
+                        $icono = " fa-circle-plus ";
                     } else {
+                        $icono = " fa-xmark ";
                         $fondo = "primary";
                         $color = "warning";
                         $disable = "disabled";
                     }
-                    
-                    if(strtolower($TAREA['ESTADO_TAREA']) == "terminada"){
+
+                    if (strtolower($TAREA['ESTADO_TAREA']) == "terminada") {
+                        $icono = " fa-xmark ";
+                        $disable = "disabled";
                         $mostrar = " ";
                         $fondo = "bg-success";
-
-                    }else{
+                    } else {
                         $mostrar = "show";
                         $fondo = " ";
                     }
 
+                    // Preguntar si esta postulado
+
+                    $id_est = $_SESSION['id'];
+                    $SQLquery4 = "SELECT ESTADO_POSTULACION FROM POSTULADOS WHERE ID_TAREA = '$ID_TAREA' AND ID_POSTULADO = '$id_est';";
+                    $consulta44 = mysqli_query($connN, $SQLquery4);
+                    $verificacion = mysqli_fetch_array($consulta44);
+
+                    if ($verificacion) {
+
+                        if (strtoupper($verificacion['ESTADO_POSTULACION']) == 'ACTIVA') {
+                            $disable = "disabled";
+                            $icono = "fa-check ";
+                        }
+                    }
 
                 ?>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2 ">
                         <div class="border border-1  border-dark rounded-3 p-0">
                             <a class="nav-link p-0 m-0 " data-bs-toggle="collapse" data-bs-target="#<?php echo $ides; ?>" aria-expanded="false" aria-controls="<?php echo $ides; ?>">
-                                <div class="bg- border-bottom border-1 border-dark text-center py-2 <?php echo $fondo;?> " style="background-color: #90A2C0 ;">
+                                <div class="bg- border-bottom border-1 border-dark text-center py-2 <?php echo $fondo; ?> " style="background-color: #90A2C0 ;">
                                     <h6 class="text-light"><b><?php echo $TAREA['NOMBRE_TAREA']; ?></b></h6>
 
                                 </div>
@@ -171,7 +189,7 @@ if (isset($_SESSION['id'])) {
                                         <input type="hidden" name="id_tarea" style="background-color: #008080;" class="border-0 text-center" readonly value="<?php echo $TAREA['ID_TAREA']; ?>">
                                         <input type="hidden" name="id_estudiantes" style="background-color: #008080;" class="border-0 text-center" readonly value="<?php echo $_SESSION['id']; ?>">
                                         <div class="d-flex- justify-content-end">
-                                            <button type="submit" name="Postularse" <?php echo $disable; ?> class=" btn btn-outline-light my-2 me-4 rounded-pill btn-sm"><i class="fa-solid fa-circle-plus"> <b>Postularse</b></i></button>
+                                            <button type="submit" name="Postularse" <?php echo $disable; ?> class=" btn btn-outline-light my-2 me-4 rounded-pill btn-sm"><i class=" fa-solid <?php echo $icono; ?> "> <b>Postularse</b></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -179,6 +197,7 @@ if (isset($_SESSION['id'])) {
                         </div>
                     </div>
                 <?php
+
                     $id_collapse++;
                 } ?>
             </div>

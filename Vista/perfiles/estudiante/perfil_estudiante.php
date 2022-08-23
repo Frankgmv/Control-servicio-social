@@ -13,9 +13,9 @@ if (isset($_SESSION['id'])) {
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-        <link rel="shortcut icon" href="../../  ../Controlador/includes/recursos/faviivon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title>Perfil de <?php echo $datosEstudiante['NOMBRES']; ?></title>
+        <title><?php echo $datosEstudiante['NOMBRES'] . " (" . $disponibles; ?>)</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -190,9 +190,21 @@ if (isset($_SESSION['id'])) {
                                 $ModalColor = "success";
                                 $color = "success";
                             }
+
+                            // revisar si estoy activo
+                            $SLQ11 = "SELECT ESTADO_POSTULACION as ESTADO FROM POSTULADOS WHERE ID_POSTULADO = '$id' AND ID_TAREA = '$ID_TAREA_MIA';";
+                            $consl = mysqli_query($connN, $SLQ11);
+                            $resultado = mysqli_fetch_array($consl);
+
+                            $text = "dark";
+                            if (strtoupper($resultado['ESTADO']) == 'INACTIVA') {
+                                $color = "dark";
+                                $ModalColor = "warning";
+                                $text = "light";
+                            }
                         ?>
                             <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xl-4">
-                                <div class=" border border-3 border-<?php echo $color ?> bg-secondary rounded-3 mb-2">
+                                <div class=" border border-3 border-<?php echo $color; ?> bg-secondary rounded-3 mb-2">
                                     <div class="row px-2 mt-1">
                                         <!-- nombre tarea -->
                                         <div class="col text-danger">
@@ -219,7 +231,7 @@ if (isset($_SESSION['id'])) {
                                         <div class="col-12 text-center">
                                             <div class="row">
                                                 <div class="col pt-2">
-                                                    <i class="border border-1 small  bg-<?php echo $color; ?> rounded p-1 fa-solid fa-clock"><b> <?php echo $mis_tareas['NUMERO_HORAS']; ?> h</b></i>
+                                                    <i class="border border-1 small  bg-<?php echo $color; ?> rounded p-1 fa-solid fa-clock text-<?php echo $text; ?>"><b> <?php echo $mis_tareas['NUMERO_HORAS']; ?> h</b></i>
                                                 </div>
                                                 <div class="col">
                                                     <button type="button" class="btn border-0 rounded-pill btn-sm my-1" data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal; ?>">
@@ -286,7 +298,7 @@ if (isset($_SESSION['id'])) {
                                                                 <input type="hidden" name="id_user" value="<?php echo $id; ?>">
                                                                 <input type="hidden" name="id_tarea" value="<?php echo $mis_tareas['ID_TAREA']; ?>">
 
-                                                                <button name="Anular_postulacion" type="button" class="btn btn-light small btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal2; ?>">Anular Postulación.</button>
+                                                                <button name="Anular_postulacion" type="button" class="btn btn-light small btn-sm " data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal2; ?>">Anular Postulación.</button>
 
                                                                 <div class="modal fade mt-5 pt-5 " id="<?php echo $id_modal2; ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                                                     <div class="modal-dialog " role="document mt-5">

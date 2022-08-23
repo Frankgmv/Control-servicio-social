@@ -11,9 +11,9 @@ if (isset($_SESSION['id'])) {
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-        <link rel="shortcut icon" href="../../../Controlador/includes/recursos/faviivon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title>Tareas (<?php echo $ConteoDeActivas['Activas']; ?>)</title>
+        <title>Tareas </title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

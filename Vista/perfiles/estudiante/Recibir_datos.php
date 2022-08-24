@@ -2,7 +2,7 @@
 
 include_once "../../../Modelo/conexion_db.php";
 
-include "../../../Controlador/RecogerDatos/estudiante/datos.php";
+// include "../../../Controlador/RecogerDatos/estudiante/datos.php";
 
 // Vector con los datos base del estudiante.
 $datosEstudiante = $_SESSION['vector'];

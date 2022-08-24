@@ -55,14 +55,6 @@ class Estudiante
 
 class Directivo extends Estudiante
 {
-   var $identidad;
-   var $nombres;
-   var $apellidos;
-   var $edad;
-   var $fecha_actual;
-   var $celular;
-   var $correo;
-   var $rol;
    var $ocupacion;
    var $donde_labora;
 
@@ -81,6 +73,6 @@ class Directivo extends Estudiante
    }
 
    function Crear_tarea(){
-      
+
    }
 }

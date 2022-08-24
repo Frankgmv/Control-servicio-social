@@ -95,8 +95,8 @@ session_start();
                                             <span class="input-group-text bg-body border-end-0 text-muted">SENA<i class="fa-solid fa-right-long ms-3"></i></span>
                                             <select name="nombre_tecnica" autofocus required id="nom_tecnica" class="text-center form-select  text-muted border-start-0 text-start text-uppercase" required>
                                                 <option value="Seleccionar" disabled selected>Seleccionar</option>
-                                                <option value="Desarrollo_de_software">Desarrollo de Software</option>
-                                                <option value="Asesoria_comercial">Asesoría Comercial</option>
+                                                <option value="Desarrollo de software">Desarrollo de Software</option>
+                                                <option value="Asesoria comercial">Asesoría Comercial</option>
                                                 <option value="Ninguna">Ninguna</option>
                                             </select>
                                         </div>

@@ -1,8 +1,6 @@
 <?php
-// extensiones del documento
 include_once "../../../Modelo /conexion_db.php";
 
-// Clases 
 class Estudiante
 {
 
@@ -55,40 +53,19 @@ class Estudiante
 }
 
 
-class Directivo extends Estudiante
-{
-   var $ocupacion;
-   var $donde_labora;
-
-   function __construct($identidad, $nombres, $apellidos, $edad, $fecha_actual, $celular, $correo, $rol, $ocupacion, $donde_labora)
-   {
-      $identidad = $identidad;
-      $nombres = $nombres;
-      $apellidos = $apellidos;
-      $edad = $edad;
-      $fecha_actual = $fecha_actual;
-      $celular = $celular;
-      $correo = $correo;
-      $rol = $rol;
-      $ocupacion = $ocupacion;
-      $donde_labora = $donde_labora;
-   }
-
-   function Crear_tarea()
-   {
-   }
-}
 
 $id = $_SESSION['id'];
 
 if (isset($_SESSION['id'])) {
 
    // Seleccionar datos de la tabla estudiante.
+
    $datosPersonales = "SELECT IDENTIDAD, NOMBRES, APELLIDOS, EDAD, FECHA_REGISTRO, CELULAR, CORREO, ROL, GRADO, NOMBRE_TECNICA FROM ESTUDIANTES WHERE IDENTIDAD = $id;";
    $RetornoDatosPersonales = mysqli_query($conn, $datosPersonales);
    $DatosPerfil = mysqli_fetch_assoc($RetornoDatosPersonales);
 
    $vector = [];
+
    foreach ($DatosPerfil as $key => $value) {
       $vector[$key] = $value;
    }
@@ -141,9 +118,6 @@ if (isset($_SESSION['id'])) {
    $result12 = mysqli_query($conn, $SQL12);
    $getResultado = mysqli_fetch_array($result12);
    $disponibles =  $getResultado['TareasMia'];
-
-   // header("Location:../../../Vista/perfiles/estudiante/perfil_estudiante.php");
-   //  include "../../../Vista/perfiles/estudiante/perfil_estudiante.php";
 } else {
    echo "<script> alert(\"Se produjo un error al extraer los datos del estudiante, Carpeta:Controlador/RecogerDatos/estudiante/datos.php\")</script>";
    header("Location:../../../index.php");

@@ -34,11 +34,11 @@
 
      // métodos
 
-     function Ver_mis_datos (){
+      function Ver_mis_datos (){
 
         // return $vector;
      }
-     function Postularse_a_tarea (){
+   function Postularse_a_tarea (){
 
      }
      function Salir_de_tarea (){
@@ -51,3 +51,5 @@
 
      }
  }
+
+ 

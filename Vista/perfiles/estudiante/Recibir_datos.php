@@ -1,11 +1,10 @@
 <?php
 
-
-
 include_once "../../../Modelo/conexion_db.php";
 
 // Vector con los datos base del estudiante.
 $datosEstudiante = $_SESSION['vector'];
+
 $id = $datosEstudiante['IDENTIDAD'];
 
 // CONEXIÓN HABILITADA PARA EL DOCUMENTO DE TAREAS Y ESTUDIANTES.

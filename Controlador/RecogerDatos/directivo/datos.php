@@ -6,13 +6,13 @@ if(isset($_SESSION['id'])){
 
     $id = $_SESSION['id'];
 
+    // IDENTIDAD, NOMBRES, APELLIDOS, EDAD, FECHA_REGISTRO, CELULAR, CORREO, ROL, GRADO, NOMBRE_TECNICA
     // seleccionar datos de la tabla estudiante.
-    $datosPersonales = "SELECT IDENTIDAD, NOMBRES, APELLIDOS, EDAD, FECHA_REGISTRO, CELULAR, CORREO, ROL, GRADO, NOMBRE_TECNICA FROM ESTUDIANTES WHERE IDENTIDAD = $id;";
+    $datosPersonales = "SELECT * FROM DIRECTIVOS WHERE IDENTIDAD = $id;";
 
     $RetornoDatosPersonales = mysqli_query($conn, $datosPersonales);    
     $DatosPerfil =mysqli_fetch_assoc($RetornoDatosPersonales);
 
-    print_r($DatosPerfil);
     foreach ($DatosPerfil as $key => $value) {
         echo $key." : ".$value." <br>";
     }

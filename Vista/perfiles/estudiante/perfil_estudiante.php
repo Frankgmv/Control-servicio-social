@@ -1,5 +1,5 @@
 <?php
-include_once "Recibir_datos.php";
+require "Recibir_datos.php";
 
 // cierre de sesiones
 // $_SESSION[]

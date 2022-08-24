@@ -3,7 +3,7 @@
 include_once "../../../Modelo /conexion_db.php";
 
 // Clases para el estudiante.
-include_once "../Clases.php";
+require_once "../Clases.php";
 
 $id = $_SESSION['id'];
 
@@ -15,12 +15,9 @@ if (isset($_SESSION['id'])) {
     $DatosPerfil = mysqli_fetch_assoc($RetornoDatosPersonales);
 
     $vector = [];
-
     foreach ($DatosPerfil as $key => $value) {
         $vector[$key] = $value;
     }
-
-    echo "hola estudiante. <br>";
 
     // Creando instancia estudiante
     $Estudiante = new Estudiante(
@@ -37,12 +34,6 @@ if (isset($_SESSION['id'])) {
     );
 
     $Estudiante->horasTotales = 12;
-
-
-    
-
-
-
 
     $_SESSION['vector'] = $vector;
 

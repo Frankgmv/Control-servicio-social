@@ -89,7 +89,7 @@ if (isset($_POST['Anular_postulacion'])) {
         }
     } else {
         $_SESSION['tituloDePerfil'] = "Postulación Ya Anulada. ";
-        $_SESSION['mensajeDePerfil'] = "id_estu :$ID_EST <=> id_tarea $ID_TAREA " . $result8['ESTADO_POSTULACION'];
+        $_SESSION['mensajeDePerfil'] = "Ya no eres participante de esta tarea.";
         $_SESSION['tipoPerfil'] = "warning";
         header("Location:perfil_estudiante.php");
     }

@@ -1,5 +1,5 @@
 <?php
-require "Recibir_datos.php";
+require "../../../Controlador/RecogerDatos/estudiante/datos.php";
 
 // cierre de sesiones
 if (isset($_SESSION['id'])) {

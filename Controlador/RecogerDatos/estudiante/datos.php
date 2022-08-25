@@ -1,20 +1,20 @@
 <?php
 include_once "../../../Modelo /conexion_db.php";
-
 class Estudiante
 {
 
-   var $identidad;
-   var $nombres;
-   var $apellidos;
-   var $edad;
-   var $fecha_actual;
-   var $celular;
-   var $correo;
-   var $rol;
-   var $grado;
-   var $nombre_tecnica;
-   var $horasTotales;
+   var $identidad = 00;
+   var $nombres = "desconocidos";
+   var $apellidos = "desconocidos";
+   var $edad = 0;
+   var $fecha_actual = " ";
+   var $celular = " ";
+   var $correo = " ";
+   var $rol = " ";
+   var $grado = " ";
+   var $nombre_tecnica = " ";
+   var $horasTotales = 0;
+
 
    // Propiedades 
    function Estudiante($identidad, $nombres, $apellidos, $edad, $fecha_actual, $celular, $correo, $rol, $grado, $nombre_tecnica)
@@ -41,7 +41,7 @@ class Estudiante
       return $result_1;
    }
 
-   function Postularse_a_tarea($id_estudiante, $id_tarea)
+   function Set_postularse_a_tarea($id_estudiante, $id_tarea)
    {
       global $conn;
       // Verificación
@@ -74,7 +74,7 @@ class Estudiante
          return 4;
       }
    }
-   function Anular_postulacion($id_estudiante, $id_tarea)
+   function Set_anular_postulacion($id_estudiante, $id_tarea)
    {
       global $conn;
 
@@ -98,7 +98,7 @@ class Estudiante
       }
    }
 
-   function ACuantasPertenezco($id_estudiante)
+   function GetACuantasPertenezco($id_estudiante)
    {
       // conteo de las tareas a las que pertenezco y están activas
       global $conn;
@@ -111,33 +111,55 @@ class Estudiante
       return $disponibles;
    }
 
-   function Ver_tarea()
+   function Get_tareas_activas()
    {
+      global $conn;
+      // CONTEO DE TAREAS ACTIVAS.
+      $SQL2 = "SELECT COUNT(ESTADO_TAREA) as Activas FROM TAREAS WHERE ESTADO_TAREA LIKE \"A%\";";
+      $result4 = mysqli_query($conn, $SQL2);
+      $ConteoDeActivas = mysqli_fetch_array($result4);
+      return $ConteoDeActivas['Activas'];
    }
-   function Cerrar_sesion()
+   function Get_mis_tareas($id_estudiante)
    {
+      //Tareas a las cuales esta postulado.
+      global $conn;
+      $SQL5 = "SELECT * FROM POSTULADOS WHERE ID_POSTULADO = '$id_estudiante';";
+      $resultYa = mysqli_query($conn, $SQL5);
+      return $resultYa;
    }
-}
 
+   function Get_tareas_totales()
+   {
+      global $conn;
+      // $SQL =  "SELECT * FROM TAREAS WHERE ESTADO_TAREA LIKE \"A%\" OR \"T%\" ;";
+      $SQL =  "SELECT * FROM TAREAS ORDER BY  ESTADO_TAREA  ;";
+      $result3 = mysqli_query($conn, $SQL);
+      $num = mysqli_num_rows($result3);
+      return  $result3;
+   }
 
-
-$id = $_SESSION['id'];
+   function Get_mis_horas($id)
+   {
+      //TODO total de horas que lleva el estudiante.
+      global $conn;
+      $sql_2 = "SELECT SUM(HORAS) AS HORAS FROM HORAS WHERE ID_ESTUDIANTE = '$id';";
+      $consult_2 = mysqli_query($conn, $sql_2);
+      $result_2 = mysqli_fetch_array($consult_2);
+      $horasTotales = $result_2['HORAS'];
+      return $horasTotales;
+   }
+} //FIN CLASS ESTUDIANTE
 
 if (isset($_SESSION['id'])) {
 
-   // Seleccionar datos de la tabla estudiante.
+   $id = $_SESSION['id'];
 
+   // Obtener mis datos personales.
    $datosPersonales = "SELECT IDENTIDAD, NOMBRES, APELLIDOS, EDAD, FECHA_REGISTRO, CELULAR, CORREO, ROL, GRADO, NOMBRE_TECNICA FROM ESTUDIANTES WHERE IDENTIDAD = $id;";
    $RetornoDatosPersonales = mysqli_query($conn, $datosPersonales);
    $DatosPerfil = mysqli_fetch_assoc($RetornoDatosPersonales);
 
-   $vector = [];
-
-   foreach ($DatosPerfil as $key => $value) {
-      $vector[$key] = $value;
-   }
-
-   // Creando instancia estudiante
    $Pepito = new Estudiante(
       $id,
       $DatosPerfil['NOMBRES'],
@@ -151,34 +173,38 @@ if (isset($_SESSION['id'])) {
       $DatosPerfil['NOMBRE_TECNICA'],
    );
 
-   $Pepito->horasTotales = 12;
-
-   $_SESSION['vector'] = $vector;
-   // Vector con los datos base del estudiante.
-   $datosEstudiante = $_SESSION['vector'];
-
-   $id = $datosEstudiante['IDENTIDAD'];
-
-   // CONEXIÓN HABILITADA PARA EL DOCUMENTO DE TAREAS Y ESTUDIANTES.
+   $id = $_SESSION['id'];
    $connN = $conn;
 
-   // Seleccionar tareas ACTIVAS.
-   // $SQL =  "SELECT * FROM TAREAS WHERE ESTADO_TAREA LIKE \"A%\" OR \"T%\" ;";
-   $SQL =  "SELECT * FROM TAREAS ORDER BY  ESTADO_TAREA  ;";
-   $result3 = mysqli_query($conn, $SQL);
-   $num = mysqli_num_rows($result3);
+   // FUNCIONES OPERATIVAS DE LAS TAREAS
+   function EstoyPostulado($id_tarea)
+   {
+      // Los datos de la tarea a la cual estoy postulado
+      global $conn;
+      $SQL6 = "SELECT * FROM TAREAS WHERE ID_TAREA = '$id_tarea';";
+      $result6 = mysqli_query($conn, $SQL6);
+      $mis_tareas = mysqli_fetch_array($result6);
+      return $mis_tareas;
+   }
 
-   // CONTEO DE TAREAS ACTIVAS.
-   $SQL2 = "SELECT COUNT(ESTADO_TAREA) as Activas FROM TAREAS WHERE ESTADO_TAREA LIKE \"A%\";";
-   $result4 = mysqli_query($conn, $SQL2);
-   $ConteoDeActivas = mysqli_fetch_array($result4);
+   function NombreCreadorTarea($id_creador)
+   {
 
-   //TODO total de horas que lleva el estudiante.
-
-
-   //Tareas a las cuales esta postulado.
-   $SQL5 = "SELECT * FROM POSTULADOS WHERE ID_POSTULADO = '$id';";
-   $result5 = mysqli_query($conn, $SQL5);
+      global $conn;
+      $SQL7 = "SELECT CONCAT(NOMBRES,' ', APELLIDOS) AS NOMBRES FROM DIRECTIVOS WHERE IDENTIDAD = '$id_creador';";
+      $queryC = mysqli_query($conn, $SQL7);
+      $CreadorDeTarea = mysqli_fetch_array($queryC);
+      return $CreadorDeTarea;
+   }
+   function EstoyActivo($id, $id_tarea)
+   {
+      // REVISAR SI ESTOY ACTIVO
+      global $conn;
+      $SLQ11 = "SELECT ESTADO_POSTULACION as ESTADO FROM POSTULADOS WHERE ID_POSTULADO = '$id' AND ID_TAREA = '$id_tarea';";
+      $consl = mysqli_query($conn, $SLQ11);
+      $resultado = mysqli_fetch_array($consl);
+      return $resultado['ESTADO'];
+   }
 } else {
    echo "<script> alert(\"Se produjo un error al extraer los datos del estudiante, Carpeta:Controlador/RecogerDatos/estudiante/datos.php\")</script>";
 }

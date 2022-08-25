@@ -7,6 +7,9 @@ if (isset($_SESSION['id'])) {
 
     $MisDatos = $Pepito->Get_mis_datos($idt);
 
+  
+    
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -17,7 +20,7 @@ if (isset($_SESSION['id'])) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title><?php echo $MisDatos['NOMBRES'] . " (" . $Pepito->ACuantasPertenezco($idt); ?>)</title>
+        <title><?php echo $MisDatos['NOMBRES'] . " (" . $Pepito->GetACuantasPertenezco($idt); ?>)</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +28,7 @@ if (isset($_SESSION['id'])) {
     </head>
 
     <body class="pt-5">
-        <header class="container-fluid">
+        <header class="container-fluid ">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
                 <a class="navbar-brand" href="tareas.php">
                     <div class="row ">
@@ -125,8 +128,7 @@ if (isset($_SESSION['id'])) {
                             <div class="input-group">
                                 <!-- TODO extraer las horas del totales -->
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Horas</b></i></span>
-                                <input type="text" value="<?php echo "12"; //TODO sacar el total 
-                                                            ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $Pepito->Get_mis_horas($id); ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
 
@@ -163,44 +165,39 @@ if (isset($_SESSION['id'])) {
                     <div class="row">
                         <?php
                         $variable = 0;
+                        $result5 = $Pepito->Get_mis_tareas($idt);
                         while ($tareasEnProceso = mysqli_fetch_array($result5)) {
-                            // IDs del modal
+                            // IDS DEL MODAL
                             $id_modal = "Modal_N_" . $variable;
-                            $id_modal2 = "Modal_N2_" . $variable;
-
-                            // tareas a las que estoy postulado
-
+                            $id_modal2 = "Modal_N2_" . $variable;                            
+                            
+                            // TAREAS A LAS QUE ESTOY POSTULADO
                             $ID_TAREA_MIA = $tareasEnProceso['ID_TAREA'];
-                            $SQL6 = "SELECT * FROM TAREAS WHERE ID_TAREA = '$ID_TAREA_MIA';";
-                            $result6 = mysqli_query($connN, $SQL6);
-                            $mis_tareas = mysqli_fetch_array($result6);
+                            $mis_tareas = EstoyPostulado($ID_TAREA_MIA);
 
-                            // Nombre del creador
+                            // NOMBRE DEL CREADOR
                             $ElCreador = $mis_tareas['ID_CREADOR'];
-                            $SQL7 = "SELECT CONCAT(NOMBRES,' ', APELLIDOS) AS NOMBRES FROM DIRECTIVOS WHERE IDENTIDAD = '$ElCreador';";
-                            $queryC = mysqli_query($connN, $SQL7);
-                            $CreadorDeTarea = mysqli_fetch_array($queryC);
-
+                            $CreadorDeTarea = NombreCreadorTarea($ElCreador);
+                            
+                            // VERIFICAR EL ESTADO DE LA TAREA
                             if (strtolower($mis_tareas['ESTADO_TAREA']) == "activa") {
                                 $color = "warning";
                                 $ModalColor = "warning";
                             } else {
-
                                 $ModalColor = "success";
                                 $color = "success";
                             }
 
-                            // revisar si estoy activo
-                            $SLQ11 = "SELECT ESTADO_POSTULACION as ESTADO FROM POSTULADOS WHERE ID_POSTULADO = '$id' AND ID_TAREA = '$ID_TAREA_MIA';";
-                            $consl = mysqli_query($connN, $SLQ11);
-                            $resultado = mysqli_fetch_array($consl);
-
                             $text = "dark";
-                            if (strtoupper($resultado['ESTADO']) == 'INACTIVA') {
+
+                                // VER SI ESTOY ACTIVO
+                            $resultado = EstoyActivo($idt, $ID_TAREA_MIA);
+                            if (strtoupper($resultado) === 'INACTIVA') {
                                 $color = "dark";
                                 $ModalColor = "warning";
                                 $text = "light";
                             }
+
                         ?>
                             <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xl-4">
                                 <div class=" border border-3 border-<?php echo $color; ?> bg-secondary rounded-3 mb-2">

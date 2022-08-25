@@ -7,7 +7,7 @@ if (isset($_POST['Postularse'])) {
     $id_tarea = $_POST['id_tarea'];
     $id_estudiantes = $_POST['id_estudiantes'];
 
-    $postularme = $Pepito->Postularse_a_tarea($id_estudiantes, $id_tarea);
+    $postularme = $Pepito->Set_postularse_a_tarea($id_estudiantes, $id_tarea);
 
     if ($postularme == 0) {
         $_SESSION['tituloDeTareas'] = "Error de Postulación";
@@ -43,7 +43,7 @@ if (isset($_POST['Anular_postulacion'])) {
 
     $ID_EST  = $_POST['id_user'];
     $ID_TAREA = $_POST['id_tarea'];
-    $anularPostulacion = $Pepito->Anular_postulacion($ID_EST, $ID_TAREA);
+    $anularPostulacion = $Pepito->Set_anular_postulacion($ID_EST, $ID_TAREA);
 
     if ($anularPostulacion == 0) {
 

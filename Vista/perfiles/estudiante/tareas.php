@@ -62,14 +62,14 @@ if (isset($_SESSION['id'])) {
                 <!-- titulo superior -->
                 <div class="bg-primary  text-center py-2  rounded-top mb-2">
                     <h6 class="text-light text-white-50 my-2">
-                        Postulate a las <?php echo $ConteoDeActivas['Activas']; ?> tareas activas que hay para terminar tus horas.
+                        Postulate cualquiera de las <?php echo $Pepito->Get_tareas_activas(); ?> tareas activas para completar tus horas.
                     </h6>
 
                 </div>
                 <?php
                 $contador = 0;
                 $id_collapse = 2;
-
+                $result3 = $Pepito->Get_tareas_totales();
                 while ($TAREA = mysqli_fetch_array($result3)) {
                     // variables operadores de código 
                     $ID_TAREA = $TAREA['ID_TAREA'];

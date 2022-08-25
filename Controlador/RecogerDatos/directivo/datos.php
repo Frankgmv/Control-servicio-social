@@ -31,9 +31,8 @@ class Directivo
     function Crear_tarea()
     {
     }
+
 }
-
-
 
 if (isset($_SESSION['id'])) {
 

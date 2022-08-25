@@ -17,7 +17,7 @@ class Estudiante
    var $horasTotales;
 
    // Propiedades 
-   function __construct($identidad, $nombres, $apellidos, $edad, $fecha_actual, $celular, $correo, $rol, $grado, $nombre_tecnica)
+   function Estudiante($identidad, $nombres, $apellidos, $edad, $fecha_actual, $celular, $correo, $rol, $grado, $nombre_tecnica)
    {
       $identidad = $identidad;
       $nombres = $nombres;
@@ -32,18 +32,85 @@ class Estudiante
    }
 
    // métodos
+   function Get_mis_datos($id)
+   {
+      global $conn;
+      $sql_1 = "SELECT * FROM ESTUDIANTES WHERE IDENTIDAD = '$id';";
+      $consult_1 = mysqli_query($conn, $sql_1);
+      $result_1 = mysqli_fetch_array($consult_1);
+      return $result_1;
+   }
 
-   function Ver_mis_datos()
+   function Postularse_a_tarea($id_estudiante, $id_tarea)
    {
-      echo "mostrar datos";
+      global $conn;
+      // Verificación
+      $SQLquery0 = "SELECT ESTADO_POSTULACION FROM POSTULADOS WHERE ID_TAREA = '$id_tarea' AND ID_POSTULADO = '$id_estudiante';";
+      $consulta0 = mysqli_query($conn, $SQLquery0);
+      $verificar = mysqli_fetch_array($consulta0);
+
+
+      if (!$verificar) {
+         // Insertar
+         $SQLquery1 = "INSERT INTO POSTULADOS(ID_POSTULADO, ID_TAREA, FECHA_POSTULACION, ESTADO_POSTULACION) VALUES ('$id_estudiante', '$id_tarea',CURRENT_DATE(), 'ACTIVA');";
+         $consulta1 = mysqli_query($conn, $SQLquery1);
+
+         if (!$consulta1) {
+            return 0;
+         } else {
+            return 1;
+         }
+      } elseif (strtoupper($verificar['ESTADO_POSTULACION']) == 'INACTIVA') {
+         // reactiva la postulación 
+         $SLQ10 = "UPDATE POSTULADOS SET ESTADO_POSTULACION = 'ACTIVA' WHERE ID_POSTULADO = '$id_estudiante' AND ID_TAREA = '$id_tarea';";
+         $query3 = mysqli_query($conn, $SLQ10);
+
+         if (!$query3) {
+            return 2;
+         } else {
+            return 3;
+         }
+      } else {
+         return 4;
+      }
    }
-   function Postularse_a_tarea()
+   function Anular_postulacion($id_estudiante, $id_tarea)
    {
-      echo "me ";
+      global $conn;
+
+      // obtener el estado de postulación
+      $SLQ8 = "SELECT ESTADO_POSTULACION FROM POSTULADOS WHERE ID_POSTULADO = '$id_estudiante' AND ID_TAREA = '$id_tarea';";
+      $query2 = mysqli_query($conn, $SLQ8);
+      $result8 = mysqli_fetch_array($query2);
+
+      // verificar si esta inactivo para no repetirlo de nuevo
+      if (strtoupper($result8['ESTADO_POSTULACION']) == 'ACTIVA') {
+
+         $SLQ9 = "UPDATE POSTULADOS SET ESTADO_POSTULACION = 'INACTIVA' WHERE ID_POSTULADO = '$id_estudiante' AND ID_TAREA = '$id_tarea';";
+         $result9 = mysqli_query($conn, $SLQ9);
+         if (!$result9) {
+            return 0;
+         } else {
+            return 1;
+         }
+      } else {
+         return 2;
+      }
    }
-   function Salir_de_tarea()
+
+   function ACuantasPertenezco($id_estudiante)
    {
+      // conteo de las tareas a las que pertenezco y están activas
+      global $conn;
+      // conteo de las que pertenezco y están activas
+      $SQL12 = "SELECT COUNT(ID_TAREA) as TareasMia FROM POSTULADOS WHERE ID_POSTULADO = '$id_estudiante' AND ESTADO_POSTULACION LIKE 'A%';";
+      $result12 = mysqli_query($conn, $SQL12);
+      $getResultado = mysqli_fetch_array($result12);
+      $disponibles =  $getResultado['TareasMia'];
+
+      return $disponibles;
    }
+
    function Ver_tarea()
    {
    }
@@ -71,7 +138,7 @@ if (isset($_SESSION['id'])) {
    }
 
    // Creando instancia estudiante
-   $Estudiante = new Estudiante(
+   $Pepito = new Estudiante(
       $id,
       $DatosPerfil['NOMBRES'],
       $DatosPerfil['APELLIDOS'],
@@ -84,7 +151,7 @@ if (isset($_SESSION['id'])) {
       $DatosPerfil['NOMBRE_TECNICA'],
    );
 
-   $Estudiante->horasTotales = 12;
+   $Pepito->horasTotales = 12;
 
    $_SESSION['vector'] = $vector;
    // Vector con los datos base del estudiante.
@@ -112,13 +179,6 @@ if (isset($_SESSION['id'])) {
    //Tareas a las cuales esta postulado.
    $SQL5 = "SELECT * FROM POSTULADOS WHERE ID_POSTULADO = '$id';";
    $result5 = mysqli_query($conn, $SQL5);
-
-   // conteo de las que pertenezco y están activas
-   $SQL12 = "SELECT COUNT(ID_TAREA) as TareasMia FROM POSTULADOS WHERE ID_POSTULADO = '$id' AND ESTADO_POSTULACION LIKE 'A%';";
-   $result12 = mysqli_query($conn, $SQL12);
-   $getResultado = mysqli_fetch_array($result12);
-   $disponibles =  $getResultado['TareasMia'];
 } else {
    echo "<script> alert(\"Se produjo un error al extraer los datos del estudiante, Carpeta:Controlador/RecogerDatos/estudiante/datos.php\")</script>";
-   header("Location:../../../index.php");
 }

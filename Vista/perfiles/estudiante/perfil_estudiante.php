@@ -3,6 +3,9 @@ require "../../../Controlador/RecogerDatos/estudiante/datos.php";
 
 // cierre de sesiones
 if (isset($_SESSION['id'])) {
+    $idt = $_SESSION['id'];
+
+    $MisDatos = $Pepito->Get_mis_datos($idt);
 
 ?>
     <!DOCTYPE html>
@@ -14,14 +17,14 @@ if (isset($_SESSION['id'])) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title><?php echo $datosEstudiante['NOMBRES'] . " (" . $disponibles; ?>)</title>
+        <title><?php echo $MisDatos['NOMBRES'] . " (" . $Pepito->ACuantasPertenezco($idt); ?>)</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
-    <body class="pt-5 ">
+    <body class="pt-5">
         <header class="container-fluid">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
                 <a class="navbar-brand" href="tareas.php">
@@ -54,7 +57,7 @@ if (isset($_SESSION['id'])) {
             </nav>
         </header>
         <!-- Contenido principal -->
-        <main class="mt-5 pt-4 px-sm-2">
+        <main class="mt-5 pt-4 px-sm-2 ">
             <div class="border border-4 border-primary rounded-3">
                 <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#perfil" aria-expanded="false" aria-controls="perfil">
                     <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
@@ -70,14 +73,14 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12 col-sm-6 col-md-5 offset-md-1 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0">Nombres </span>
-                                <input type="text" value="<?php echo $datosEstudiante['NOMBRES']; ?>" class=" border-0 form-control rounded-4 text-center" readonly>
+                                <input type="text" value="<?php echo $MisDatos['NOMBRES']; ?>" class=" border-0 form-control rounded-4 text-center" readonly>
                             </div>
                         </div>
                         <!-- Apellidos -->
                         <div class="col-12 col-sm-6 col-md-5 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0">Apellidos </span>
-                                <input type="text" value="<?php echo $datosEstudiante['APELLIDOS']; ?>" class="border-0 form-control rounded-4 text-center" readonly>
+                                <input type="text" value="<?php echo $MisDatos['APELLIDOS']; ?>" class="border-0 form-control rounded-4 text-center" readonly>
                             </div>
                         </div>
                     </div>
@@ -87,21 +90,21 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12 col-sm-4 col-md-4 offset-md-1 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0"><i class="fa-solid fa-address-card"></i></span>
-                                <input type="text" value="<?php echo $datosEstudiante['IDENTIDAD']; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $MisDatos['IDENTIDAD']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                         <!-- Fecha de registro -->
                         <div class="col-12 col-sm-4 col-md-3 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-calendar-days"></i></span>
-                                <input type="text" value="<?php echo $datosEstudiante['FECHA_REGISTRO']; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $MisDatos['FECHA_REGISTRO']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                         <!-- grado -->
                         <div class="col-12 col-sm-4 col-md-3 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 ">Grado</span>
-                                <input type="text" value="<?php echo $datosEstudiante['GRADO'] . "°"; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $MisDatos['GRADO'] . "°"; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                     </div>
@@ -111,7 +114,7 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12 col-sm-6 offset-sm-1 col-lg-5 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-phone"></i></span>
-                                <input type="text" value="<?php echo $datosEstudiante['CELULAR']; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $MisDatos['CELULAR']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                         <div class="d-none d-lg-block col-2  text-center">
@@ -134,22 +137,20 @@ if (isset($_SESSION['id'])) {
                         <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-2  mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-chalkboard-user"><b> Técnica</b></i></span>
-                                <input type="text" value="<?php echo $datosEstudiante['NOMBRE_TECNICA']; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $MisDatos['NOMBRE_TECNICA']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
                         <!-- Correo -->
                         <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-0 mb-2">
                             <div class="input-group">
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-at"></i></span>
-                                <input type="text" value="<?php echo $datosEstudiante['CORREO']; ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $MisDatos['CORREO']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
-
-            <!-- TODO mostrar las tareas a las cuales esta postulado y sus detalles. -->
             <!-- Tareas del estudiante. -->
             <div class="border border-4 border-primary rounded-3 mt-3">
                 <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#tareas" aria-expanded="false" aria-controls="tareas">
@@ -161,7 +162,6 @@ if (isset($_SESSION['id'])) {
                 <div class="mx-1 my-2 collapse show " id="tareas">
                     <div class="row">
                         <?php
-
                         $variable = 0;
                         while ($tareasEnProceso = mysqli_fetch_array($result5)) {
                             // IDs del modal
@@ -351,6 +351,10 @@ if (isset($_SESSION['id'])) {
             </script>
         <?php unset($_SESSION['mensajeDePerfil'], $_SESSION['tituloDePerfil'], $_SESSION['tipoPerfil']);
         } ?>
+        <footer class=" ">
+            <?php
+            ?>
+        </footer>
     </body>
 
     </html>

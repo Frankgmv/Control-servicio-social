@@ -4,12 +4,7 @@ require "../../../Controlador/RecogerDatos/estudiante/datos.php";
 // cierre de sesiones
 if (isset($_SESSION['id'])) {
     $idt = $_SESSION['id'];
-
     $MisDatos = $Pepito->Get_mis_datos($idt);
-
-  
-    
-
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -20,6 +15,7 @@ if (isset($_SESSION['id'])) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
+        <!-- nombre y cuántas tareas tiene pendientes. -->
         <title><?php echo $MisDatos['NOMBRES'] . " (" . $Pepito->GetACuantasPertenezco($idt); ?>)</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -169,8 +165,8 @@ if (isset($_SESSION['id'])) {
                         while ($tareasEnProceso = mysqli_fetch_array($result5)) {
                             // IDS DEL MODAL
                             $id_modal = "Modal_N_" . $variable;
-                            $id_modal2 = "Modal_N2_" . $variable;                            
-                            
+                            $id_modal2 = "Modal_N2_" . $variable;
+
                             // TAREAS A LAS QUE ESTOY POSTULADO
                             $ID_TAREA_MIA = $tareasEnProceso['ID_TAREA'];
                             $mis_tareas = EstoyPostulado($ID_TAREA_MIA);
@@ -178,7 +174,7 @@ if (isset($_SESSION['id'])) {
                             // NOMBRE DEL CREADOR
                             $ElCreador = $mis_tareas['ID_CREADOR'];
                             $CreadorDeTarea = NombreCreadorTarea($ElCreador);
-                            
+
                             // VERIFICAR EL ESTADO DE LA TAREA
                             if (strtolower($mis_tareas['ESTADO_TAREA']) == "activa") {
                                 $color = "warning";
@@ -190,7 +186,7 @@ if (isset($_SESSION['id'])) {
 
                             $text = "dark";
 
-                                // VER SI ESTOY ACTIVO
+                            // VER SI ESTOY ACTIVO
                             $resultado = EstoyActivo($idt, $ID_TAREA_MIA);
                             if (strtoupper($resultado) === 'INACTIVA') {
                                 $color = "dark";
@@ -348,10 +344,6 @@ if (isset($_SESSION['id'])) {
             </script>
         <?php unset($_SESSION['mensajeDePerfil'], $_SESSION['tituloDePerfil'], $_SESSION['tipoPerfil']);
         } ?>
-        <footer class=" ">
-            <?php
-            ?>
-        </footer>
     </body>
 
     </html>

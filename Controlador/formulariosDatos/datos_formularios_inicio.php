@@ -12,7 +12,6 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
     $identidad = $_POST['documento'];
     $password = $_POST['password'];
 
-    $_SESSION['id'] = $identidad;
 
     if (isset($_POST['iniciar_sesion_estudiantes'])) {
 
@@ -24,6 +23,7 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del estudiante
+            $_SESSION['id'] = $identidad;
             header('Location:../../Vista/perfiles/estudiante/perfil_estudiante.php');
         } else {
             // fail estudiante 
@@ -46,6 +46,7 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del directivo
+            $_SESSION['id_dir'] = $identidad;
             header('Location:../../Vista/perfiles/directivo/perfil_directivo.php');
         } else {
             // fail directivo 
@@ -65,6 +66,7 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del admin
+            $_SESSION['id_adm'] = $identidad;
             header('Location:../../Vista/perfiles/_admin/perfil_admin.php');
         } else {
             // fail admin

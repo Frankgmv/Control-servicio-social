@@ -206,5 +206,8 @@ if (isset($_SESSION['id'])) {
       return $resultado['ESTADO'];
    }
 } else {
-   echo "<script> alert(\"Se produjo un error al extraer los datos del estudiante, Carpeta:Controlador/RecogerDatos/estudiante/datos.php\")</script>";
+   header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
+   $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";
+   $_SESSION['tipoAlertaInicio'] = "warning";
+   $_SESSION['tituloInicio'] = "Sesión fallida";
 }

@@ -170,8 +170,9 @@ if (isset($_SESSION['id_dir'])) {
                         $result5 = $Boss->Get_mis_tarea($idt);
                         while ($tareasPorMi = mysqli_fetch_array($result5)) {
                             // IDS DEL MODAL
-                            $id_modal = "Modal_N_" . $variable;
-                            $id_modal2 = "Modal_N2_" . $variable;
+                            $id_Eliminar = "Modal_Eliminar_" . $variable;
+                            $id_Editar = "Modal_Editar_" . $variable;
+                            $id_Ver = "Modal_Ver_" . $variable;
 
                             if (strtoupper($tareasPorMi['ESTADO_TAREA']) == "TERMINADA") {
                                 $color = "success";
@@ -179,7 +180,9 @@ if (isset($_SESSION['id_dir'])) {
                                 $modal_text = " ";
                                 $disable = "d-none";
                                 $disable = "disabled";
+                                $hidden = "hidden";
                             } else {
+                                $hidden = " ";
                                 $disable = " ";
                                 $modal_color = " ";
                                 $modal_text = " ";
@@ -230,15 +233,126 @@ if (isset($_SESSION['id_dir'])) {
                                             <div class="mt-2">
                                                 <p><b class=" border border-2 rounded-pill  p-1 border-<?php echo $color; ?> text-capitalize"><?php echo $tareasPorMi['ESTADO_TAREA']; ?><i class="text-<?php echo $color; ?> ms-1 fa-solid fa-circle"></i></b></p>
                                             </div>
-                                            <div class=" border-2 small border border-<?php echo $color;?> rounded-pill mt-0 ">
-                                                <button <?php echo $disable;?> class="btn rounded-circle btn-outline-danger border-0"><i class=" fa-solid fa-trash-can small"></i></button>
-                                                <button <?php echo $disable;?> class="btn rounded-circle btn-outline-success border-0"><i class="fa-solid fa-pencil small"></i></button>
-                                                <button  class="btn rounded-circle btn-outline-primary border-0"><i class="fa-solid fa-eye small"></i></button>
+                                            <div class=" border-2 small border border-<?php echo $color; ?> rounded-pill mt-0 ">
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo $id_Eliminar; ?>" <?php echo $hidden; ?> class="btn rounded-circle btn-outline-danger border-0"><i class=" fa-solid fa-trash-can small"></i></button>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo $id_Editar; ?>" <?php echo $disable; ?> class="btn rounded-circle btn-outline-success border-0"><i class="fa-solid fa-pencil small"></i></button>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo $id_Ver; ?>" class="btn rounded-circle btn-outline-primary border-0"><i class="fa-solid fa-eye small"></i></button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                                <!-- MODAL PARA ELIMINAR -->
+                                <div class="modal fade" id="<?php echo $id_Eliminar; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $id_Eliminar; ?>" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content rounded-3 border border-3 border-danger">
+                                            <div class="modal-header bg-danger">
+                                                <h5 class="modal-title text-light">Eliminar <b><?php echo $tareasPorMi['NOMBRE_TAREA']; ?></b> </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body my-4">
+                                                <b> Seguro que deseas eliminar la tareas, esta no se podrá recuperar ningún registro de <?php echo $tareasPorMi['NOMBRE_TAREA']; ?>.</b>
+                                            </div>
+                                            <form action="../../../Controlador/RecogerDatos/directivo/datos.php" method="POST" class="modal-footer bg-danger">
+                                                <button type="button" class="btn btn-secondary rounded-3" data-bs-dismiss="modal"><b>No</b></button>
+                                                <input type="hidden" name="id_tarea" value="<?php echo $tareasPorMi['ID_TAREA']; ?>">
+                                                <button type="submit" name="EliminarTarea" class="btn rounded btn-outline-secondary border-0"><i class=" fa-solid fa-trash-can small"> <b>Si</b></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                                <!-- MODAL PARA EDITAR -->
+                                <form action="../../../Controlador/RecogerDatos/directivo/datos.php" method="POST">
+                                    <div class="modal fade" id="<?php echo $id_Editar; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $id_Editar; ?>" aria-hidden="true">
+                                        <div class="modal-dialog  modal-fullscreen py-5 px-4" role="document">
+                                            <div class="modal-content rounded-3 border border-3 border-success ">
+                                                <div class="modal-header bg-success">
+                                                    <h5 class="modal-title text-light">EDITAR <b><?php echo $tareasPorMi['NOMBRE_TAREA']; ?></b></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body bg-secondary">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="">Nombre de la tarea</label>
+                                                            <input type="text" value="<?php echo $tareasPorMi['NOMBRE_TAREA']; ?>">
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="">Estado de la tarea</label>
+                                                            <input type="text" value="<?php echo $tareasPorMi['ESTADO_TAREA']; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="">Fecha Limite</label>
+                                                            <input type="date" value="<?php echo $tareasPorMi['FECHA_LIMITE']; ?>">
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="">Cambiar Grupo</label>
+                                                            <input type="text" value="<?php echo $tareasPorMi['PARA_QUE_GRADO']; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="number" value="<?php echo $tareasPorMi['NUMERO_HORAS']; ?>">
+
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text" value="<?php echo $tareasPorMi['N_PERSONAS']; ?>">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for=""></label>
+                                                            <textarea name="" id="descripcion" cols="30" rows="10"><?php echo $tareasPorMi['DESCRIPCION']; ?></textarea>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for=""></label>
+                                                            <textarea name="" id="objetivo" cols="30
+                                                            " rows="10"><?php echo $tareasPorMi['OBJETIVO']; ?></textarea>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                                <div class="modal-footer bg-success">
+                                                    <button type="button" class="btn btn-light rounded-3 btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-outline-light btn-sm rounded-3"><i class="fa-solid fa-bookmark"> <b>Guardar</b></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+
+
+                                <!-- MODAL PARA VER -->
+                                <div class="modal fade" id="<?php echo $id_Ver; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $id_Ver; ?>" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Ver tarea NOMBre</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <?php echo $id_Ver ?>
+                                            </div>
+                                            <form action="../../../Controlador/RecogerDatos/directivo/datos.php" method="POST" class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         <?php $variable++;
                         } ?>

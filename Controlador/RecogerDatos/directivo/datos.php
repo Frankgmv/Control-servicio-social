@@ -103,34 +103,34 @@ class Directivo
     {
     }
 
-    function Set_modificaciones()
+    function Set_modificaciones($id, $Tipo_modificacion)
     {
+
+
     }
 }
 
 if (isset($_SESSION['id_dir'])) {
-
     $id = $_SESSION['id_dir'];
-
-    // SELECCIONAR DATOS DE LA TABLA DIRECTIVOS.
-    $datosPersonales = "SELECT * FROM DIRECTIVOS WHERE IDENTIDAD = $id;";
-
-    $RetornoDatosPersonales = mysqli_query($conn, $datosPersonales);
-    $DataDir = mysqli_fetch_assoc($RetornoDatosPersonales);
-
-    // $Boss = new Directivo(
-    //     $id,
-    //     $DataDir['NOMBRES'],
-    //     $DataDir['APELLIDOS'],
-    //     $DataDir['EDAD'],
-    //     $DataDir['FECHA_REGISTRO'],
-    //     $DataDir['CELULAR'],
-    //     $DataDir['CORREO'],
-    //     $DataDir['ROL'],
-    //     $DataDir['OCUPACION'],
-    //     $DataDir['DONDE_LABORA'],
-    // );
     $Boss = new Directivo($id);
+
+
+
+    if(isset($_POST['EliminarTarea'])){
+
+        $id_tarea_eliminar = $_POST['id_tarea'];
+        echo "eliminar ".$id_tarea_eliminar;
+        
+    }
+
+    if(isset($_POST[''])){
+
+    }
+
+    if(isset($_POST[''])){
+
+    }
+
 
     header("../../../Vista/perfiles/directivo/perfil_directivo.php");
 } else {

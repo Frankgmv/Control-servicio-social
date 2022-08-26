@@ -67,8 +67,8 @@ if (isset($_SESSION['id_dir'])) {
                         </h2>
                     </div>
                 </a>
-                <!-- <div class="mx-2 collapse " id="perfilDir"> -->
-                <div class="mx-2 collapse show " id="perfil">
+                <div class="mx-2 collapse " id="perfil">
+                    <!-- <div class="mx-2 collapse show " id="perfil"> -->
                     <!-- hilera 1 -->
                     <div class="row my-sm-3">
                         <!-- Nombres -->
@@ -105,7 +105,8 @@ if (isset($_SESSION['id_dir'])) {
                         <!-- grado -->
                         <div class="col-12 col-sm-4 col-md-3 mb-2">
                             <div class="input-group">
-                                <span class="input-group-text border-0 "><i class="fa-solid fa-address-book"><b> Tareas Creadas</b></i></span>
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-address-book"><b> Tareas
+                                            Creadas</b></i></span>
                                 <input type="text" value="<?php echo $HorasYTareas['TOTAL_TAREAS']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
@@ -126,7 +127,8 @@ if (isset($_SESSION['id_dir'])) {
                         <div class="col-12 col-sm-4 col-lg-3  mb-2">
                             <div class="input-group">
                                 <!-- TODO extraer las horas del totales -->
-                                <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Cuantas </b></i></span>
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Cuantas
+                                        </b></i></span>
                                 <input type="text" value="<?php echo $HorasYTareas['TOTAL_HORAS']; ?> h" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
@@ -136,7 +138,8 @@ if (isset($_SESSION['id_dir'])) {
                         <!-- Media técnica -->
                         <div class="col-12 col-md-8 offset-md-2 col-lg-4 offset-lg-2  mb-2">
                             <div class="input-group">
-                                <span class="input-group-text border-0 "><i class="fa-solid fa-chalkboard-user"><b> Ocupación</b></i></span>
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-chalkboard-user"><b>
+                                            Ocupación</b></i></span>
                                 <input type="text" value="<?php echo $DataDir['OCUPACION']; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
@@ -153,12 +156,104 @@ if (isset($_SESSION['id_dir'])) {
             </div>
 
             <!-- Tareas del estudiante. -->
+            <div class="border border-4 border-primary rounded-3 mt-3">
+                <a class="nav-link p-0 m-0" data-bs-toggle="collapse" href="#tareas" aria-expanded="false" aria-controls="tareas">
+                    <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
+                        <h2 class="text-white-50"><i class="fa-solid fa-book"></i><b class="text-light"> Tareas Creadas</b>
+                        </h2>
+                    </div>
+                </a>
+                <div class="mx-1 my-2 collapse show " id="tareas">
+                    <div class="row">
+                        <?php
+                        $variable = 0;
+                        $result5 = $Boss->Get_mis_tarea($idt);
+                        while ($tareasPorMi = mysqli_fetch_array($result5)) {
+                            // IDS DEL MODAL
+                            $id_modal = "Modal_N_" . $variable;
+                            $id_modal2 = "Modal_N2_" . $variable;
 
-            
+                            if (strtoupper($tareasPorMi['ESTADO_TAREA']) == "TERMINADA") {
+                                $color = "success";
+                                $modal_color = " ";
+                                $modal_text = " ";
+                                $disable = "d-none";
+                                $disable = "disabled";
+                            } else {
+                                $disable = " ";
+                                $modal_color = " ";
+                                $modal_text = " ";
+                                $color = "warning";
+                            }
+
+
+                            // cuantos postulados hoy a la tarea
+
+                            // El estado de la tarea para los colores
+
+
+
+                            // foreach ($tareasPorMi as $key => $value) {
+                            // echo "$key :: $value  <br>";
+                            // }
+
+                        ?>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xl-4 ">
+                                <div class=" border border-3 border-<?php echo $color; ?> bg-secondary rounded-3 mb-3">
+                                    <div class=" text-center py-1 bg-<?php echo $color; ?>">
+                                        <h6 class="text-center  text-light text-capitalize"><b><?php echo $tareasPorMi['NOMBRE_TAREA']; ?></b></h4>
+                                    </div>
+                                    <!-- fechas y postulados -->
+                                    <div class="row mb-1 mt-2">
+                                        <div class="col-8  small ">
+                                            <div class="col ps-2 d-flex justify-content-sm-around flex-column flex-sm-row justify-content-between align-items-center">
+                                                <h6 class="text-primary"><i class="small fa-solid fa-calendar-days"><i> <?php echo $tareasPorMi['FECHA_LIMITE']; ?></i></i></h6>
+                                                <h6 class="text-danger"><i class="small fa-solid fa-calendar-days"><i> <?php echo $tareasPorMi['FECHA_LIMITE']; ?></i></i></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col text-center d-flex justify-content-center align-items-center d-sm-block">
+                                            <b class="rounded border border-<?php echo "dark"; ?> border-1 bg-<?php echo $color; ?>"><i class="ms-1 fa-solid fa-user-clock"><b class="border-start border-1 border-dark ps-2 mx-2"><?php echo "12"; ?></b></i></b>
+                                        </div>
+                                    </div>
+                                    <!-- objetivo -->
+                                    <div class="row mb-1">
+                                        <div class="col">
+                                            <div class="m-1 m-sm-2 px-2">
+                                                <h6 class="text-danger small "><b>Objetivo.</b></h6>
+                                                <p class="P-1 text-black small  "><?php echo $tareasPorMi['OBJETIVO']; ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Botones -->
+                                    <div class="row mb-1  mx-1 mx-sm-4">
+                                        <div class="col mt-0 p-0 d-flex justify-content-between align-items-start">
+                                            <div class="mt-2">
+                                                <p><b class=" border border-2 rounded-pill  p-1 border-<?php echo $color; ?> text-capitalize"><?php echo $tareasPorMi['ESTADO_TAREA']; ?><i class="text-<?php echo $color; ?> ms-1 fa-solid fa-circle"></i></b></p>
+                                            </div>
+                                            <div class=" border-2 small border border-<?php echo $color;?> rounded-pill mt-0 ">
+                                                <button <?php echo $disable;?> class="btn rounded-circle btn-outline-danger border-0"><i class=" fa-solid fa-trash-can small"></i></button>
+                                                <button <?php echo $disable;?> class="btn rounded-circle btn-outline-success border-0"><i class="fa-solid fa-pencil small"></i></button>
+                                                <button  class="btn rounded-circle btn-outline-primary border-0"><i class="fa-solid fa-eye small"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        <?php $variable++;
+                        } ?>
+                    </div>
+                </div>
+            </div>
+
+
         </main>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous ">
+        </script>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

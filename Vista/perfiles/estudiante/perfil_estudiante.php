@@ -252,11 +252,9 @@ if (isset($_SESSION['id'])) {
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <!-- titular de la tarea -->
                                                                     <div class="col-8  text-start">
                                                                         <h6 class=" p-1"><i class=" fa-solid fa-calendar-days"> <b class="ms-2 text-primary text-decoration-underline"> <?php echo $mis_tareas['FECHA_CREACION']; ?></b></i> <b> al </b> <b class=" text-danger text-decoration-underline "><?php echo $mis_tareas['FECHA_LIMITE']; ?></b></h6>
                                                                     </div>
-                                                                    <!-- estado de la tarea -->
                                                                     <div class="col px-md-5">
                                                                         <div class="col-12 input-group border-0">
                                                                             <!-- horas -->

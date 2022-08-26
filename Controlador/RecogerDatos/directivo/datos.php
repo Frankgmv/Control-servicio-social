@@ -14,21 +14,36 @@ class Directivo
     var $ocupacion = " desconocidos";
     var $donde_labora = " desconocidos";
 
-    function Directivo($identidad, $nombres, $apellidos, $edad, $fecha_registro, $celular, $correo, $rol, $ocupacion, $donde_labora)
+    // function Directivo($identidad, $nombres, $apellidos, $edad, $fecha_registro, $celular, $correo, $rol, $ocupacion, $donde_labora)
+    function Directivo($identidad)
     {
-        $identidad = $identidad;
-        $nombres = $nombres;
-        $apellidos = $apellidos;
-        $edad = $edad;
-        $fecha_registro = $fecha_registro;
-        $celular = $celular;
-        $correo = $correo;
-        $rol = $rol;
-        $ocupacion = $ocupacion;
-        $donde_labora = $donde_labora;
+        // $this->identidad = $identidad;
+        // $this->nombres = $nombres;
+        // $this->apellidos = $apellidos;
+        // $this->edad = $edad;
+        // $this->fecha_registro = $fecha_registro;
+        // $this->celular = $celular;
+        // $this->correo = $correo;
+        // $this->rol = $rol;
+        // $this->ocupacion = $ocupacion;
+        // $this->donde_labora = $donde_labora;
+        // SELECCIONAR DATOS DE LA TABLA DIRECTIVOS.
+        global $conn;
+        $datosPersonales = "SELECT * FROM DIRECTIVOS WHERE IDENTIDAD = $identidad;";
+
+        $RetornoDatosPersonales = mysqli_query($conn, $datosPersonales);
+        $DataDir = mysqli_fetch_assoc($RetornoDatosPersonales);
+        $this->identidad = $DataDir['IDENTIDAD  '];
+        $this->nombres = $DataDir['NOMBRES'];
+        $this->apellidos = $DataDir['APELLIDOS'];
+        $this->edad = $DataDir['EDAD'];
+        $this->fecha_registro = $DataDir['FECHA_REGISTRO'];
+        $this->celular = $DataDir['CELULAR'];
+        $this->correo = $DataDir['CORREO'];
+        $this->rol = $DataDir['ROL'];
+        $this->ocupacion = $DataDir['OCUPACION'];
+        $this->donde_labora = $DataDir['DONDE_LABORA'];
     }
-
-
     function Get_mis_datos($id)
     {
         global $conn;
@@ -53,8 +68,21 @@ class Directivo
     }
     function Get_mis_tarea($id_creador)
     {
+        global $conn;
+        $SQL_6 = "SELECT * FROM TAREAS  WHERE ID_CREADOR = '$id_creador' ORDER BY ESTADO_TAREA ASC";
+        $CONSULT_6 = mysqli_query($conn, $SQL_6);
+        return $CONSULT_6;
     }
-    function Borra_tarea()
+
+
+    function Get_Todos_los_postulados()
+    {
+    }
+
+    function Get_datos_del_postulado()
+    {
+    }
+    function Borrar_tarea()
     {
     }
     function Set_terminar_tarea()
@@ -63,20 +91,17 @@ class Directivo
     function Set_modificar_tarea()
     {
     }
-    function Set_nueva_tarea()
+    function Set_Crear_nueva_tarea()
     {
     }
 
     function Get_todas_las_tareas()
     {
     }
-    function Get_Todos_los_postulados()
-    {
-    }
+
     function Set_Borrar_postulaciones()
     {
     }
-
 
     function Set_modificaciones()
     {
@@ -93,18 +118,19 @@ if (isset($_SESSION['id_dir'])) {
     $RetornoDatosPersonales = mysqli_query($conn, $datosPersonales);
     $DataDir = mysqli_fetch_assoc($RetornoDatosPersonales);
 
-    $Boss = new Directivo(
-        $id,
-        $DataDir['NOMBRES'],
-        $DataDir['APELLIDOS'],
-        $DataDir['EDAD'],
-        $DataDir['FECHA_REGISTRO'],
-        $DataDir['CELULAR'],
-        $DataDir['CORREO'],
-        $DataDir['ROL'],
-        $DataDir['OCUPACION'],
-        $DataDir['DONDE_LABORA'],
-    );
+    // $Boss = new Directivo(
+    //     $id,
+    //     $DataDir['NOMBRES'],
+    //     $DataDir['APELLIDOS'],
+    //     $DataDir['EDAD'],
+    //     $DataDir['FECHA_REGISTRO'],
+    //     $DataDir['CELULAR'],
+    //     $DataDir['CORREO'],
+    //     $DataDir['ROL'],
+    //     $DataDir['OCUPACION'],
+    //     $DataDir['DONDE_LABORA'],
+    // );
+    $Boss = new Directivo($id);
 
     header("../../../Vista/perfiles/directivo/perfil_directivo.php");
 } else {

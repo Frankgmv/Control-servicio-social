@@ -55,14 +55,12 @@ if (isset($_POST['Postularse'])) {
             $_SESSION['mensajeDeTareas'] = "La tarea no esta habilitada para tu GRUPO / GRADO actualmente";
             $_SESSION['tipoTareas'] = "warning";
             break;
-            default:
+        default:
             $_SESSION['tituloDeTareas'] = "Error";
             $_SESSION['mensajeDeTareas'] = "hubo un error en las postulaciones, por favor notifíquelo";
             $_SESSION['tipoTareas'] = "error";
             break;
     }
-
-
     header("Location:tareas.php");
 }
 

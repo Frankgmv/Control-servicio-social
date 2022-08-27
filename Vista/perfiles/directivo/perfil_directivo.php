@@ -197,7 +197,7 @@ if (isset($_SESSION['id_dir'])) {
 
 
                             // foreach ($tareasPorMi as $key => $value) {
-                            // echo "$key :: $value  <br>";
+                            // echo "$key => $value  <br>";
                             // }
 
                         ?>
@@ -277,46 +277,68 @@ if (isset($_SESSION['id_dir'])) {
                                                     <h5 class="modal-title text-light">EDITAR <b><?php echo $tareasPorMi['NOMBRE_TAREA']; ?></b></h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body bg-secondary">
+                                                <div class="modal-body bg-success ">
                                                     <div class="row">
-                                                        <div class="col">
-                                                            <label for="">Nombre de la tarea</label>
-                                                            <input type="text" value="<?php echo $tareasPorMi['NOMBRE_TAREA']; ?>">
+                                                        <div class="col-12 col-md-6 text-center px-5 px-sm-5">
+                                                            <div class="input-group">
+                                                                <label for="NOMBRE_TAREA" class=" input-group-text">NOMBRE</label>
+                                                                <input id="NOMBRE_TAREA" class="form-control text-center input-group-text" name="NOMBRE_TAREA" type="text" value="<?php echo $tareasPorMi['NOMBRE_TAREA']; ?>">
+                                                            </div>
                                                         </div>
-                                                        <div class="col">
-                                                            <label for="">Estado de la tarea</label>
-                                                            <input type="text" value="<?php echo $tareasPorMi['ESTADO_TAREA']; ?>">
+                                                        <div class="col-12 col-md-6 text-center  px-5 px-sm-5">
+                                                            <div class="input-group">
+                                                                <label for="ESTADO_TAREA" class=" input-group-text">Estado <?php echo $tareasPorMi['ESTADO_TAREA']; ?></label>
+                                                                <select name="ESTADO_TAREA" class="form-select text-center" id="ESTADO_TAREA">
+                                                                    <option selected value="<?php echo $tareasPorMi['ESTADO_TAREA']; ?>">Defecto "<?php echo $tareasPorMi['ESTADO_TAREA']; ?>"</option>
+                                                                    <option value="Activa">Activa</option>
+                                                                    <option value="Terminada">Terminada</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col">
-                                                            <label for="">Fecha Limite</label>
-                                                            <input type="date" value="<?php echo $tareasPorMi['FECHA_LIMITE']; ?>">
+                                                        <div class="col-12 col-md-6 text-center px-5 px-sm-5">
+                                                            <div class="input-group">
+                                                                <label for="FECHA_LIMITE" class=" input-group-text">Fecha Limite</label>
+                                                                <input id="FECHA_LIMITE" class="form-control text-center input-group-text" name="FECHA_LIMITE" type="date" value="<?php echo $tareasPorMi['FECHA_LIMITE']; ?>">
+                                                            </div>
                                                         </div>
-                                                        <div class="col">
-                                                            <label for="">Cambiar Grupo</label>
-                                                            <input type="text" value="<?php echo $tareasPorMi['PARA_QUE_GRADO']; ?>">
+                                                        <div class="col-12 col-md-6 text-center px-5 px-sm-5">
+                                                            <div class="input-group">
+                                                                <label for="PARA_QUE_GRADO" class=" input-group-text">Cambiar grupo de <?php echo $tareasPorMi['PARA_QUE_GRADO'] . "'s "; ?> por </label>
+                                                                <select name="PARA_QUE_GRADO" class=" input-group-text form-select text-center" id="PARA_QUE_GRADO">
+                                                                    <option selected value="<?php echo $tareasPorMi['PARA_QUE_GRADO']; ?>">Mismo Grupo</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="todos">Todos</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col">
-                                                            <input type="number" value="<?php echo $tareasPorMi['NUMERO_HORAS']; ?>">
+                                                        <div class="col text-center px-5 px-sm-5">
+                                                            <div class="input-group">
+                                                                <label for="NUMERO_HORAS" class=" input-group-text ">Número de horas</label>
+                                                                <input id="NUMERO_HORAS" class=" input-group-text form-control text-center" name="NUMERO_HORAS" type="number" value="<?php echo $tareasPorMi['NUMERO_HORAS']; ?>">
+                                                            </div>
 
                                                         </div>
-                                                        <div class="col">
-                                                            <input type="text" value="<?php echo $tareasPorMi['N_PERSONAS']; ?>">
-
+                                                        <div class="col text-center px-5 px-sm-5">
+                                                            <div class="input-group">
+                                                                <label for="N_PERSONAS" class=" input-group-text">Número de personas</label>
+                                                                <input id="N_PERSONAS" class=" input-group-text form-control text-center" name="N_PERSONAS" type="number" value="<?php echo $tareasPorMi['N_PERSONAS']; ?>">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col">
-                                                            <label for=""></label>
-                                                            <textarea name="" id="descripcion" cols="30" rows="10"><?php echo $tareasPorMi['DESCRIPCION']; ?></textarea>
+                                                        <div class="col text-center px-5 px-sm-5">
+                                                            <h5  class="d-block text-light"><b>Descripción</b></h5>
+                                                            <textarea id="descripcion" class=" form-control" name="descripcion" id="descripcion" cols="25" rows="6"><?php echo $tareasPorMi['DESCRIPCION']; ?></textarea>
                                                         </div>
-                                                        <div class="col">
-                                                            <label for=""></label>
-                                                            <textarea name="" id="objetivo" cols="30
-                                                            " rows="10"><?php echo $tareasPorMi['OBJETIVO']; ?></textarea>
+                                                        <div class="col text-center px-5 px-sm-5">
+                                                            <h5  class="d-block text-light"><b>Objetivo</b></h5>
+                                                            <textarea name="objetivo" class=" form-control" id="objetivo" cols="25" rows="6"><?php echo $tareasPorMi['OBJETIVO']; ?></textarea>
                                                         </div>
                                                     </div>
 

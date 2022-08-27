@@ -3,32 +3,37 @@ include_once "../../../Modelo /conexion_db.php";
 class Estudiante
 {
 
-   var $identidad = 00;
-   var $nombres = "desconocidos";
-   var $apellidos = "desconocidos";
-   var $edad = 0;
-   var $fecha_actual = " ";
-   var $celular = " ";
-   var $correo = " ";
-   var $rol = " ";
-   var $grado = " ";
-   var $nombre_tecnica = " ";
-   var $horasTotales = 0;
-
+   var $identidad;
+   var $nombres;
+   var $apellidos;
+   var $edad;
+   var $fecha_actual;
+   var $celular;
+   var $correo;
+   var $rol;
+   var $grado;
+   var $nombre_tecnica;
+   var $horasTotales;
 
    // Propiedades 
-   function Estudiante($identidad, $nombres, $apellidos, $edad, $fecha_actual, $celular, $correo, $rol, $grado, $nombre_tecnica)
+   function Estudiante($identidad)
    {
-      $identidad = $identidad;
-      $nombres = $nombres;
-      $apellidos = $apellidos;
-      $edad = $edad;
-      $fecha_actual = $fecha_actual;
-      $celular = $celular;
-      $correo = $correo;
-      $rol = $rol;
-      $grado = $grado;
-      $nombre_tecnica = $nombre_tecnica;
+      global $conn;
+      // Obtener mis datos personales.
+      $datosPersonales = "SELECT IDENTIDAD, NOMBRES, APELLIDOS, EDAD, FECHA_REGISTRO, CELULAR, CORREO, ROL, GRADO, NOMBRE_TECNICA FROM ESTUDIANTES WHERE IDENTIDAD = $identidad;";
+      $RetornoDatosPersonales = mysqli_query($conn, $datosPersonales);
+      $DatosPerfil = mysqli_fetch_assoc($RetornoDatosPersonales);
+
+      $this->identidad = $DatosPerfil['IDENTIDAD'];
+      $this->nombres = $DatosPerfil['NOMBRES'];
+      $this->apellidos = $DatosPerfil['APELLIDOS'];
+      $this->edad = $DatosPerfil['EDAD'];
+      $this->fecha_actual = $DatosPerfil['FECHA_REGISTRO'];
+      $this->celular = $DatosPerfil['CELULAR'];
+      $this->correo = $DatosPerfil['CORREO'];
+      $this->rol = $DatosPerfil['ROL'];
+      $this->grado = $DatosPerfil['GRADO'];
+      $this->nombre_tecnica = $DatosPerfil['NOMBRE_TECNICA'];
    }
 
    // métodos
@@ -41,37 +46,46 @@ class Estudiante
       return $result_1;
    }
 
-   function Set_postularse_a_tarea($id_estudiante, $id_tarea)
+   function Set_postularse_a_tarea($id_estudiante, $id_tarea, $grado)
    {
       global $conn;
       // Verificación
-      $SQLquery0 = "SELECT ESTADO_POSTULACION FROM POSTULADOS WHERE ID_TAREA = '$id_tarea' AND ID_POSTULADO = '$id_estudiante';";
-      $consulta0 = mysqli_query($conn, $SQLquery0);
-      $verificar = mysqli_fetch_array($consulta0);
+      $SQLquery11 = "SELECT GRADO FROM ESTUDIANTES WHERE IDENTIDAD = '$id_estudiante';";
+      $consulta11 = mysqli_query($conn, $SQLquery11);
+      $verificar11 = mysqli_fetch_array($consulta11);
+
+      if ($grado == $verificar11['GRADO'] or strtoupper($grado) == "TODOS") {
+
+         $SQLquery0 = "SELECT ESTADO_POSTULACION FROM POSTULADOS WHERE ID_TAREA = '$id_tarea' AND ID_POSTULADO = '$id_estudiante';";
+         $consulta0 = mysqli_query($conn, $SQLquery0);
+         $verificar = mysqli_fetch_array($consulta0);
 
 
-      if (!$verificar) {
-         // Insertar
-         $SQLquery1 = "INSERT INTO POSTULADOS(ID_POSTULADO, ID_TAREA, FECHA_POSTULACION, ESTADO_POSTULACION) VALUES ('$id_estudiante', '$id_tarea',CURRENT_DATE(), 'ACTIVA');";
-         $consulta1 = mysqli_query($conn, $SQLquery1);
+         if (!$verificar) {
+            // Insertar
+            $SQLquery1 = "INSERT INTO POSTULADOS(ID_POSTULADO, ID_TAREA, FECHA_POSTULACION, ESTADO_POSTULACION) VALUES ('$id_estudiante', '$id_tarea',CURRENT_DATE(), 'ACTIVA');";
+            $consulta1 = mysqli_query($conn, $SQLquery1);
 
-         if (!$consulta1) {
-            return 0;
+            if (!$consulta1) {
+               return 0;
+            } else {
+               return 1;
+            }
+         } elseif (strtoupper($verificar['ESTADO_POSTULACION']) == 'INACTIVA') {
+            // reactiva la postulación 
+            $SLQ10 = "UPDATE POSTULADOS SET ESTADO_POSTULACION = 'ACTIVA' WHERE ID_POSTULADO = '$id_estudiante' AND ID_TAREA = '$id_tarea';";
+            $query3 = mysqli_query($conn, $SLQ10);
+
+            if (!$query3) {
+               return 2;
+            } else {
+               return 3;
+            }
          } else {
-            return 1;
+            return 4;
          }
-      } elseif (strtoupper($verificar['ESTADO_POSTULACION']) == 'INACTIVA') {
-         // reactiva la postulación 
-         $SLQ10 = "UPDATE POSTULADOS SET ESTADO_POSTULACION = 'ACTIVA' WHERE ID_POSTULADO = '$id_estudiante' AND ID_TAREA = '$id_tarea';";
-         $query3 = mysqli_query($conn, $SLQ10);
-
-         if (!$query3) {
-            return 2;
-         } else {
-            return 3;
-         }
-      } else {
-         return 4;
+      }else{
+         return 5;
       }
    }
    function Set_anular_postulacion($id_estudiante, $id_tarea)
@@ -147,7 +161,12 @@ class Estudiante
       $consult_2 = mysqli_query($conn, $sql_2);
       $result_2 = mysqli_fetch_array($consult_2);
       $horasTotales = $result_2['HORAS'];
-      return $horasTotales;
+      $this->horasTotales = $horasTotales;
+      if ($horasTotales != 0) {
+         return $horasTotales;
+      } else {
+         return 0;
+      }
    }
 } //FIN CLASS ESTUDIANTE
 
@@ -160,18 +179,7 @@ if (isset($_SESSION['id'])) {
    $RetornoDatosPersonales = mysqli_query($conn, $datosPersonales);
    $DatosPerfil = mysqli_fetch_assoc($RetornoDatosPersonales);
 
-   $Pepito = new Estudiante(
-      $id,
-      $DatosPerfil['NOMBRES'],
-      $DatosPerfil['APELLIDOS'],
-      $DatosPerfil['EDAD'],
-      $DatosPerfil['FECHA_REGISTRO'],
-      $DatosPerfil['CELULAR'],
-      $DatosPerfil['CORREO'],
-      $DatosPerfil['ROL'],
-      $DatosPerfil['GRADO'],
-      $DatosPerfil['NOMBRE_TECNICA'],
-   );
+   $Pepito = new Estudiante($id);
 
    $id = $_SESSION['id'];
    $connN = $conn;

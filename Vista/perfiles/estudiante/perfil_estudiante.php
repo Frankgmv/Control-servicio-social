@@ -5,6 +5,7 @@ require "../../../Controlador/RecogerDatos/estudiante/datos.php";
 if (isset($_SESSION['id'])) {
     $idt = $_SESSION['id'];
     $MisDatos = $Pepito->Get_mis_datos($idt);
+    $horas = $Pepito->Get_mis_horas($id);
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -124,7 +125,7 @@ if (isset($_SESSION['id'])) {
                             <div class="input-group">
                                 <!-- TODO extraer las horas del totales -->
                                 <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Horas</b></i></span>
-                                <input type="text" value="<?php echo $Pepito->Get_mis_horas($id); ?>" class=" border-0 form-control text-center" readonly>
+                                <input type="text" value="<?php echo $horas; ?>" class=" border-0 form-control text-center" readonly>
                             </div>
                         </div>
 
@@ -210,11 +211,11 @@ if (isset($_SESSION['id'])) {
                                     <div class="row px-2">
                                         <!-- Nombre creador de tarea -->
                                         <div class="col  text-center ">
-                                            <h6 class="small"><i>De <?php echo $CreadorDeTarea['NOMBRES']; ?></i></h6>
+                                            <h6 class="small"><i>De <b><?php echo $CreadorDeTarea['NOMBRES']; ?></b></i></h6>
                                         </div>
                                         <!-- fecha creación -->
                                         <div class="col  text-center small">
-                                            <label for="" class=" d-inline small"><b>Limite</b></label>
+                                            <label for="" class=" d-inline small"><b>Fecha limite</b></label>
                                             <h6><i class="small fa-solid fa-calendar-days"><i> <?php echo $mis_tareas['FECHA_LIMITE']; ?></i></i></h6>
                                         </div>
                                     </div>
@@ -246,24 +247,24 @@ if (isset($_SESSION['id'])) {
                                                                 <div class="row">
                                                                     <div class="d-flex justify-content-around align-content-center">
                                                                         <!-- titular de la tarea -->
-                                                                        <h6><i class="fa-solid fa-user-tag"><i> <?php echo $CreadorDeTarea['NOMBRES']; ?></i></i></h6>
+                                                                        <h6><i class="fa-solid fa-user-tag"><i> <b>De </b><?php echo $CreadorDeTarea['NOMBRES']; ?></i></i></h6>
                                                                         <!-- fechas  -->
-                                                                        <p><b class="border rounded bg-secondary p-1 small"><?php echo $mis_tareas['ESTADO_TAREA'];; ?><i class="text-<?php echo $color; ?> ms-1 fa-solid fa-circle"></i></b></p>
+                                                                        <p><b class="border rounded bg-secondary p-1 small text-capitalize"><?php echo $mis_tareas['ESTADO_TAREA'];; ?><i class="text-<?php echo $color; ?> ms-1 fa-solid fa-circle"></i></b></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-8  text-start">
-                                                                        <h6 class=" p-1"><i class=" fa-solid fa-calendar-days"> <b class="ms-2 text-primary text-decoration-underline"> <?php echo $mis_tareas['FECHA_CREACION']; ?></b></i> <b> al </b> <b class=" text-danger text-decoration-underline "><?php echo $mis_tareas['FECHA_LIMITE']; ?></b></h6>
+                                                                        <h6 class=" p-1"><i class=" fa-solid fa-calendar-days"> <b class="ms-2 text-primary "><b class="text-dark">Del </b> <?php echo "".$mis_tareas['FECHA_CREACION']; ?></b></i> <b> al </b> <b class=" text-danger  "><?php echo $mis_tareas['FECHA_LIMITE']; ?></b></h6>
                                                                     </div>
                                                                     <div class="col px-md-5">
                                                                         <div class="col-12 input-group border-0">
                                                                             <!-- horas -->
                                                                             <span class="input-group-text bg-body border-0">
-                                                                                <i class=" fa-solid fa-clock "><b> <?php echo $mis_tareas['NUMERO_HORAS']; ?> h</b></i>
+                                                                                <i class=" fa-solid fa-clock "> <b>Pago</b> <b class="text-danger"> <?php echo $mis_tareas['NUMERO_HORAS']; ?> h</b></i>
                                                                             </span>
                                                                             <!-- Grupos -->
                                                                             <span class=" input-group-text bg-body border-0">
-                                                                                <i class=" fa-solid fa-users-viewfinder "><b class="ms-1 text-capitalize"> <?php echo $mis_tareas['PARA_QUE_GRADO']; ?></b></i>
+                                                                                <i class=" fa-solid fa-user-group "><b class="ms-1 text-capitalize"><b class="text-">Grupos </b><label class="text-danger"> <?php echo $mis_tareas['PARA_QUE_GRADO']; ?></label></b></i>
                                                                             </span>
                                                                         </div>
                                                                     </div>

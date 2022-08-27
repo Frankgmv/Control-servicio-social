@@ -103,21 +103,19 @@ if (isset($_SESSION['id'])) {
                         $icono = " fa-xmark ";
                         $disable = "disabled";
                         $mostrar = " ";
-                        $fondo = "bg-success";
+                        $fondo = "success";
                     } else {
                         $mostrar = "show";
-                        $fondo = " ";
+                        $fondo = "warning";
                     }
 
                     // Preguntar si esta postulado
-
                     $id_est = $_SESSION['id'];
                     $SQLquery4 = "SELECT ESTADO_POSTULACION FROM POSTULADOS WHERE ID_TAREA = '$ID_TAREA' AND ID_POSTULADO = '$id_est';";
                     $consulta44 = mysqli_query($connN, $SQLquery4);
                     $verificacion = mysqli_fetch_array($consulta44);
 
                     if ($verificacion) {
-
                         if (strtoupper($verificacion['ESTADO_POSTULACION']) == 'ACTIVA') {
                             $disable = "disabled";
                             $icono = "fa-check ";
@@ -126,9 +124,9 @@ if (isset($_SESSION['id'])) {
 
                 ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2 ">
-                        <div class="border border-1  border-dark rounded-3 p-0">
+                        <div class="border border-2  border-dark rounded-3 p-0">
                             <a class="nav-link p-0 m-0 " data-bs-toggle="collapse" data-bs-target="#<?php echo $ides; ?>" aria-expanded="false" aria-controls="<?php echo $ides; ?>">
-                                <div class="bg- border-bottom border-1 border-dark text-center py-2 <?php echo $fondo; ?> " style="background-color: #90A2C0 ;">
+                                <div class=" border-bottom border-2 border-<?php echo $fondo; ?> text-center py-2 bg-<?php echo $fondo; ?> ">
                                     <h6 class="text-light"><b><?php echo $TAREA['NOMBRE_TAREA']; ?></b></h6>
 
                                 </div>
@@ -150,8 +148,8 @@ if (isset($_SESSION['id'])) {
                                     <div class="row">
                                         <div class="col-12 px-4">
                                             <h6 class=" mb-2 d-flex justify-content-between justify-content-md-around">
-                                                <b class=" text-primary me-1"><b class="text-center text-dark d-block  d-sm-block"> Inicio</b> <i class="fa-solid fa-calendar-days"></i> <?php echo $TAREA['FECHA_CREACION']; ?></b>
-                                                <b class="ps-1 text-danger"><b class="text-center text-dark d-block d-sm-block"> Fin </b> <i class="fa-solid fa-calendar-days"></i> <?php echo $TAREA['FECHA_LIMITE']; ?></b>
+                                                <b class=" text-primary me-1"><b class="text-center text-dark d-block mb-1">Fecha inicio</b> <i class="fa-solid fa-calendar-days"></i> <?php echo $TAREA['FECHA_CREACION']; ?></b>
+                                                <b class="ps-1 text-danger"><b class="text-center text-dark d-block mb-1">Fecha fin </b> <i class="fa-solid fa-calendar-days"></i> <?php echo $TAREA['FECHA_LIMITE']; ?></b>
                                             </h6>
                                         </div>
                                         <!-- estado de la tarea -->
@@ -165,7 +163,7 @@ if (isset($_SESSION['id'])) {
                                             <!-- Grupos -->
                                             <span class=" border border-1 p-1  rounded-pill bg-secondary">
                                                 <div class="mx-2">
-                                                    <p class="d-inline text-success "><i class=" fa-solid fa-users-line"></i></p> <b class="ms-2 text-capitalize    "> <?php echo $TAREA['PARA_QUE_GRADO']; ?></b>
+                                                    <p class="d-inline text-success "><i class=" fa-solid fa-users-line"> <b>Grupo </b></i></p> <b class="ms-2 text-capitalize    "> <?php echo $TAREA['PARA_QUE_GRADO']; ?></b>
                                                 </div>
                                             </span>
                                         </div>
@@ -186,8 +184,9 @@ if (isset($_SESSION['id'])) {
                                 <form action="Postulaciones.php" method="POST">
                                     <div class="d-flex justify-content-around align-items-center " style="background-color: #008080 ;">
                                         <label title="Número de estudiantes postulados a <?php echo $TAREA['NOMBRE_TAREA']; ?>" class="text-light"><i class="fa-solid fa-users"></i> <b class="ms-2"><?php echo  $EST_POSTULADOS['POSTULADOS'] . " / " . $TAREA['N_PERSONAS']; ?> POSTULADOS</b></label>
-                                        <input type="hidden" name="id_tarea" style="background-color: #008080;" class="border-0 text-center" readonly value="<?php echo $TAREA['ID_TAREA']; ?>">
-                                        <input type="hidden" name="id_estudiantes" style="background-color: #008080;" class="border-0 text-center" readonly value="<?php echo $_SESSION['id']; ?>">
+                                        <input type="hidden" name="id_tarea" required readonly value="<?php echo $TAREA['ID_TAREA']; ?>">
+                                        <input type="hidden" name="id_estudiantes" required readonly value="<?php echo $_SESSION['id']; ?>">
+                                        <input type="hidden" name="PARA_QUE_GRADO" required readonly value="<?php echo $TAREA['PARA_QUE_GRADO']; ?>">
                                         <div class="d-flex- justify-content-end">
                                             <button type="submit" name="Postularse" <?php echo $disable; ?> class=" btn btn-outline-light my-2 me-4 rounded-pill btn-sm"><i class=" fa-solid <?php echo $icono; ?> "> <b>Postularse</b></i></button>
                                         </div>

@@ -6,31 +6,20 @@ include "../../../Modelo/conexion_db.php";
 
 class Directivo
 {
-    var $identidad = " 00";
-    var $nombres = " desconocidos";
-    var $apellidos = " desconocidos";
-    var $edad = " desconocidos";
-    var $fecha_registro = " desconocidos";
-    var $celular = " desconocidos";
-    var $correo = " desconocidos";
-    var $rol = " desconocidos";
-    var $ocupacion = " desconocidos";
-    var $donde_labora = " desconocidos";
+    var $identidad ;
+    var $nombres ;
+    var $apellidos ;
+    var $edad ;
+    var $fecha_registro ;
+    var $celular ;
+    var $correo ;
+    var $rol ;
+    var $ocupacion ;
+    var $donde_labora ;
 
-    // function Directivo($identidad, $nombres, $apellidos, $edad, $fecha_registro, $celular, $correo, $rol, $ocupacion, $donde_labora)
     function Directivo($identidad)
     {
-        // $this->identidad = $identidad;
-        // $this->nombres = $nombres;
-        // $this->apellidos = $apellidos;
-        // $this->edad = $edad;
-        // $this->fecha_registro = $fecha_registro;
-        // $this->celular = $celular;
-        // $this->correo = $correo;
-        // $this->rol = $rol;
-        // $this->ocupacion = $ocupacion;
-        // $this->donde_labora = $donde_labora;
-        // SELECCIONAR DATOS DE LA TABLA DIRECTIVOS.
+
         global $conn;
         $datosPersonales = "SELECT * FROM DIRECTIVOS WHERE IDENTIDAD = $identidad;";
 
@@ -106,6 +95,25 @@ class Directivo
         $CONSULT_8 = mysqli_query($conn, $slq_8);
         return $CONSULT_8;
     }
+    function Set_modificar_tarea($id_modificador, $id_tarea_editar, $NOMBRE_TAREA, $FECHA_LIMITE, $PARA_QUE_GRADO, $NUMERO_HORAS, $N_PERSONAS, $descripcion, $objetivo)
+    {
+        global $conn;
+        $slq_13 = "UPDATE TAREAS SET NOMBRE_TAREA = '$NOMBRE_TAREA', DESCRIPCION = '$descripcion' , FECHA_LIMITE = '$FECHA_LIMITE', NUMERO_HORAS = $NUMERO_HORAS, OBJETIVO = '$objetivo', PARA_QUE_GRADO = '$PARA_QUE_GRADO', N_PERSONAS = $N_PERSONAS   WHERE ID_TAREA = '$id_tarea_editar' AND ID_CREADOR = '$id_modificador';";
+        $consulta_13 = mysqli_query($conn, $slq_13);
+
+
+        if(!$consulta_13){
+            return 0;
+        }else{
+            $string = "Cambio a tarea N° $id_tarea_editar ";
+            $modify_sql = "INSERT INTO MODIFICACIONES (ID_MODIFICADOR,FECHA_MODIFICACION, TIPO_MODIFICACION) VALUE ('$id_modificador',CURRENT_DATE(),'$string');";
+            $modify_consult = mysqli_query($conn, $modify_sql);
+
+            if($modify_consult){
+                return 1;
+            }   
+        }
+    }
 
     function Get_datos_del_estudiante($identidad)
     {
@@ -121,10 +129,8 @@ class Directivo
     function Borrar_tarea()
     {
     }
+
     function Set_terminar_tarea()
-    {
-    }
-    function Set_modificar_tarea()
     {
     }
     function Set_Crear_nueva_tarea()
@@ -145,30 +151,35 @@ class Directivo
 }
 
 if (isset($_SESSION['id_dir'])) {
+
     $id = $_SESSION['id_dir'];
+
     $Boss = new Directivo($id);
-
-    if (isset($_POST['EliminarTarea'])) {
-
-        $id_tarea_eliminar = $_POST['id_tarea'];
-        echo "eliminar " . $id_tarea_eliminar;
-    }
 
     if (isset($_POST['EditarTarea'])) {
 
-        echo $id_tarea_editar = $_POST['id_tarea'];
-        echo $NOMBRE_TAREA = $_POST['NOMBRE_TAREA'];
-        echo $ESTADO_TAREA = $_POST['ESTADO_TAREA'];
-        echo $FECHA_LIMITE = $_POST['FECHA_LIMITE'];
-        echo $PARA_QUE_GRADO = $_POST['PARA_QUE_GRADO'];
-        echo $NUMERO_HORAS = $_POST['NUMERO_HORAS'];
-        echo $N_PERSONAS = $_POST['N_PERSONAS'];
-        echo $descripcion = $_POST['descripcion'];
-        echo $objetivo = $_POST['objetivo'];
+        $id_tarea_editar = $_POST['id_tarea'];
+        $NOMBRE_TAREA = $_POST['NOMBRE_TAREA'];
+        $FECHA_LIMITE = $_POST['FECHA_LIMITE'];
+        $PARA_QUE_GRADO = $_POST['PARA_QUE_GRADO'];
+        $NUMERO_HORAS = $_POST['NUMERO_HORAS'];
+        $N_PERSONAS = $_POST['N_PERSONAS'];
+        $descripcion = $_POST['descripcion'];
+        $objetivo = $_POST['objetivo'];
 
-        echo "editar " . $id_tarea_editar;
+        $respuesta = $Boss->Set_modificar_tarea($id, $id_tarea_editar, $NOMBRE_TAREA, $FECHA_LIMITE, $PARA_QUE_GRADO, $NUMERO_HORAS, $N_PERSONAS, $descripcion, $objetivo);
+
+        switch($respuesta){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
     }
-    // $id_tarea = $_POST['']
 
     if (isset($_POST['TerminarTarea'])) {
         $id_tarea = $_POST['id_tarea'];
@@ -177,6 +188,7 @@ if (isset($_SESSION['id_dir'])) {
 
         echo "Tareas terminada $id_tarea";
     }
+
     if (isset($_POST['EliminarPostulacion'])) {
         $id_tarea = $_POST['id_tarea'];
         $id_creador = $_POST['id_user'];
@@ -184,6 +196,7 @@ if (isset($_SESSION['id_dir'])) {
 
         echo "Eliminar a $id_postulado de la tarea $id_tarea";
     }
+
     if (isset($_POST['DesactivarPostulacion'])) {
         $id_tarea = $_POST['id_tarea'];
         $id_creador = $_POST['id_user'];
@@ -191,13 +204,12 @@ if (isset($_SESSION['id_dir'])) {
 
         echo "pausar a $id_postulado de la tarea $id_tarea";
     }
-    // if (isset($_POST[''])) {
-    //     $id_tarea = $_POST['id_tarea'];
-    //     $id_creador = $_POST['id_user'];
-    //     $id_postulado = $_POST['id_postulado'];
 
-    // }
+    if (isset($_POST['EliminarTarea'])) {
 
+        $id_tarea_eliminar = $_POST['id_tarea'];
+        echo "eliminar " . $id_tarea_eliminar;
+    }
 
 
     header("../../../Vista/perfiles/directivo/perfil_directivo.php");

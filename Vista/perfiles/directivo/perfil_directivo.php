@@ -279,7 +279,7 @@ if (isset($_SESSION['id_dir'])) {
                                                         <div class="col-12 col-lg-6 text-center  px-5 px-sm-5 mb-2 mb-lg-0">
                                                             <div class="input-group border border-1 border-dark  rounded">
                                                                 <label for="ESTADO_TAREA" class="text-danger bg-light input-group-text border-0"><b>Estado <?php echo $tareasPorMi['ESTADO_TAREA']; ?></b></label>
-                                                                <select name="ESTADO_TAREA" class="bg-light form-select text-center border-0" id="ESTADO_TAREA">
+                                                                <select name="ESTADO_TAREA" class="bg-light form-select text-center border-0 " disabled id="ESTADO_TAREA">
                                                                     <option selected value="<?php echo $tareasPorMi['ESTADO_TAREA']; ?>">"<?php echo $tareasPorMi['ESTADO_TAREA']; ?>"</option>
                                                                     <option value="Activa">Activa</option>
                                                                     <option value="Terminada">Terminada</option>

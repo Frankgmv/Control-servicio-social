@@ -10,20 +10,6 @@ if (isset($_POST['Postularse'])) {
 
     $postularme = $Pepito->Set_postularse_a_tarea($id_estudiantes, $id_tarea, $Grado);
 
-    if ($postularme == 0) {
-    } else {
-    }
-
-    if ($postularme == 2) {
-    }
-    if ($postularme == 3) {
-    }
-
-    if ($postularme == 4) {
-    }
-    if ($postularme == 5) {
-    }
-
     switch ($postularme) {
         case 0:
             $_SESSION['tituloDeTareas'] = "Error de Postulación";

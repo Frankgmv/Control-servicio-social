@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 include "../../../Modelo/conexion_db.php";
 
 class Directivo
@@ -75,13 +78,46 @@ class Directivo
     }
 
 
-    function Get_Todos_los_postulados()
+    function Get_contar_los_postulados($id_tarea)
     {
+        global $conn;
+        $sql_5 = "SELECT  COUNT(ID_POSTULADO) AS TOTAL FROM POSTULADOS WHERE ID_TAREA = '$id_tarea';";
+        $CONSULT_5 = mysqli_query($conn, $sql_5);
+        $result__5 = mysqli_fetch_array($CONSULT_5);
+
+        $sql_10 = "SELECT  COUNT(ID_POSTULADO) AS ACTIVOS FROM POSTULADOS WHERE ID_TAREA = '$id_tarea' AND ESTADO_POSTULACION LIKE 'A%';";
+        $CONSULT_10 = mysqli_query($conn, $sql_10);
+        $result__10 = mysqli_fetch_array($CONSULT_10);
+
+
+        $activos = $result__10['ACTIVOS'];
+        $total = $result__5['TOTAL'];
+        $inactivos = $total - $activos;
+
+        $N_POSTULACIONES = array('ACTIVOS' => $activos, 'TOTALES' =>  $total, 'INACTIVOS' => $inactivos);
+
+        return $N_POSTULACIONES;
     }
 
-    function Get_datos_del_postulado()
+    function Get_datos_del_postulado($id_tarea)
     {
+        global $conn;
+        $slq_8 = "SELECT * FROM POSTULADOS WHERE ID_TAREA = '$id_tarea' ORDER BY ESTADO_POSTULACION ASC;";
+        $CONSULT_8 = mysqli_query($conn, $slq_8);
+        return $CONSULT_8;
     }
+
+    function Get_datos_del_estudiante($identidad)
+    {
+        global $conn;
+        // 
+        $sql_7 = "SELECT * FROM ESTUDIANTES WHERE IDENTIDAD = '$identidad';";
+        $CONSULT_7 = mysqli_query($conn, $sql_7);
+        $result__7 = mysqli_fetch_array($CONSULT_7);
+
+        return $result__7;
+    }
+
     function Borrar_tarea()
     {
     }
@@ -105,8 +141,6 @@ class Directivo
 
     function Set_modificaciones($id, $Tipo_modificacion)
     {
-
-
     }
 }
 
@@ -114,22 +148,56 @@ if (isset($_SESSION['id_dir'])) {
     $id = $_SESSION['id_dir'];
     $Boss = new Directivo($id);
 
-
-
-    if(isset($_POST['EliminarTarea'])){
+    if (isset($_POST['EliminarTarea'])) {
 
         $id_tarea_eliminar = $_POST['id_tarea'];
-        echo "eliminar ".$id_tarea_eliminar;
-        
+        echo "eliminar " . $id_tarea_eliminar;
     }
 
-    if(isset($_POST[''])){
+    if (isset($_POST['EditarTarea'])) {
 
+        echo $id_tarea_editar = $_POST['id_tarea'];
+        echo $NOMBRE_TAREA = $_POST['NOMBRE_TAREA'];
+        echo $ESTADO_TAREA = $_POST['ESTADO_TAREA'];
+        echo $FECHA_LIMITE = $_POST['FECHA_LIMITE'];
+        echo $PARA_QUE_GRADO = $_POST['PARA_QUE_GRADO'];
+        echo $NUMERO_HORAS = $_POST['NUMERO_HORAS'];
+        echo $N_PERSONAS = $_POST['N_PERSONAS'];
+        echo $descripcion = $_POST['descripcion'];
+        echo $objetivo = $_POST['objetivo'];
+
+        echo "editar " . $id_tarea_editar;
     }
+    // $id_tarea = $_POST['']
 
-    if(isset($_POST[''])){
+    if (isset($_POST['TerminarTarea'])) {
+        $id_tarea = $_POST['id_tarea'];
+        $id_creador = $_POST['id_user'];
+        $id_postulado = $_POST['id_postulado'];
 
+        echo "Tareas terminada $id_tarea";
     }
+    if (isset($_POST['EliminarPostulacion'])) {
+        $id_tarea = $_POST['id_tarea'];
+        $id_creador = $_POST['id_user'];
+        $id_postulado = $_POST['id_postulado'];
+
+        echo "Eliminar a $id_postulado de la tarea $id_tarea";
+    }
+    if (isset($_POST['DesactivarPostulacion'])) {
+        $id_tarea = $_POST['id_tarea'];
+        $id_creador = $_POST['id_user'];
+        $id_postulado = $_POST['id_postulado'];
+
+        echo "pausar a $id_postulado de la tarea $id_tarea";
+    }
+    // if (isset($_POST[''])) {
+    //     $id_tarea = $_POST['id_tarea'];
+    //     $id_creador = $_POST['id_user'];
+    //     $id_postulado = $_POST['id_postulado'];
+
+    // }
+
 
 
     header("../../../Vista/perfiles/directivo/perfil_directivo.php");

@@ -190,3 +190,4 @@ VALUES ('1', '1010', '1', 'Berrer patio.', '2022-8-22', 4);
 
 INSERT INTO HORAS (ID_DATO, ID_ESTUDIANTE, ID_TAREA, NOMBRE_TAREA, FECHA_CREACION, HORAS) 
 VALUES ('2', '105', '1',  'Berrer patio.', '2022-8-22', 4);
+

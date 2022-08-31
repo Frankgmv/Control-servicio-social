@@ -207,7 +207,7 @@ if (isset($_SESSION['id_dir'])) {
                                     <div class="row mb-1 mt-2">
                                         <div class="col-8  small ">
                                             <div class="col ps-2 d-flex justify-content-sm-around flex-column flex-sm-row justify-content-between align-items-center">
-                                                <h6 class="text-primary"><i class="small fa-solid fa-calendar-days"><i> <?php echo $tareasPorMi['FECHA_LIMITE']; ?></i></i></h6>
+                                                <h6 class="text-primary"><i class="small fa-solid fa-calendar-days"><i> <?php echo $tareasPorMi['FECHA_CREACION']; ?></i></i></h6>
                                                 <h6 class="text-danger"><i class="small fa-solid fa-calendar-days"><i> <?php echo $tareasPorMi['FECHA_LIMITE']; ?></i></i></h6>
                                             </div>
                                         </div>
@@ -252,8 +252,8 @@ if (isset($_SESSION['id_dir'])) {
                                                 <b> Seguro que deseas eliminar la tareas, esta no se podrá recuperar ningún registro de <?php echo $tareasPorMi['NOMBRE_TAREA']; ?>.</b>
                                             </div>
                                             <form action="../../../Controlador/RecogerDatos/directivo/datos.php" method="POST" class="modal-footer bg-danger">
+                                                <input type="hidden" name="id_tarea_elim" value="<?php echo $tareasPorMi['ID_TAREA']; ?>">
                                                 <button type="button" class="btn btn-secondary rounded-3" data-bs-dismiss="modal"><b>No</b></button>
-                                                <input type="hidden" name="id_tarea" value="<?php echo $tareasPorMi['ID_TAREA']; ?>">
                                                 <button type="submit" name="EliminarTarea" class="btn rounded btn-outline-secondary border-0"><i class=" fa-solid fa-trash-can small"> <b>Si</b></i></button>
                                             </form>
                                         </div>
@@ -317,7 +317,7 @@ if (isset($_SESSION['id_dir'])) {
                                                         <div class="col text-center px-5 px-sm-5 mb-2 mb-lg-0">
                                                             <div class="input-group border border-1 border-dark  rounded">
                                                                 <label for="N_PERSONAS" class="text-danger input-group-text bg-light border-0"><b>Número de personas</b></label>
-                                                                <input id="N_PERSONAS" class=" input-group-text form-control border-0 bg-light text-center" min="1" max="30" step="1" name="N_PERSONAS" type="number" value="<?php echo $tareasPorMi['N_PERSONAS']; ?>">
+                                                                <input id="N_PERSONAS" class=" input-group-text form-control border-0 bg-light text-center" min="0" max="30" step="1" name="N_PERSONAS" type="number" value="<?php echo $tareasPorMi['N_PERSONAS']; ?>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -357,14 +357,16 @@ if (isset($_SESSION['id_dir'])) {
                                                     <div class="row">
                                                         <div class=" d-flex justify-content-between justify-content-md-around">
                                                             <p><b class="border rounded bg-secondary p-1 text-capitalize"><?php echo $tareasPorMi['ESTADO_TAREA'];; ?><i class="text-<?php echo $color; ?> ms-1 fa-solid fa-circle"></i></b></p>
+                                                            <p> <i class="fa-solid fa-user-clock"></i> <b>N° Personas</b> <?php echo $tareasPorMi['N_PERSONAS'];?></p>
                                                             <span class="input-group-text input-group-sm bg-secondary border-0 rounded text-<?php echo $color; ?>">
                                                                 <i class=" fa-solid fa-user-group "><b class="ms-1 text-capitalize"><b class="text-dark">Grupos </b><label class="text-danger"> <?php echo $tareasPorMi['PARA_QUE_GRADO']; ?></label></b></i>
                                                             </span>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <h6 class="col mb-2 d-flex justify-content-between justify-content-md-around">
+                                                        <h6 class="col mb-2 d-flex justify-content-between justify-content-md-around mt-2">
                                                             <b class=" text-primary me-1"><b class="text-center text-dark d-block mb-1">Fecha inicio</b> <i class="fa-solid fa-calendar-days"></i> <?php echo $tareasPorMi['FECHA_CREACION']; ?></b>
+                                                            <b class="  me-1"><b class="text-center text-dark d-block mb-1">Pago</b> <i class="fa-solid fa-stopwatch"></i class="text-dark"> <?php echo $tareasPorMi['NUMERO_HORAS']." h"; ?></b>
                                                             <b class="ps-1 text-danger"><b class="text-center text-dark d-block mb-1">Fecha fin</b> <i class="fa-solid fa-calendar-days"></i> <?php echo $tareasPorMi['FECHA_LIMITE']; ?></b>
                                                         </h6>
                                                     </div>
@@ -389,10 +391,9 @@ if (isset($_SESSION['id_dir'])) {
                                                     <!-- <form action="" method="POST"> -->
                                                     <input type="hidden" name="id_user" value="<?php echo $id; ?>">
                                                     <input type="hidden" name="id_tarea" value="<?php echo $tareasPorMi['ID_TAREA']; ?>">
-
-                                                    <button type="button" class="btn btn-outline-success bg-dark small btn-sm " data-bs-dismiss="modal"><b>Cerrar</b></button>
-                                                    <button type="button" class="btn  btn-outline-success bg-dark small btn-sm" data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal2; ?>"><i class="fa-solid fa-user-check"> <b> Postulados</b></i></button>
-                                                    <button type="button" class="btn  btn-outline-success bg-dark small btn-sm" data-bs-toggle="modal" data-bs-target="#<?php echo $id_terminar; ?>"><b> TERMINAR</b></button>
+                                                            <button type="button" class="btn btn-outline-success bg-dark small btn-sm " data-bs-dismiss="modal"><b>Cerrar</b></button>
+                                                        <button type="button" class="btn  btn-outline-success bg-dark small btn-sm" data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal2; ?>"><i class="fa-solid fa-user-check"> <b> Postulados</b></i></button>
+                                                        <button type="button" class="btn  btn-outline-success bg-dark small btn-sm" data-bs-toggle="modal" data-bs-target="#<?php echo $id_terminar; ?>"><b> TERMINAR</b></button>
                                                     <!-- modal ver postulados -->
                                                     <div class=" modal fade mt-5 pt-5 " id="<?php echo $id_modal2; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $id_modal2; ?>" aria-hidden="true">
                                                         <div class="modal-dialog  px-2 modal-lg modal-dialog-scrollable modal-backdrop" role="document mt-5">

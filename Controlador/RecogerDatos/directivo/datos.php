@@ -6,16 +6,16 @@ include "../../../Modelo/conexion_db.php";
 
 class Directivo
 {
-    var $identidad ;
-    var $nombres ;
-    var $apellidos ;
-    var $edad ;
-    var $fecha_registro ;
-    var $celular ;
-    var $correo ;
-    var $rol ;
-    var $ocupacion ;
-    var $donde_labora ;
+    var $identidad;
+    var $nombres;
+    var $apellidos;
+    var $edad;
+    var $fecha_registro;
+    var $celular;
+    var $correo;
+    var $rol;
+    var $ocupacion;
+    var $donde_labora;
 
     function Directivo($identidad)
     {
@@ -66,7 +66,6 @@ class Directivo
         return $CONSULT_6;
     }
 
-
     function Get_contar_los_postulados($id_tarea)
     {
         global $conn;
@@ -101,24 +100,17 @@ class Directivo
         $slq_13 = "UPDATE TAREAS SET NOMBRE_TAREA = '$NOMBRE_TAREA', DESCRIPCION = '$descripcion' , FECHA_LIMITE = '$FECHA_LIMITE', NUMERO_HORAS = $NUMERO_HORAS, OBJETIVO = '$objetivo', PARA_QUE_GRADO = '$PARA_QUE_GRADO', N_PERSONAS = $N_PERSONAS   WHERE ID_TAREA = '$id_tarea_editar' AND ID_CREADOR = '$id_modificador';";
         $consulta_13 = mysqli_query($conn, $slq_13);
 
-
-        if(!$consulta_13){
+        if (!$consulta_13) {
             return 0;
-        }else{
-            $string = "Cambio a tarea N° $id_tarea_editar ";
-            $modify_sql = "INSERT INTO MODIFICACIONES (ID_MODIFICADOR,FECHA_MODIFICACION, TIPO_MODIFICACION) VALUE ('$id_modificador',CURRENT_DATE(),'$string');";
-            $modify_consult = mysqli_query($conn, $modify_sql);
-
-            if($modify_consult){
-                return 1;
-            }   
+        } else {
+            return 1;
         }
     }
 
     function Get_datos_del_estudiante($identidad)
     {
         global $conn;
-        // 
+
         $sql_7 = "SELECT * FROM ESTUDIANTES WHERE IDENTIDAD = '$identidad';";
         $CONSULT_7 = mysqli_query($conn, $sql_7);
         $result__7 = mysqli_fetch_array($CONSULT_7);
@@ -126,13 +118,53 @@ class Directivo
         return $result__7;
     }
 
-    function Borrar_tarea()
+    function Set_terminar_tarea($id_tarea, $id_creador)
     {
+        global $conn;
+        $sql_14 = "UPDATE TAREAS SET ESTADO_TAREA = 'Terminada' WHERE ID_TAREA = '$id_tarea' AND ID_CREADOR = '$id_creador'; ";
+        $consulta_14 = mysqli_query($conn, $sql_14);
+
+        if (!$consulta_14) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
-    function Set_terminar_tarea()
+    function Borrar_postulaciones_totales($id_tarea)
     {
+        global $conn;
+        $delete = "DELETE FROM POSTULADOS WHERE ID_TAREA = '$id_tarea';";
+        $cons = mysqli_query($conn, $delete);
+
+        return 0;
     }
+
+    function Borrar_tarea($id_tarea, $id_cread)
+    {
+        global $conn;
+
+        // $delete = "DELETE FROM POSTULADOS WHERE ID_TAREA = '$id_tarea';";
+        // $cons = mysqli_query($conn, $delete);
+
+        // if (!$cons) {
+        // return "no borra postulados";
+        // } else {
+
+        $del_task = "DELETE FROM TAREAS WHERE ID_TAREA = '$id_tarea' AND ID_CREADOR = '$id_cread';";
+        $QE = mysqli_query($conn, $del_task);
+
+
+        if (!$QE) {
+
+            return "paila";
+        } else {
+
+            return "sirvió";
+        }
+        // }
+    }
+
     function Set_Crear_nueva_tarea()
     {
     }
@@ -141,12 +173,51 @@ class Directivo
     {
     }
 
-    function Set_Borrar_postulaciones()
+    function Set_Borrar_postulaciones($id_postulado, $id_tarea)
     {
+        global $conn;
+        $sql_15 = "DELETE FROM POSTULADOS WHERE ID_TAREA = $id_tarea AND ID_POSTULADO = $id_postulado ;";
+        $consulta_15 = mysqli_query($conn, $sql_15);
+
+        if (!$consulta_15) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+    function Set_estado_postulaciones($id_postulado, $id_tarea)
+    {
+        global $conn;
+
+        $sql_1 = "SELECT ESTADO_POSTULACION as EST FROM POSTULADOS WHERE ID_POSTULADO = '$id_postulado' AND ID_TAREA = '$id_tarea';";
+        $CONS = mysqli_query($conn, $sql_1);
+        $restul = mysqli_fetch_array($CONS);
+
+        if (strtoupper($restul['EST']) == "ACTIVA") {
+            $POSTULACION = "Inactiva";
+        } else {
+            $POSTULACION = "Activa";
+        }
+
+        $sql_16 = "UPDATE POSTULADOS SET ESTADO_POSTULACION = '$POSTULACION' WHERE ID_TAREA = $id_tarea AND ID_POSTULADO = $id_postulado ;";
+        $consulta_16 = mysqli_query($conn, $sql_16);
+
+        if (!$consulta_16) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
-    function Set_modificaciones($id, $Tipo_modificacion)
+    function Set_modificaciones($id_modificador, $Tipo_modificacion)
     {
+        global $conn;
+        $modify_sql = "INSERT INTO MODIFICACIONES (ID_MODIFICADOR,FECHA_MODIFICACION, TIPO_MODIFICACION) VALUE ('$id_modificador',CURRENT_DATE(),'$Tipo_modificacion');";
+        $modify_consult = mysqli_query($conn, $modify_sql);
+
+        if ($modify_consult) {
+            return 1;
+        }
     }
 }
 
@@ -155,7 +226,7 @@ if (isset($_SESSION['id_dir'])) {
     $id = $_SESSION['id_dir'];
 
     $Boss = new Directivo($id);
-
+    // editar tareas
     if (isset($_POST['EditarTarea'])) {
 
         $id_tarea_editar = $_POST['id_tarea'];
@@ -168,49 +239,62 @@ if (isset($_SESSION['id_dir'])) {
         $objetivo = $_POST['objetivo'];
 
         $respuesta = $Boss->Set_modificar_tarea($id, $id_tarea_editar, $NOMBRE_TAREA, $FECHA_LIMITE, $PARA_QUE_GRADO, $NUMERO_HORAS, $N_PERSONAS, $descripcion, $objetivo);
+        $string = "Cambio a tarea N°  $id_tarea_editar!  - [ $NOMBRE_TAREA ,  $FECHA_LIMITE ,   $PARA_QUE_GRADO ,  $NUMERO_HORAS  ,  $N_PERSONAS ]";
+        $respuesta = $Boss->Set_modificaciones($id, $string);
 
-        switch($respuesta){
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            default:
-                break;
+        if ($respuesta == 0) {
+            $_SESSION['tituloDePerfilDir'] = "Error";
+            $_SESSION['mensajeDePerfilDir'] = "EL proceso no a sido completado.";
+            $_SESSION['tipoPerfilDir'] = "error";
         }
+
+        header("Location:../../../Vista/perfiles/directivo/perfil_directivo.php");
     }
 
     if (isset($_POST['TerminarTarea'])) {
-        $id_tarea = $_POST['id_tarea'];
-        $id_creador = $_POST['id_user'];
+
+        $id_tarea_ter = $_POST['id_tarea'];
         $id_postulado = $_POST['id_postulado'];
 
-        echo "Tareas terminada $id_tarea";
+        $TERMINADA = $Boss->Set_terminar_tarea($id_tarea_ter, $id);
+
+        if ($TERMINADA == 0) {
+            $_SESSION['tituloDePerfilDir'] = "Error";
+            $_SESSION['mensajeDePerfilDir'] = "EL proceso de terminación no a sido completado.";
+            $_SESSION['tipoPerfilDir'] = "error";
+        }
+        $modificacion = "Terminación de tarea N° $id_tarea_ter por el directivo n° $id; ";
+
+        $Boss->Set_modificaciones($id_creador, $modificacion);
+
+        header("Location:../../../Vista/perfiles/directivo/perfil_directivo.php");
     }
 
     if (isset($_POST['EliminarPostulacion'])) {
         $id_tarea = $_POST['id_tarea'];
-        $id_creador = $_POST['id_user'];
         $id_postulado = $_POST['id_postulado'];
+        $Boss->Set_Borrar_postulaciones($id_postulado, $id_tarea);
 
-        echo "Eliminar a $id_postulado de la tarea $id_tarea";
+        header("Location:../../../Vista/perfiles/directivo/perfil_directivo.php");
     }
 
     if (isset($_POST['DesactivarPostulacion'])) {
         $id_tarea = $_POST['id_tarea'];
-        $id_creador = $_POST['id_user'];
         $id_postulado = $_POST['id_postulado'];
+        $Boss->Set_estado_postulaciones($id_postulado, $id_tarea);
 
-        echo "pausar a $id_postulado de la tarea $id_tarea";
+        header("Location:../../../Vista/perfiles/directivo/perfil_directivo.php");
     }
 
     if (isset($_POST['EliminarTarea'])) {
 
-        $id_tarea_eliminar = $_POST['id_tarea'];
-        echo "eliminar " . $id_tarea_eliminar;
-    }
+        // TODO
+        $id_tarea_eliminar = $_POST['id_tarea_elim'];
+        $est = $Boss->Borrar_postulaciones_totales($id_tarea_eliminar);
+        $est = $Boss->Borrar_tarea($id, $id_tarea_eliminar);
 
+        // header("../../../Vista/perfiles/directivo/perfil_directivo.php");
+    }
 
     header("../../../Vista/perfiles/directivo/perfil_directivo.php");
 } else {

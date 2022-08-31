@@ -357,7 +357,7 @@ if (isset($_SESSION['id_dir'])) {
                                                     <div class="row">
                                                         <div class=" d-flex justify-content-between justify-content-md-around">
                                                             <p><b class="border rounded bg-secondary p-1 text-capitalize"><?php echo $tareasPorMi['ESTADO_TAREA'];; ?><i class="text-<?php echo $color; ?> ms-1 fa-solid fa-circle"></i></b></p>
-                                                            <p> <i class="fa-solid fa-user-clock"></i> <b>N° Personas</b> <?php echo $tareasPorMi['N_PERSONAS'];?></p>
+                                                            <p> <i class="fa-solid fa-user-clock"></i> <b>N° Personas</b> <?php echo $tareasPorMi['N_PERSONAS']; ?></p>
                                                             <span class="input-group-text input-group-sm bg-secondary border-0 rounded text-<?php echo $color; ?>">
                                                                 <i class=" fa-solid fa-user-group "><b class="ms-1 text-capitalize"><b class="text-dark">Grupos </b><label class="text-danger"> <?php echo $tareasPorMi['PARA_QUE_GRADO']; ?></label></b></i>
                                                             </span>
@@ -366,7 +366,7 @@ if (isset($_SESSION['id_dir'])) {
                                                     <div class="row">
                                                         <h6 class="col mb-2 d-flex justify-content-between justify-content-md-around mt-2">
                                                             <b class=" text-primary me-1"><b class="text-center text-dark d-block mb-1">Fecha inicio</b> <i class="fa-solid fa-calendar-days"></i> <?php echo $tareasPorMi['FECHA_CREACION']; ?></b>
-                                                            <b class="  me-1"><b class="text-center text-dark d-block mb-1">Pago</b> <i class="fa-solid fa-stopwatch"></i class="text-dark"> <?php echo $tareasPorMi['NUMERO_HORAS']." h"; ?></b>
+                                                            <b class="  me-1"><b class="text-center text-dark d-block mb-1">Pago</b> <i class="fa-solid fa-stopwatch"></i class="text-dark"> <?php echo $tareasPorMi['NUMERO_HORAS'] . " h"; ?></b>
                                                             <b class="ps-1 text-danger"><b class="text-center text-dark d-block mb-1">Fecha fin</b> <i class="fa-solid fa-calendar-days"></i> <?php echo $tareasPorMi['FECHA_LIMITE']; ?></b>
                                                         </h6>
                                                     </div>
@@ -391,9 +391,9 @@ if (isset($_SESSION['id_dir'])) {
                                                     <!-- <form action="" method="POST"> -->
                                                     <input type="hidden" name="id_user" value="<?php echo $id; ?>">
                                                     <input type="hidden" name="id_tarea" value="<?php echo $tareasPorMi['ID_TAREA']; ?>">
-                                                            <button type="button" class="btn btn-outline-success bg-dark small btn-sm " data-bs-dismiss="modal"><b>Cerrar</b></button>
-                                                        <button type="button" class="btn  btn-outline-success bg-dark small btn-sm" data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal2; ?>"><i class="fa-solid fa-user-check"> <b> Postulados</b></i></button>
-                                                        <button type="button" class="btn  btn-outline-success bg-dark small btn-sm" data-bs-toggle="modal" data-bs-target="#<?php echo $id_terminar; ?>"><b> TERMINAR</b></button>
+                                                    <button type="button" class="btn btn-outline-success bg-dark small btn-sm " data-bs-dismiss="modal"><b>Cerrar</b></button>
+                                                    <button type="button" class="btn  btn-outline-success bg-dark small btn-sm" data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal2; ?>"><i class="fa-solid fa-user-check"> <b> Postulados</b></i></button>
+                                                    <button type="button" class="btn  btn-outline-success bg-dark small btn-sm" <?php echo $disable; ?> data-bs-toggle="modal" data-bs-target="#<?php echo $id_terminar; ?>"><b> TERMINAR</b></button>
                                                     <!-- modal ver postulados -->
                                                     <div class=" modal fade mt-5 pt-5 " id="<?php echo $id_modal2; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $id_modal2; ?>" aria-hidden="true">
                                                         <div class="modal-dialog  px-2 modal-lg modal-dialog-scrollable modal-backdrop" role="document mt-5">
@@ -414,9 +414,11 @@ if (isset($_SESSION['id_dir'])) {
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
+                                                                            <!-- TODO solucionar el problema de la obtención del  id del usuario -->
                                                                             <?php
                                                                             $info_postulacion = $Boss->Get_datos_del_postulado($tareasPorMi['ID_TAREA']);
                                                                             while ($datos_postulacion = mysqli_fetch_array($info_postulacion)) {
+
                                                                                 $datos = $Boss->Get_datos_del_estudiante($datos_postulacion['ID_POSTULADO']);
 
                                                                                 if (strtoupper($datos_postulacion['ESTADO_POSTULACION']) == "ACTIVA") {
@@ -424,24 +426,28 @@ if (isset($_SESSION['id_dir'])) {
                                                                                 } else {
                                                                                     $postulad__ = "danger";
                                                                                 }
+                                                                                ;
 
                                                                             ?>
-                                                                                <tr class="">
+                                                                                <tr>
                                                                                     <td>
                                                                                         <p class="d-inline border border-secondary bg-secondary px-1 rounded-5 small"><?php echo "<b>" . $datos['GRADO'] . "</b>"; ?><i class="text-<?php echo $postulad__; ?> ms-1 fa-solid fa-circle"></i></p>
                                                                                     </td>
-                                                                                    <td><?php echo $datos['NOMBRES'] . " " . $datos['APELLIDOS']; ?></td>
+                                                                                    <!-- <td><?php  $datos['NOMBRES'] . " " . $datos['APELLIDOS']; ?></td> -->
+                                                                                    <td><?php echo $datos['NOMBRES']; ?></td>
                                                                                     <td><?php echo $datos_postulacion['FECHA_POSTULACION']; ?></td>
                                                                                     <td>
                                                                                         <div class="d-block">
-                                                                                            <input type="hidden" name="id_postulado" value="<?php echo $datos['IDENTIDAD']; ?>">
+                                                                                        
+                                                                                            <input type="hidden" name="id_postulado_botones" value="<?php print_r($datos['ID_E']); ?>">
+                                                                                            <input type="hidden" name="id_tarea_botones" value="<?php echo $tareasPorMi['ID_TAREA']; ?>">
 
-                                                                                            <button type="submit" name="EliminarPostulacion" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash-can"></i></button>
-                                                                                            <button type="submit" name="DesactivarPostulacion" class="btn btn-sm btn-outline-warning"><i class="fa-solid fa-stop"></i></button>
+                                                                                            <button type="submit" <?php echo $disable; ?> name="EliminarPostulacion" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash-can"><?php echo $tareasPorMi['ID_TAREA']; ?></i></button>
+                                                                                            <button type="submit" <?php echo $disable; ?> name="DesactivarPostulacion" class="btn btn-sm btn-outline-warning"><i class="fa-solid fa-stop"><?php print_r($datos_postulacion['ID_POSTULADO']); ?></i></button>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
-                                                                            <?php  } ?>
+                                                                            <?php   } ?>
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -463,7 +469,7 @@ if (isset($_SESSION['id_dir'])) {
                                                                 <div class="modal-footer border-0">
                                                                     <button type="button" class="btn btn-dark small btn-sm " data-bs-dismiss="modal"><i class="fa-solid fa-xmark"> <b class="">No</b></i></button>
                                                                     <!-- button terminar -->
-                                                                    <button name="TerminarTarea" type="submit" class="btn btn-outline-success small btn-sm rounded"> <i class="fa-solid fa-check "><b> SI</b></i></button>
+                                                                    <button name="TerminarTarea" <?php echo $disable; ?> type="submit" class="btn btn-outline-success small btn-sm rounded"> <i class="fa-solid fa-check "><b> SI</b></i></button>
                                                                 </div>
                                                             </div>
                                                         </div>

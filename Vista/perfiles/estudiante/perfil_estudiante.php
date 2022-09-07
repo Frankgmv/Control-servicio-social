@@ -6,6 +6,7 @@ if (isset($_SESSION['id'])) {
     $idt = $_SESSION['id'];
     $MisDatos = $Pepito->Get_mis_datos($idt);
     $horas = $Pepito->Get_mis_horas($id);
+    
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -17,7 +18,7 @@ if (isset($_SESSION['id'])) {
         <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
         <!-- nombre y cuántas tareas tiene pendientes. -->
-        <title><?php echo $MisDatos['NOMBRES'] . " (" . $Pepito->GetACuantasPertenezco($idt); ?>)</title>
+        <title><?php echo $MisDatos['NOMBRES'];?></title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -254,7 +255,7 @@ if (isset($_SESSION['id'])) {
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-8  text-start">
-                                                                        <h6 class=" p-1"><i class=" fa-solid fa-calendar-days"> <b class="ms-2 text-primary "><b class="text-dark">Del </b> <?php echo "".$mis_tareas['FECHA_CREACION']; ?></b></i> <b> al </b> <b class=" text-danger  "><?php echo $mis_tareas['FECHA_LIMITE']; ?></b></h6>
+                                                                        <h6 class=" p-1"><i class=" fa-solid fa-calendar-days"> <b class="ms-2 text-primary "><b class="text-dark">Del </b> <?php echo "" . $mis_tareas['FECHA_CREACION']; ?></b></i> <b> al </b> <b class=" text-danger  "><?php echo $mis_tareas['FECHA_LIMITE']; ?></b></h6>
                                                                     </div>
                                                                     <div class="col px-md-5">
                                                                         <div class="col-12 input-group border-0">

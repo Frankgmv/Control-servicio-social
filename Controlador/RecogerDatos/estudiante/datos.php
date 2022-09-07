@@ -32,6 +32,7 @@ class Estudiante
       $this->celular = $DatosPerfil['CELULAR'];
       $this->correo = $DatosPerfil['CORREO'];
       $this->rol = $DatosPerfil['ROL'];
+      $this->horasTotales = 0;
       $this->grado = $DatosPerfil['GRADO'];
       $this->nombre_tecnica = $DatosPerfil['NOMBRE_TECNICA'];
    }
@@ -84,7 +85,7 @@ class Estudiante
          } else {
             return 4;
          }
-      }else{
+      } else {
          return 5;
       }
    }
@@ -116,7 +117,6 @@ class Estudiante
    {
       // conteo de las tareas a las que pertenezco y están activas
       global $conn;
-      // conteo de las que pertenezco y están activas
       $SQL12 = "SELECT COUNT(ID_TAREA) as TareasMia FROM POSTULADOS WHERE ID_POSTULADO = '$id_estudiante' AND ESTADO_POSTULACION LIKE 'A%';";
       $result12 = mysqli_query($conn, $SQL12);
       $getResultado = mysqli_fetch_array($result12);
@@ -147,9 +147,8 @@ class Estudiante
    {
       global $conn;
       // $SQL =  "SELECT * FROM TAREAS WHERE ESTADO_TAREA LIKE \"A%\" OR \"T%\" ;";
-      $SQL =  "SELECT * FROM TAREAS ORDER BY  ESTADO_TAREA  ;";
+      $SQL =  "SELECT * FROM TAREAS ORDER BY  ESTADO_TAREA;";
       $result3 = mysqli_query($conn, $SQL);
-      $num = mysqli_num_rows($result3);
       return  $result3;
    }
 
@@ -160,6 +159,7 @@ class Estudiante
       $sql_2 = "SELECT SUM(HORAS) AS HORAS FROM HORAS WHERE ID_ESTUDIANTE = '$id';";
       $consult_2 = mysqli_query($conn, $sql_2);
       $result_2 = mysqli_fetch_array($consult_2);
+
       $horasTotales = $result_2['HORAS'];
       $this->horasTotales = $horasTotales;
       if ($horasTotales != 0) {

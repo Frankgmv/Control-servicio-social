@@ -73,6 +73,7 @@ if (isset($_SESSION['id'])) {
                 while ($TAREA = mysqli_fetch_array($result3)) {
                     // variables operadores de código 
                     $ID_TAREA = $TAREA['ID_TAREA'];
+                    
                     $ides = "tareasN_" . $id_collapse;
 
                     // Obtener el nombre del creador
@@ -84,6 +85,7 @@ if (isset($_SESSION['id'])) {
                     // $Conocer_postulados 
                     $SQL3 = "SELECT COUNT(ESTADO_POSTULACION) AS POSTULADOS FROM POSTULADOS WHERE ESTADO_POSTULACION LIKE 'A%' AND ID_TAREA = '$ID_TAREA';";
                     $query1 = mysqli_query($connN, $SQL3);
+
                     $EST_POSTULADOS = mysqli_fetch_array($query1);
 
                     // verificar el número de estudiantes postulados

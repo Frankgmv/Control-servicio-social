@@ -46,7 +46,7 @@ session_start();
                                 <div class="col-2">
                                 </div>
                                 <div class="col-8  input-group px-5 ">
-                                    <span class="input-group-text bg-body border-bottom border-top border-start border-end-0 border-2">Roles</span>
+                                    <span class="input-group-text bg-body border-bottom border-top border-start border-end-0 border-2">ROLES</span>
                                     <select name="rol" required class="form-select  border-bottom border-top border-start border-start-0 border-2 border-secondary text-center">
                                         <option value="volver" selected>Seleccionar</option>
                                         <option value="estudiante">Estudiante</option>
@@ -57,15 +57,15 @@ session_start();
                             </div>
                         </div>
                         <div class="d-flex justify-content-evenly mt-4">
-                            <button type="submit" class="btn btn-outline-primary m-1 mt-2 btn-sm rounded-pill" name="registro"> <i class="fa-solid fa-user-plus"><b> Registrarme.</b></i></button>
-                            <button type="submit" class="btn btn-outline-success m-1 mt-2 btn-sm rounded-pill" name="inicio"><i class="fa-solid fa-user"><b> Iniciar sesión.</b></i></button>
+                            <button type="submit" class="btn btn-outline-primary m-1 mt-2 btn-sm rounded-pill" name="registro"> <i class="fa-solid fa-user-plus"><b> Registrarme</b></i></button>
+                            <button type="submit" class="btn btn-outline-success m-1 mt-2 btn-sm rounded-pill" name="inicio"><i class="fa-solid fa-user"><b> Iniciar sesión</b></i></button>
                         </div>
 
                     </form>
                     <div class="text-center">
                         <!-- Button disparador del modal -->
                         <button class=" border-0 text-muted btn-light btn-sm mb-3 " data-bs-toggle="modal" data-bs-target="#modalContacto">
-                            <i class="fa-solid fa-person-chalkboard"><b> Leer más.</b></i>
+                            <i class="fa-solid fa-person-chalkboard"><b> Leer instrucciones.</b></i>
                         </button>
 
                         <!-- Modal -->
@@ -112,7 +112,7 @@ session_start();
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
                             </div>

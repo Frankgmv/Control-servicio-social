@@ -3,6 +3,7 @@ require "../../../Controlador/RecogerDatos/directivo/datos.php";
 
 // cierre de sesiones
 if (isset($_SESSION['id_dir'])) {
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -13,7 +14,7 @@ if (isset($_SESSION['id_dir'])) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title>Tareas</title>
+        <title>Tareas institucionales IERML</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,14 +66,14 @@ if (isset($_SESSION['id_dir'])) {
                 <!-- titulo superior -->
                 <div class="bg-primary  text-center py-2  rounded-top mb-2">
                     <h6 class="text-light text-white-50 my-2">
-                        Postulate cualquiera de las <?php echo $Pepito->Get_tareas_activas(); ?> tareas activas para completar tus horas.
+                        Revisa las tareas globales de la institución para evitar redundancia en las tuyas.
                     </h6>
 
                 </div>
                 <?php
                 $contador = 0;
                 $id_collapse = 2;
-                $result3 = $Pepito->Get_tareas_totales();
+                $result3 = $Boss->Get_todas_las_tareas();
                 while ($TAREA = mysqli_fetch_array($result3)) {
                     // variables operadores de código 
                     $ID_TAREA = $TAREA['ID_TAREA'];
@@ -111,9 +112,17 @@ if (isset($_SESSION['id_dir'])) {
                         $mostrar = "show";
                         $fondo = "warning";
                     }
+                    $textMia = " ";
+                    if($TAREA['ID_CREADOR'] == $getCreador){
+
+                        $mostrar = " ";
+                        $fondo = "info";
+                        $fondo = "primary";
+                        $textMia= "(Mia)";
+                    }
 
                     // Preguntar si esta postulado
-                    $id_est = $_SESSION['id'];
+                    $id_est = $_SESSION['id_dir'];
                     $SQLquery4 = "SELECT ESTADO_POSTULACION FROM POSTULADOS WHERE ID_TAREA = '$ID_TAREA' AND ID_POSTULADO = '$id_est';";
                     $consulta44 = mysqli_query($connN, $SQLquery4);
                     $verificacion = mysqli_fetch_array($consulta44);
@@ -131,8 +140,7 @@ if (isset($_SESSION['id_dir'])) {
                         <div class="border border-2  border-dark rounded-3 p-0">
                             <a class="nav-link p-0 m-0 " data-bs-toggle="collapse" data-bs-target="#<?php echo $ides; ?>" aria-expanded="false" aria-controls="<?php echo $ides; ?>">
                                 <div class=" border-bottom border-2 border-<?php echo $fondo; ?> text-center py-2 bg-<?php echo $fondo; ?> ">
-                                    <h6 class="text-light"><b><?php echo $TAREA['NOMBRE_TAREA']; ?></b></h6>
-
+                                    <h6 class="text-light"><b><?php echo $TAREA['NOMBRE_TAREA']."    ".$textMia; ?></b></h6>
                                 </div>
                             </a>
                             <div class=" collapse bg-light  <?php echo $mostrar; ?> " id="<?php echo $ides; ?>">
@@ -185,17 +193,11 @@ if (isset($_SESSION['id_dir'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <form action="Postulaciones.php" method="POST">
-                                    <div class="d-flex justify-content-around align-items-center " style="background-color: #008080 ;">
+                                <div class="d-flex justify-content-around align-items-end " style="background-color: #008080 ;">
+                                    <div class="my-2">
                                         <label title="Número de estudiantes postulados a <?php echo $TAREA['NOMBRE_TAREA']; ?>" class="text-light"><i class="fa-solid fa-users"></i> <b class="ms-2"><?php echo  $EST_POSTULADOS['POSTULADOS'] . " / " . $TAREA['N_PERSONAS']; ?> POSTULADOS</b></label>
-                                        <input type="hidden" name="id_tarea" required readonly value="<?php echo $TAREA['ID_TAREA']; ?>">
-                                        <input type="hidden" name="id_estudiantes" required readonly value="<?php echo $_SESSION['id']; ?>">
-                                        <input type="hidden" name="PARA_QUE_GRADO" required readonly value="<?php echo $TAREA['PARA_QUE_GRADO']; ?>">
-                                        <div class="d-flex- justify-content-end">
-                                            <button type="submit" name="Postularse" <?php echo $disable; ?> class=" btn btn-outline-light my-2 me-4 rounded-pill btn-sm"><i class=" fa-solid <?php echo $icono; ?> "> <b>Postularse</b></i></button>
-                                        </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -228,11 +230,11 @@ if (isset($_SESSION['id_dir'])) {
 
     <!-- Cierre de sesión por medio de las mismas. -->
 <?php
-
 } else {
-    header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
-
-    $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tipoAlertaInicio'] = "warning";
-    $_SESSION['tituloInicio'] = "Reingreso fallido";
+    
+    $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
+    $_SESSION['tituloDeAlerte'] = "warning";
+    $_SESSION['tipoAlerta'] = "Reingreso fallido";
+        
+    header("Location:../../../index.php");
 }  ?>

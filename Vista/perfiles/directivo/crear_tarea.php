@@ -3,9 +3,9 @@ require "../../../Controlador/RecogerDatos/directivo/datos.php";
 
 // cierre de sesiones
 if (isset($_SESSION['id_dir'])) {
-    $idt = $_SESSION['id_dir'];
-    $DataDir = $Boss->Get_mis_datos($idt);
-    $HorasYTareas = $Boss->Get_numero_de_tareas_y_horas($idt);
+    $idD = $_SESSION['id_dir'];
+    $DataDir = $Boss->Get_mis_datos($idD);
+    $HorasYTareas = $Boss->Get_numero_de_tareas_y_horas($idD);
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -161,9 +161,10 @@ if (isset($_SESSION['id_dir'])) {
 
 <?php
 } else {
-    header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
-
-    $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tipoAlertaInicio'] = "warning";
-    $_SESSION['tituloInicio'] = "Reingreso ";
+    
+    $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
+    $_SESSION['tituloDeAlerte'] = "warning";
+    $_SESSION['tipoAlerta'] = "Reingreso fallido";
+    
+    header("Location:../../../index.php");
 } ?>

@@ -1,8 +1,9 @@
 <?php
 
-use LDAP\Result;
-
 include "../../../Modelo/conexion_db.php";
+
+$connN = $conn;
+
 
 class Directivo
 {
@@ -213,7 +214,6 @@ class Directivo
         }
     }
 
-
     function Set_estado_postulaciones($id_postulado, $id_tarea)
     {
         global $conn;
@@ -265,6 +265,10 @@ class Directivo
 
     function Get_todas_las_tareas()
     {
+        global $conn;
+        $sql_tar = "SELECT * FROM TAREAS ORDER BY ESTADO_TAREA ASC;";
+        $consult = mysqli_query($conn, $sql_tar);
+        return $consult;
     }
 }
 
@@ -331,16 +335,21 @@ if (isset($_SESSION['id_dir'])) {
         $id_postulado_elim = $_POST['id_postulado_botones'];
 
         $Boss->Set_Borrar_postulaciones($id_postulado_elim, $id_tarea_elim);
-
+        $st_modif = "Se eliminó al estudiante [$id_postulado_elim] de la tarea [$id_tarea_elim]";
+        $Boss->Set_modificaciones($id, $st_modif);
+        
         header("Location:../../../Vista/perfiles/directivo/perfil_directivo.php");
     }
-
+    
     // Desactivar postulación
     if (isset($_POST['DesactivarPostulacion'])) {
 
         $id_tarea_postulacion = $_POST['id_tarea_botones'];
         $id_postulado_postulacion = $_POST['id_postulado_botones'];
         $Boss->Set_estado_postulaciones($id_postulado_postulacion, $id_tarea_postulacion);
+
+        $st_modif = "Se Modifico el estado al estudiante [$id_postulado_elim] de la tarea [$id_tarea_elim]";
+        $Boss->Set_modificaciones($id, $st_modif);
         header("Location:../../../Vista/perfiles/directivo/perfil_directivo.php");
     }
 
@@ -350,6 +359,7 @@ if (isset($_SESSION['id_dir'])) {
         $id_tarea_eliminar = $_POST['id_tarea_elim'];
         $Boss->Borrar_postulaciones_totales($id_tarea_eliminar);
         $Boss->Borrar_tarea($id_tarea_eliminar);
+        $Boss->Set_modificaciones($id, "Se eliminó la tarea $id_tarea_eliminar");
 
         header("Location:../../../Vista/perfiles/directivo/perfil_directivo.php");
     }
@@ -381,9 +391,9 @@ if (isset($_SESSION['id_dir'])) {
     header("../../../Vista/perfiles/directivo/perfil_directivo.php");
 } else {
 
-    header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
+    header("Location:../../../index.php");
 
-    $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tipoAlertaInicio'] = "warning";
-    $_SESSION['tituloInicio'] = "Reingreso fallido";
+    $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
+    $_SESSION['tituloDeAlerte'] = "warning";
+    $_SESSION['tipoAlerta'] = "Reingreso fallido";
 }

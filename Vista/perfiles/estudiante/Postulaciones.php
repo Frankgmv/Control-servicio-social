@@ -74,5 +74,6 @@ if (isset($_POST['Anular_postulacion'])) {
         $_SESSION['mensajeDePerfil'] = "Ya no eres participante de esta tarea.";
         $_SESSION['tipoPerfil'] = "warning";
     }
+    
     header("Location:perfil_estudiante.php");
 }

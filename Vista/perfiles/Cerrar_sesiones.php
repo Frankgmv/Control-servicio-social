@@ -2,10 +2,12 @@
 session_start();
 
 unset($_SESSION['id']);
+unset($_SESSION['id_dir']);
 
-$_SESSION['mensajeInicio'] = "Cerraste de sesión";
-$_SESSION['tipoAlertaInicio'] = "success";
-$_SESSION['tituloInicio'] = " ";
+$_SESSION['mensajeDeAlerta'] = "Cierre de credenciales.";
+$_SESSION['tituloDeAlerte'] = "Cierre sesión";
+$_SESSION['tipoAlerta'] = "success";
 
-header("Location:../../Controlador/formulariosDatos/inicio_sesion.php");
+header("Location:../../index.php");
+
 ?>

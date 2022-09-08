@@ -7,7 +7,7 @@ if (isset($_SESSION['id'])) {
     $MisDatos = $Pepito->Get_mis_datos($idt);
     $horas = $Pepito->Get_mis_horas($id);
     $pertenezco = $Pepito->GetACuantasPertenezco($idt);
-    
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -19,7 +19,7 @@ if (isset($_SESSION['id'])) {
         <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
         <!-- nombre y cuántas tareas tiene pendientes. -->
-        <title><?php echo $MisDatos['NOMBRES']." (".$pertenezco;?>)</title>
+        <title><?php echo $MisDatos['NOMBRES'] . " (" . $pertenezco; ?>)</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,7 +120,7 @@ if (isset($_SESSION['id'])) {
                             </div>
                         </div>
                         <div class="d-none d-lg-block col-2  text-center">
-                            <span class="border-0 h4"><i class="fa-solid fa-face-grin-beam-sweat"></i></span>
+                            <span class="border-0 h4 opacity-25"><i class="fa-solid fa-face-grin-beam-sweat"></i></span>
                         </div>
                         <!-- horas totales -->
                         <div class="col-12 col-sm-4 col-lg-3  mb-2">
@@ -265,7 +265,7 @@ if (isset($_SESSION['id'])) {
                                                                                 <i class=" fa-solid fa-clock "> <b>Pago</b> <b class="text-danger"> <?php echo $mis_tareas['NUMERO_HORAS']; ?> h</b></i>
                                                                             </span>
                                                                             <!-- Grupos -->
-                                                                            <span class=" input-group-text bg-body border-0">
+                                                                            <span class=" input-group-text bg-body border-0">   
                                                                                 <i class=" fa-solid fa-user-group "><b class="ms-1 text-capitalize"><b class="text-">Grupos </b><label class="text-danger"> <?php echo $mis_tareas['PARA_QUE_GRADO']; ?></label></b></i>
                                                                             </span>
                                                                         </div>
@@ -351,9 +351,9 @@ if (isset($_SESSION['id'])) {
 
 <?php
 } else {
-    header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
+    header("Location:../../../index.php");
 
-    $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tipoAlertaInicio'] = "warning";
-    $_SESSION['tituloInicio'] = "Reingreso fallido";
+    $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
+    $_SESSION['tituloDeAlerte'] = "warning";
+    $_SESSION['tipoAlerta'] = "Reingreso fallido";
 } ?>

@@ -127,7 +127,7 @@ if (isset($_SESSION['id_dir'])) {
                         <div class="col-12 col-sm-4 col-lg-3  mb-2">
                             <div class="input-group">
                                 <!-- TODO extraer las horas del totales -->
-                                <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Cuantas
+                                <span class="input-group-text border-0 "><i class="fa-solid fa-clock"><b> Cuenta 
                                         </b></i></span>
                                 <input type="text" value="<?php echo $HorasYTareas['TOTAL_HORAS']; ?> h" class=" border-0 form-control text-center" readonly>
                             </div>
@@ -512,9 +512,10 @@ if (isset($_SESSION['id_dir'])) {
 
 <?php
 } else {
-    header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
-
-    $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tipoAlertaInicio'] = "warning";
-    $_SESSION['tituloInicio'] = "Reingreso ";
+    
+    $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
+    $_SESSION['tituloDeAlerte'] = "warning";
+    $_SESSION['tipoAlerta'] = "Reingreso fallido";
+    
+    header("Location:../../../index.php");
 } ?>

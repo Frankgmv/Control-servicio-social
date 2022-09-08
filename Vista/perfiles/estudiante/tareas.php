@@ -199,7 +199,6 @@ if (isset($_SESSION['id'])) {
                         </div>
                     </div>
                 <?php
-
                     $id_collapse++;
                 } ?>
             </div>
@@ -229,9 +228,9 @@ if (isset($_SESSION['id'])) {
 <?php
 
 } else {
-    header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
-
-    $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tipoAlertaInicio'] = "warning";
-    $_SESSION['tituloInicio'] = "Reingreso fallido";
+    
+    $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
+    $_SESSION['tituloDeAlerte'] = "warning";
+    $_SESSION['tipoAlerta'] = "Reingreso fallido";
+    header("Location:../../../index.php");
 }  ?>

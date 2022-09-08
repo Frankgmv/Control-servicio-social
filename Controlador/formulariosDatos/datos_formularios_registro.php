@@ -50,7 +50,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
                 #mensaje de éxito al guardar 
                 $_SESSION['tituloDeAlerte'] = " Registro. ";
                 $_SESSION['tipoAlerta'] = "success";
-                $_SESSION['mensajeDeAlerta'] = "El estudiante a podido ser registrado correctamente, inicie sesión normalmente.";
+                $_SESSION['mensajeDeAlerta'] = "El estudiante registrado correctamente, inicie sesión.";
                 header('Location:../../index.php');
             }
         } else {
@@ -105,7 +105,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
                 #mensaje de éxito al guardar
                 $_SESSION['tipoAlerta'] = "success";
                 $_SESSION['tituloDeAlerte'] = " Registro. ";
-                $_SESSION['mensajeDeAlerta'] = "Directivo registrado correctamente, espere confirmación del perfil";
+                $_SESSION['mensajeDeAlerta'] = "Directivo registrado correctamente.";
                 header('Location:../../index.php');
             }
         } else {

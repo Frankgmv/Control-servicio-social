@@ -1,5 +1,5 @@
 <?php
-include_once "../../../Modelo /conexion_db.php";
+include_once "../../../Modelo/conexion_db.php";
 class Estudiante
 {
 
@@ -168,7 +168,7 @@ class Estudiante
          return 0;
       }
    }
-} //FIN CLASS ESTUDIANTE
+} 
 
 if (isset($_SESSION['id'])) {
 
@@ -196,7 +196,7 @@ if (isset($_SESSION['id'])) {
    }
 
    function NombreCreadorTarea($id_creador)
-   {
+   {  
 
       global $conn;
       $SQL7 = "SELECT CONCAT(NOMBRES,' ', APELLIDOS) AS NOMBRES FROM DIRECTIVOS WHERE IDENTIDAD = '$id_creador';";

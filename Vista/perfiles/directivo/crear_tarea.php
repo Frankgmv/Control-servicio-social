@@ -3,9 +3,6 @@ require "../../../Controlador/RecogerDatos/directivo/datos.php";
 
 // cierre de sesiones
 if (isset($_SESSION['id_dir'])) {
-    $idD = $_SESSION['id_dir'];
-    $DataDir = $Boss->Get_mis_datos($idD);
-    $HorasYTareas = $Boss->Get_numero_de_tareas_y_horas($idD);
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -16,7 +13,7 @@ if (isset($_SESSION['id_dir'])) {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
         <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
-        <title><?php echo $DataDir['NOMBRES']; ?></title>
+        <title>Crear tarea</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

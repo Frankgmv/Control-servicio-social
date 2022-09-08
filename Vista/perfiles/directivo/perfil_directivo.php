@@ -439,8 +439,8 @@ if (isset($_SESSION['id_dir'])) {
                                                                                                 <input type="hidden" name="id_tarea_botones" value="<?php echo $tareasPorMi['ID_TAREA']; ?>">
 
 
-                                                                                                <button type="submit" <?php echo $disable; ?> name="EliminarPostulacion" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash-can"><?php echo $tareasPorMi['ID_TAREA']; ?></i></button>
-                                                                                                <button type="submit" <?php echo $disable; ?> name="DesactivarPostulacion" class="btn btn-sm btn-outline-warning"><i class="fa-solid fa-stop"><?php print_r($datos_postulacion['ID_POSTULADO']); ?></i></button>
+                                                                                                <button type="submit" <?php echo $disable; ?> name="EliminarPostulacion" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                                                                                <button type="submit" <?php echo $disable; ?> name="DesactivarPostulacion" class="btn btn-sm btn-outline-warning"><i class="fa-solid fa-stop"></i></button>
                                                                                             </form>
                                                                                         </div>
                                                                                     </td>

@@ -6,6 +6,7 @@ if (isset($_SESSION['id'])) {
     $idt = $_SESSION['id'];
     $MisDatos = $Pepito->Get_mis_datos($idt);
     $horas = $Pepito->Get_mis_horas($id);
+    $pertenezco = $Pepito->GetACuantasPertenezco($idt);
     
 ?>
     <!DOCTYPE html>
@@ -18,7 +19,7 @@ if (isset($_SESSION['id'])) {
         <link rel="shortcut icon" href="../../includes/recursos/faviivon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../../Vista/custome_bootstrap/style.css">
         <!-- nombre y cuántas tareas tiene pendientes. -->
-        <title><?php echo $MisDatos['NOMBRES'];?></title>
+        <title><?php echo $MisDatos['NOMBRES']." (".$pertenezco;?>)</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

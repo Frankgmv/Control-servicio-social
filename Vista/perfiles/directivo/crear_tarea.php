@@ -22,7 +22,6 @@ if (isset($_SESSION['id_dir'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
-
     <body class="pt-3 mt-5">
         <header class="container-fluid ">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
@@ -60,70 +59,79 @@ if (isset($_SESSION['id_dir'])) {
         </header>
         <!-- Contenido principal -->
         <main class="mt-5 pb-5 container">
-            <form class="row p-2 p-sm-3 bg-secondary rounded" action="../../../Controlador/RecogerDatos/directivo/datos.php" method="POST">
-                <div class="col-12 m-1">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 px-2 px-sm-4">
-                            <input type="text" name="nombre_tarea" required class="border-0 text-center form-control" placeholder="Nombre tarea" maxlength="30">
-                        </div>
-                        <div class="col-12 col-sm-6  px-2 px-sm-4">
-                            <input type="date" name="fecha_limite" required class="border-0 text-center form-control text-black-50" placeholder="fecha limite">
+            <form class="row mx-1 bg-secondary rounded border border-3 border-primary" action="../../../Controlador/RecogerDatos/directivo/datos.php" method="POST">
+                <div class="text-center bg-primary text-light">
+                    <h4 class=" my-2 d-none d-sm-block">Creador de tareas estudiantiles</h4>
+                    <h4 class=" my-2 d-block d-sm-none">Creador de tareas</h4>
+                </div>
+                <div class=" py-1">
+                    <div class="col-12 m-1">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 px-2 px-sm-4 text-center">
+                                <label class=" text-black-50 mb-2">NOMBRE TAREA</label>
+                                <input type="text" name="nombre_tarea" required class="border-0 text-center form-control form-control-sm rounded-pill" maxlength="30">
+                            </div>
+                            <div class="col-12 col-sm-6 text-center px-2 px-sm-4">
+                                <label class=" text-black-50 mb-2">FECHA LIMITE</label>
+                                <input type="date" name="fecha_limite" required class="border-0 text-center form-control form-control-sm text-black-50 rounded-pill ">
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-12 d-flex justify-content-around align-items-center m-sm-2">
-                    <input type="number" required name="n_horas" class="text-center form-control border-0 rounded rounded-pill mx-2" placeholder="Número de horas">
-                    <select name="grados" required class="text-center form-control border-0 rounded rounded-pill mx-2">
-                        <option value="0" disabled selected>Grado</option>
-                        <option value="11">11</option>
-                        <option value="10">10</option>
-                        <option value="9">9</option>
-                        <option value="todos">todos</option>
-                    </select>
-                    <input type="number" required name="N_postulaciones" class="text-center form-control border-0 rounded rounded-pill mx-2" placeholder="N° de postulaciones">
-                </div>
-                <!-- Objetivo y descripción -->
-                <div class="col-12 col-sm-12">
-                    <div class="row d-flex justify-content-around align-items-lg-stretch">
-                        <div class="mb-3 text-center col-12 col-sm-5">
-                            <label for="exampleInputEmail1" class="d-block form-label text-black-50">OBJETIVO</label>
-                            <textarea name="objetivo" required class=" form-control" cols="30" style="resize: none;" rows="4"></textarea>
-                        </div>
-                        <div class="mb-3 text-center col-12 col-sm-5 offset-sm-1">
-                            <label for="exampleInputEmail1" class="d-block form-label text-black-50">DESCRIPCIÓN</label>
-                            <textarea name="descripcion"  required class=" form-control" cols="30" rows="4" style="resize: none;"></textarea>
+                    <div class="col-12 p-sm-2">
+                        <div class="row mt-2">
+                            <div class="col-12 col-sm-4 col-md-4 mb-2 mb-sm-1">
+                                <input type="number" required name="n_horas" class="text-center form-control border-0 form-control-sm rounded-pill mx-2" placeholder="Número de horas">
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-4 mb-2 mb-sm-1">
+                                <select name="grados" required class="text-center form-control form-control-sm border-0 rounded-pill mx-2">
+                                    <option value="0" disabled selected>Grado</option>
+                                    <option value="11">11</option>
+                                    <option value="10">10</option>
+                                    <option value="9">9</option>
+                                    <option value="todos">todos</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-4 mb-2 mb-sm-1">
+                                <input type="number" required name="N_postulaciones" class="text-center form-control border-0 form-control-sm rounded-pill mx-2" placeholder="N° de postulaciones">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="text-end">
-                    <button type="reset" class=" mx-1 btn btn-warning btn-sm">limpiar</button>
-                    <button type="button" class="mx-1 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalId">
-                        <b class="text-light">Publicar</b>
-                    </button>
-                    <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
-                            <div class="modal-content border border-3 border-success">
-                                <div class="modal-header bg-success">
-                                    <h5 class="modal-title">Deseas publicar la tarea</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-center border-0">
-                                    <p><b>La tarea  será visible a los estudiantes y directivos.</b></p>
-                                </div>
-                                <div class="modal-footer border-0">
-                                    <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" name="Crear_tarea" class="btn btn-outline-success btn-sm">Publicar</button>
+                    <!-- Objetivo y descripción -->
+                    <div class="col-12 col-sm-12">
+                        <div class="row d-flex justify-content-around align-items-lg-stretch">
+                            <div class="mb-3 text-center col-12 col-sm-5">
+                                <label for="exampleInputEmail1" class="d-block form-label text-black-50">OBJETIVO</label>
+                                <textarea name="objetivo" required class=" form-control" cols="30" style="resize: none;" rows="4"></textarea>
+                            </div>
+                            <div class="mb-3 text-center col-12 col-sm-5 offset-sm-1">
+                                <label for="exampleInputEmail1" class="d-block form-label text-black-50">DESCRIPCIÓN</label>
+                                <textarea name="descripcion" required class=" form-control" cols="30" rows="4" style="resize: none;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="reset" class=" mx-1 btn btn-warning btn-sm">Limpiar</button>
+                        <button type="button" class="mx-1 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalId">
+                            <b class="text-light">Publicar</b>
+                        </button>
+                        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                                <div class="modal-content border border-3 border-success">
+                                    <div class="modal-header bg-success">
+                                        <h5 class="modal-title">Deseas publicar la tarea</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center border-0">
+                                        <p><b>La tarea será visible a los estudiantes y directivos.</b></p>
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                        <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" name="Crear_tarea" class="btn btn-outline-success btn-sm">Publicar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-                    <!-- Optional: Place to the bottom of scripts -->
-                    <script>
-                        const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-                    </script>
                 </div>
             </form>
         </main>

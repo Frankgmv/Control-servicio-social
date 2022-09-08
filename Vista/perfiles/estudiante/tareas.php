@@ -73,7 +73,7 @@ if (isset($_SESSION['id'])) {
                 while ($TAREA = mysqli_fetch_array($result3)) {
                     // variables operadores de código 
                     $ID_TAREA = $TAREA['ID_TAREA'];
-                    
+
                     $ides = "tareasN_" . $id_collapse;
 
                     // Obtener el nombre del creador
@@ -123,7 +123,7 @@ if (isset($_SESSION['id'])) {
                             $icono = "fa-check ";
                         }
                     }
-                    
+
 
                 ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2 ">

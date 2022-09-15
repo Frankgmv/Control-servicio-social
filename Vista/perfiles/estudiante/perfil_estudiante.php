@@ -182,7 +182,9 @@ if (isset($_SESSION['id'])) {
                             if (strtolower($mis_tareas['ESTADO_TAREA']) == "activa") {
                                 $color = "warning";
                                 $ModalColor = "warning";
+                                $dis_post = " ";
                             } else {
+                                $dis_post = "disabled";
                                 $ModalColor = "success";
                                 $color = "success";
                             }
@@ -291,7 +293,7 @@ if (isset($_SESSION['id'])) {
                                                                 <input type="hidden" name="id_user" value="<?php echo $id; ?>">
                                                                 <input type="hidden" name="id_tarea" value="<?php echo $mis_tareas['ID_TAREA']; ?>">
 
-                                                                <button name="Anular_postulacion" type="button" class="btn btn-light small btn-sm " data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal2; ?>">Anular Postulación.</button>
+                                                                <button name="Anular_postulacion" <?php echo $dis_post;?> type="button" class="btn btn-light small btn-sm " data-bs-toggle="modal" data-bs-target="#<?php echo $id_modal2; ?>">Anular Postulación.</button>
 
                                                                 <div class="modal fade mt-5 pt-5 " id="<?php echo $id_modal2; ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                                                     <div class="modal-dialog " role="document mt-5">
@@ -354,6 +356,6 @@ if (isset($_SESSION['id'])) {
     header("Location:../../../index.php");
 
     $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tituloDeAlerte'] = "warning";
-    $_SESSION['tipoAlerta'] = "Reingreso fallido";
+    $_SESSION['tituloDeAlerte'] = "Reingreso fallido";
+    $_SESSION['tipoAlerta'] = "warning";
 } ?>

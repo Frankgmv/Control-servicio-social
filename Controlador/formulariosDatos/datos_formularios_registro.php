@@ -135,22 +135,14 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
         $ocupacion = $_POST['ocupacion'];
         $tyc = $_POST['tyc'];
 
-
         $verificacion = "SELECT CLAVE_ADMINS FROM SUPER_ADMINS WHERE IDENTIDAD = '1011';";
-
         $return = mysqli_query($conn, $verificacion);
-
         $guardarAca = mysqli_fetch_array($return);
 
         if ($ClaveEspecial === $guardarAca['CLAVE_ADMINS']) {
-
             $contra_segura = password_hash($contra, PASSWORD_BCRYPT, ['vueltas' => 39]);
-
             $consulta =  "INSERT INTO ADMINS (IDENTIDAD, NOMBRES, APELLIDOS, EDAD, FECHA_REGISTRO, CELULAR, CORREO, ROL, DONDE_LABORA, OCUPACION, CONTRA, TYC) VALUES('$identidad', '$nombres', '$apellidos', $edad, '$fecha_actual', '$celular', '$correo', '$rol', '$Establecimiento', '$ocupacion', '$contra_segura', '$tyc');";
-
-
             $return = mysqli_query($conn, $consulta);
-
 
             if (!$return) {
                 #mensaje de error
@@ -162,7 +154,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
                 #mensaje de éxito al guardar
                 $_SESSION['tipoAlerta'] = "success";
                 $_SESSION['tituloDeAlerte'] = " Registro. ";
-                $_SESSION['mensajeDeAlerta'] = "Solicitud de administrador nuevo admin enviada correctamente, espere confirmación del super administrador.";
+                $_SESSION['mensajeDeAlerta'] = "Administrador registrado correctamente.";
                 header('Location:../../index.php');
             }
         } else {

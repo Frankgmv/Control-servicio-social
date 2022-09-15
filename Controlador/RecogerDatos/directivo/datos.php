@@ -348,7 +348,7 @@ if (isset($_SESSION['id_dir'])) {
         $id_postulado_postulacion = $_POST['id_postulado_botones'];
         $Boss->Set_estado_postulaciones($id_postulado_postulacion, $id_tarea_postulacion);
 
-        $st_modif = "Se Modifico el estado al estudiante [$id_postulado_elim] de la tarea [$id_tarea_elim]";
+        $st_modif = "Se Modifico el estado al estudiante [$id_postulado_postulacion] de la tarea [$id_tarea_postulacion]";
         $Boss->Set_modificaciones($id, $st_modif);
         header("Location:../../../Vista/perfiles/directivo/perfil_directivo.php");
     }

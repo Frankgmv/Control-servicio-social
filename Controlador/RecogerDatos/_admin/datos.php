@@ -1,9 +1,9 @@
 <?php 
-
 include "../../../Modelo/conexion_db.php";
 
-$id = $_SESSION['id'];
+$id = $_SESSION['id_adm'];
 
-echo $id;
 
 header("../../../Vista/perfiles/_admin/perfil_admin.php");
+
+

@@ -42,13 +42,16 @@ if (isset($_SESSION['id_adm'])) {
                 <div id="navegacion" class=" justify-content-sm-end collapse navbar-collapse">
                     <ul class="h4 navbar-nav  mt-3 list-group-horizontal justify-content-end">
                         <li class="nav-item text-start mx-2 h2">
-                            <a class=" text-light nav-link active d-sm-inline  d-md-inline  text-black-50" title="Perfil" href="perfil_directivo.php"><i class="fa-solid fa-circle-user" title="Perfil"></i></a>
+                            <a class=" text-light nav-link active d-sm-inline  d-md-inline  text-black-50" title="Perfil" href="#"><i class="fa-regular fa-circle-user" title="Perfil"></i></a>
                         </li>
                         <li class="nav-item text-start mx-2 h2">
-                            <a class=" text-light nav-link active d-sm-inline  d-md-inline  text-opacity-75" title="Perfil" href="crear_tarea.php"><i class="fa-solid fa-circle-plus" title="añadir tarea"></i></a>
+                            <a class=" text-light nav-link active d-sm-inline  d-md-inline  text-black-50" title="Perfil" href="#"><i class="fa-solid fa-book" title="Tareas Globales"></i></a>
                         </li>
                         <li class="nav-item text-start mx-2 h2">
-                            <a class="text-light nav-link active d-sm-inline d-md-inline text-opacity-75" href="tareas.php" title="Tareas"><i class="fa-solid fa-book"></i></a></a>
+                            <a class=" text-light nav-link active d-sm-inline  d-md-inline  text-black-50" title="Perfil" href="#"><i class="fa-solid fa-info-circle" title="Información general"></i></a>
+                        </li>
+                        <li class="nav-item text-start mx-2 h2">
+                            <a class=" text-light nav-link active d-sm-inline  d-md-inline  text-black-50" title="Perfil" href="#"><i class="fa-solid fa-users" title="Usuarios"></i></a>
                         </li>
                         <li class="nav-item text-start mx-2 h2">
                             <a class="text-light nav-link active d-sm-inline d-md-inline text-opacity-75" href="../Cerrar_sesiones.php" title="Cerrar sesión"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>

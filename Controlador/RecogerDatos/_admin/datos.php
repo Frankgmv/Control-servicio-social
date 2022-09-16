@@ -34,17 +34,49 @@ class Admin
         $this->ocupacion = $result['OCUPACION'];
         $this->donde_labora = $result['DONDE_LABORA'];
     }
-    function get_directivos()
-    {
-    }
+    
+    function get_directivos(){}
 
-    function Get_estudiantes()
-    {
-    }
+    function Get_estudiantes(){}
 
-    function  Get_ (){}
+    function Get_busqueda_de_directivo (){}
+
+    function Get_busqueda_de_estudiante (){}
+
+    function Set_cambiar_password_directivo (){}
+
+    function Set_cambiar_password_estudiante (){}
+
+    function Set_editar_directivos (){}
+
+    function Set_editar_estudiantes (){}
+
+    
+    /*
+    ** => hechos ya
+    GET
+    estudiantes **
+    directivos **
+    búsqueda_de_directivo **
+    búsqueda_de_estudiante **
+
+    SET
+    editar_directivos **
+    editar_estudiantes **
+    Set_editar_directivos **
+    Set_editar_estudiantes **
+    */
 }
+
+if(isset($_SESSION['id_adm'])){
 
 $Ferxxo = new Admin($ida);
 
-header("../../../Vista/perfiles/_admin/perfil_admin.php");
+    header("../../../Vista/perfiles/_admin/perfil_admin.php");
+
+
+
+}else{
+    header("../../../index.php");
+}
+

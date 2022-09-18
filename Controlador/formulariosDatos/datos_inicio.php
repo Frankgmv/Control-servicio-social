@@ -38,6 +38,7 @@ if (isset($_POST['rol'])) {
                     $_SESSION['nombreDeSession'] = 'iniciar_sesion_adminstradores';
                     break;
                 default:
+                    $_SESSION['tipoDeAlerte'] = "warning";
                     $_SESSION['tituloDeAlerte'] = " Error.";
                     $_SESSION['mensajeDeAlerta'] = "Acción fuera de los límites de la plataforma.";
                     header('Location:../../index.php');

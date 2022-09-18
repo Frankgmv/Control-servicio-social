@@ -80,8 +80,8 @@ session_start();
                                     </div>
                                     <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
                                         <!-- <input type="number" required autofocus name="celular" placeholder=" Celular" class="text-center rounded-pill form-control mb-1 border "> -->
-                                        <select name="grado" required autofocus class="rounded-pill text-muted form-select  text-center">
-                                            <option value="0" selected disabled>Grado</option>
+                                        <select name="grado"   autofocus class="rounded-pill text-muted form-select  text-center">
+                                            <option required aria-required="true" value="" selected disabled>Grado</option>
                                             <option value="9">9°</option>
                                             <option value="10">10°</option>
                                             <option value="11">11°</option>
@@ -93,8 +93,8 @@ session_start();
                                         <!-- Media técnica -->
                                         <div class="input-group rounded-pill mb-2">
                                             <span class="input-group-text bg-body border-end-0 text-muted">SENA<i class="fa-solid fa-right-long ms-3"></i></span>
-                                            <select name="nombre_tecnica" autofocus required id="nom_tecnica" class="text-center form-select  text-muted border-start-0 text-start text-uppercase" required>
-                                                <option value="Seleccionar" disabled selected>Seleccionar</option>
+                                            <select name="nombre_tecnica" autofocus  id="nom_tecnica" class="text-center form-select  text-muted border-start-0 text-start text-uppercase" required>
+                                                <option required aria-required="true" value="Seleccionar" disabled selected>Seleccionar</option>
                                                 <option value="Desarrollo de software">Desarrollo de Software</option>
                                                 <option value="Asesoria comercial">Asesoría Comercial</option>
                                                 <option value="Ninguna">Ninguna</option>

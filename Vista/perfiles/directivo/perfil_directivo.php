@@ -513,9 +513,9 @@ if (isset($_SESSION['id_dir'])) {
 <?php
 } else {
     
+    $_SESSION['tipoAlerta'] = "warning";
+    $_SESSION['tituloDeAlerte'] = "Reingreso fallido";
     $_SESSION['mensajeDeAlerta'] = "Por favor inicia sesión nuevamente.";
-    $_SESSION['tituloDeAlerte'] = "warning";
-    $_SESSION['tipoAlerta'] = "Reingreso fallido";
     
     header("Location:../../../index.php");
 } ?>

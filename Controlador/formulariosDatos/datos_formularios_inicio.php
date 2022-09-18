@@ -2,6 +2,7 @@
 # TODO VALIDAR LOS DATOS PARA EL INICIO DE SESIÓN.
 
 // esta página es para recibir los datos de los distintos formularios de inicio de sesión.
+
 require_once "../../Modelo/conexion_db.php";
 //  session_start();
 
@@ -46,10 +47,11 @@ if (isset($_POST['iniciar_sesion_estudiantes']) or isset($_POST['iniciar_sesion_
 
         if (($numero_resultados == 1) && password_verify($password, $pedirOrden['CONTRA'])) {
             // Cuerpo para buscar el perfil del directivo
+            $_SESSION['id_dir'] = $identidad;
             header('Location:../../Vista/perfiles/directivo/perfil_directivo.php');
         } else {
             // fail directivo 
-            $_SESSION['tipoAlertaInicio'] = "error";
+            $_SESSION['tipoAlertaInicio'] = "warning";
             $_SESSION['tituloInicio'] = "Error";
             $_SESSION['mensajeInicio'] = "Usuario o Contraseña son incorrectos. ";
             header('Location:inicio_sesion.php');

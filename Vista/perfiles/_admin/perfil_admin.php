@@ -157,6 +157,37 @@ if (isset($_SESSION['id_adm'])) {
 
                 </div>
             </div>
+            <div class="border border-4 border-primary rounded-3 mt-1">
+                <div class="bg-primary border-bottom border-3 border-primary text-center py-2">
+                    <h2 class="text-light text-white-50"><i class="small fa-solid fa-screwdriver-wrench"></i> <b class="text-light">ACTIVIDAD</b></h2>
+                </div>
+                <div class="mx-2">
+                    <table class="table mx-md-2">
+
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col">N°</th>
+                                <th scope="col">FECHA</th>
+                                <th scope="col">DESCRIPCIÓN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $cont = 1;
+                            $resultado_011 = $Ferxxo->get_mis_modificaciones($ida);
+                            while ($data_mod = mysqli_fetch_array($resultado_011)) { ?>
+                                <tr>
+                                    <td class=" text-center"><?php echo $cont; ?></td>
+                                    <td class=" text-center"><?php echo $data_mod['FECHA_MODIFICACION']; ?></td>
+                                    <td class="text-break text-center"><?php echo $data_mod['TIPO_MODIFICACION']; ?></td>
+
+                                </tr>
+                                <?php $cont++;
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">

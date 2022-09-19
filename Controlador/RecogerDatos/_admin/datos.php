@@ -80,6 +80,14 @@ class Admin
         return $result['CONTEO_MODIFICACIONES'];
     }
 
+    function get_mis_modificaciones($ida)
+    {
+        global $conn;
+        $sql_data_1 = "SELECT * FROM MODIFICACIONES WHERE ID_MODIFICADOR = '$ida';";
+        $consult_13 = mysqli_query($conn, $sql_data_1);
+        return $consult_13;
+    }
+
     function get_directivos()
     {
         global $conn;
@@ -284,6 +292,17 @@ class Admin
         if (!$retirado) {
             return 0;
         } else {
+            return 1;
+        }
+    }
+
+    function Set_modificaciones($id_modificador, $Tipo_modificacion)
+    {
+        global $conn;
+        $modify_sql = "INSERT INTO MODIFICACIONES (ID_MODIFICADOR,FECHA_MODIFICACION, TIPO_MODIFICACION) VALUE ('$id_modificador',CURRENT_DATE(),'$Tipo_modificacion');";
+        $modify_consult = mysqli_query($conn, $modify_sql);
+
+        if ($modify_consult) {
             return 1;
         }
     }

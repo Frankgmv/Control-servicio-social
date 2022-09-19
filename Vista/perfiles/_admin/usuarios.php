@@ -23,7 +23,7 @@ if (isset($_SESSION['id_adm'])) {
     <body class="pt-4 mt-4">
         <header class="container-fluid ">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-                <a class="navbar-brand" href="tareas.php">
+                <a class="navbar-brand" href="info_general.php">
                     <div class="row ">
                         <div class="col-auto text-start d-inline">
                             <img src="../../../Controlador/includes/recursos/img-cabecera.png" class="i" width="auto" height="80" alt="logo sistema">

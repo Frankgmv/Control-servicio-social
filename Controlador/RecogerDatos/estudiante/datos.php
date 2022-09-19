@@ -197,7 +197,6 @@ if (isset($_SESSION['id'])) {
 
    function NombreCreadorTarea($id_creador)
    {  
-
       global $conn;
       $SQL7 = "SELECT CONCAT(NOMBRES,' ', APELLIDOS) AS NOMBRES FROM DIRECTIVOS WHERE IDENTIDAD = '$id_creador';";
       $queryC = mysqli_query($conn, $SQL7);
@@ -213,6 +212,7 @@ if (isset($_SESSION['id'])) {
       $resultado = mysqli_fetch_array($consl);
       return $resultado['ESTADO'];
    }
+   
 } else {
    header("Location:../../../Controlador/formulariosDatos/inicio_sesion.php");
    $_SESSION['mensajeInicio'] = "Por favor inicia sesión nuevamente.";

@@ -28,7 +28,7 @@ if (isset($_SESSION['id_adm'])) {
     <body class="pt-4 mt-4">
         <header class="container-fluid ">
             <nav class="container-fluid navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-                <a class="navbar-brand" href="tareas.php">
+                <a class="navbar-brand" href="info_general.php">
                     <div class="row ">
                         <div class="col-auto text-start d-inline">
                             <img src="../../../Controlador/includes/recursos/img-cabecera.png" class="i" width="auto" height="80" alt="logo sistema">
@@ -168,15 +168,15 @@ if (isset($_SESSION['id_adm'])) {
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        <?php if (isset($_SESSION['mensajeDePerfilDir'])) { ?>
+        <?php if (isset($_SESSION['mensajeDePerfilAdm'])) { ?>
 
             <script>
-                swal("<?php print $_SESSION['tituloDePerfilDir']; ?>", " <?php print $_SESSION['mensajeDePerfilDir']; ?> "
-                    <?php if (isset($_SESSION['tipoPerfilDir'])) { ?>, "<?php print $_SESSION['tipoPerfilDir']; ?>"
+                swal("<?php print $_SESSION['tituloDePerfilAdm']; ?>", " <?php print $_SESSION['mensajeDePerfilAdm']; ?> "
+                    <?php if (isset($_SESSION['tipoPerfilAdm'])) { ?>, "<?php print $_SESSION['tipoPerfilAdm']; ?>"
                     <?php } ?>
                 );
             </script>
-        <?php unset($_SESSION['mensajeDePerfilDir'], $_SESSION['tituloDePerfilDir'], $_SESSION['tipoPerfilDir']);
+        <?php unset($_SESSION['mensajeDePerfilAdm'], $_SESSION['tituloDePerfilAdm'], $_SESSION['tipoPerfilAdm']);
         } ?>
     </body>
 

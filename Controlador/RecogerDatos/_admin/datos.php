@@ -1,4 +1,5 @@
 <?php
+
 include "../../../Modelo/conexion_db.php";
 
 $ida = $_SESSION['id_adm'];
@@ -34,6 +35,34 @@ class Admin
         $this->ocupacion = $result['OCUPACION'];
         $this->donde_labora = $result['DONDE_LABORA'];
     }
+    function get_tareas()
+    {
+        global $conn;
+        $sql_12 = "SELECT * FROM TAREAS ORDER BY ESTADO_TAREA ASC;";
+        $consult = mysqli_query($conn, $sql_12);
+
+        return $consult;
+    }
+
+    function Get_datos_del_postulado($id_tarea)
+    {
+        global $conn;
+        $slq_8 = "SELECT * FROM POSTULADOS WHERE ID_TAREA = '$id_tarea' ORDER BY ESTADO_POSTULACION ASC;";
+        $CONSULT_8 = mysqli_query($conn, $slq_8);
+        return $CONSULT_8;
+    }
+
+    function Get_datos_del_estudiante($identidad)
+    {
+        global $conn;
+
+        $sql_7 = "SELECT concat(NOMBRES,' ',APELLIDOS) as NOMBRES, IDENTIDAD as ID_E, GRADO  FROM ESTUDIANTES WHERE IDENTIDAD = '$identidad';";
+        $CONSULT_7 = mysqli_query($conn, $sql_7);
+        $rest = mysqli_fetch_array($CONSULT_7);
+
+        return $rest;
+    }
+
     function get_mis_datos($ida)
     {
         global $conn;
@@ -84,6 +113,32 @@ class Admin
         $consult_4 = mysqli_query($conn, $sql_4);
         $result_4 = mysqli_fetch_array($consult_4);
         return $result_4;
+    }
+
+    function Get_contar_los_postulados($id_tarea)
+    {
+        global $conn;
+        $sql_11 = "SELECT COUNT(ID_POSTULADO) AS TOTAL FROM POSTULADOS WHERE ID_TAREA = '$id_tarea';";
+        $CONSULT_11 = mysqli_query($conn, $sql_11);
+
+        $result__11 = mysqli_fetch_array($CONSULT_11);
+
+        $sql_10 = "SELECT  COUNT(ID_POSTULADO) AS ACTIVOS FROM POSTULADOS WHERE ID_TAREA = '$id_tarea' AND ESTADO_POSTULACION LIKE 'A%';";
+        $CONSULT_10 = mysqli_query($conn, $sql_10);
+        $result__10 = mysqli_fetch_array($CONSULT_10);
+
+
+        $activos = $result__10['ACTIVOS'];
+        $total = $result__11['TOTAL'];
+        $inactivos = $total - $activos;
+
+        $N_POSTULACIONES = array('ACTIVOS' => $activos, 'TOTALES' =>  $total, 'INACTIVOS' => $inactivos);
+
+        return $N_POSTULACIONES;
+    }
+
+    function Get_egresados()
+    {
     }
 
     function Set_cambiar_password_directivo($id_directivo, $newPassword)
@@ -159,7 +214,7 @@ class Admin
         }
     }
 
-    function Get_egresar_estudiante($id_estudiante)
+    function Set_egresar_estudiante($id_estudiante)
     {
         global $conn;
         // Obtener datos básicos
@@ -195,8 +250,8 @@ class Admin
             return 1;
         }
     }
-    
-    function Get_retirar_estudiante($id_estudiante)
+
+    function Set_retirar_estudiante($id_estudiante)
     {
         global $conn;
         // Obtener datos básicos
@@ -239,6 +294,8 @@ if (isset($_SESSION['id_adm'])) {
     $Ferxxo = new Admin($ida);
     $DataAdm = $Ferxxo->get_mis_datos($ida);
     $n_modificaciones = $Ferxxo->get_mi_numero_de_modificaciones($ida);
+
+
 
 
 

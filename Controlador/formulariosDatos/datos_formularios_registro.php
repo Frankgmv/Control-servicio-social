@@ -148,7 +148,7 @@ if (isset($_POST['Crear_estudiantes']) or isset($_POST['Crear_directivos']) or i
                 #mensaje de error
                 $_SESSION['tipoAlerta'] = "warning";
                 $_SESSION['tituloDeAlerte'] = " Registro. ";
-                $_SESSION['mensajeDeAlerta'] = "El usuario no a podido ENVIAR su solicitud de administrador.";
+                $_SESSION['mensajeDeAlerta'] = "El usuario no ser registrado administrador.";
                 header('Location:../../index.php');
             } else {
                 #mensaje de éxito al guardar

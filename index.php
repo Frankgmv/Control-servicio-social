@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="Controlador/includes/recursos/faviivon.ico" type="image/x-icon">
@@ -33,12 +33,12 @@ session_start();
         </a>
     </nav>
     <main class="container">
-        <div class="row pt-3 mt-1  mb-5">
+        <div class="row pt-3 mt-1 mb-5 ">
             <div class="col-12 col-sm-3 col-md-3 col-lg-3"></div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-6 ">
                 <section class="card  shadow-lg border border-4 border-primary">
                     <div class="col text-center bg-primary py-2">
-                        <h4 class=""><i class="fa-solid fa-face-smile-wink text-light"><b class="h3"> INICIA AHORA.</b></i></h4>
+                        <h4 class=""><i class="fa-solid fa-face-smile-wink text-light"><b class="h3"> INICIA AHORA</b></i></h4>
                     </div>
                     <form class="p-3 mb-2 bg-body mt-5 " action="Controlador/formulariosDatos/datos_inicio.php" method="POST">
                         <div class="form-group text-center">

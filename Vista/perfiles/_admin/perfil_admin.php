@@ -182,7 +182,7 @@ if (isset($_SESSION['id_adm'])) {
                                     <td class="text-break text-center"><?php echo $data_mod['TIPO_MODIFICACION']; ?></td>
 
                                 </tr>
-                                <?php $cont++;
+                            <?php $cont++;
                             } ?>
                         </tbody>
                     </table>

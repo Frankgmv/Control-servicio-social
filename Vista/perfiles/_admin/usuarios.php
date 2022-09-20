@@ -3,6 +3,27 @@ require "../../../Controlador/RecogerDatos/_admin/datos.php";
 
 if (isset($_SESSION['id_adm'])) {
     $ida = $_SESSION['id_adm'];
+
+
+    function RealizarBusqueda($dato, $rol)
+    {
+        global $conn;
+        $rolN = strtoupper($rol);
+        switch ($rolN) {
+            case 'ESTUDIANTE':
+                $table = "ESTUDIANTES";
+                break;
+            case 'DIRECTIVO':
+                $table = "DIRECTIVOS";
+                break;
+            case 'ADMIN':
+                $table = "ADMINS";
+                break;
+        }
+        $sql_4 = "SELECT * FROM $table WHERE (IDENTIDAD like LOWER('$dato%')) OR (NOMBRES like LOWER('$dato%')) OR (APELLIDOS like LOWER('$dato%'));";
+        $consult_4 = mysqli_query($conn, $sql_4);
+        return $consult_4;
+    }
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -18,6 +39,7 @@ if (isset($_SESSION['id_adm'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     </head>
 
     <body class="pt-4 mt-4">
@@ -60,6 +82,162 @@ if (isset($_SESSION['id_adm'])) {
         </header>
         <!-- Contenido principal -->
         <main class="mt-5 pt-4 px-sm-2">
+            <!-- Barra de busqueda -->
+            <form action="" method="GET">
+                <div class="mb-2 col-12 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-6 offset-lg-3" id="Barra_busqueda">
+                    <div class="input-group mb-3 px-2 px-sm-0">
+                        <div class="input-group-text border border-0">
+                            <!-- <span class="input-group-text form-control border-0 border">Filtrar <i class="ms-1 fa-solid fa-chevron-down"></i></span> -->
+                            <span class="input-group-text form-control border-0 border"><i class="fa-solid fa-filter"></i></span>
+                            <!-- <span class="input-group-text form-control border-0 border">Filtrar</span> -->
+                            <select class="input-group-text mx-2 pe-5 px-2 text-center border border-0" name="rol">
+                                <option value="estudiante"><b>Estudiante</b></option>
+                                <option value="directivo"><b>Directivo</b></option>
+                                <option value="admin"><b>Admin</b></option>
+                            </select>
+                        </div>
+                        <input type="search" maxlength="20" required name="datos" class="form-control input-group-text text-center border-0" placeholder="Busqueda">
+                        <button class="input border-0" name="buscar_datos"><i class="fa-solid fa-magnifying-glass">
+                                <div class="fs-6 d-inline">buscar</div>
+                            </i></button>
+                    </div>
+                </div>
+            </form>
+            <div class="">
+                <?php
+                if (isset($_GET['datos'])) {
+
+                    $datos = $_GET['datos'];
+                    $rol = $_GET['rol'];
+
+                    $resultadoBusqueda = RealizarBusqueda($datos, $rol);
+                ?>
+                    <div class=" alert alert-primary alert-dismissible fade show  align-items-center" role="alert">
+                        <i class="btn btn-close" data-bs-dismiss="alert" aria-hidden="true"></i>
+                        <div class="table-responsive-sm">
+                            <table class="table table-primary">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">IDENTIDAD</th>
+                                        <th scope="col">NOMBRES</th>
+                                        <th scope="col">ACCIONES </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <?php
+                                    while ($Resultado = mysqli_fetch_array($resultadoBusqueda)) {
+                                        $idModal = $Resultado['IDENTIDAD'];
+                                    ?>
+                                        <tr class="">
+                                            <td scope="row"><?php echo $Resultado['IDENTIDAD']; ?></td>
+                                            <td><?php echo $Resultado['NOMBRES'] . $Resultado['APELLIDOS']; ?></td>
+                                            <td>
+                                                <div class="col mt-0 p-0 d-flex justify-content-between align-items-start">
+                                                    <div class="small">
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo "ver" . $idModal; ?>" class="btn rounded-3 btn-outline-primary border-0"><i class="fa-solid fa-eye small"></i></button>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo "editar" . $idModal; ?>" class="btn rounded-3 btn-outline-success border-0"><i class="fa-solid fa-pencil small"></i></button>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo "editPass" . $idModal; ?>" class="btn rounded-3 btn-outline-dark border-0"><i class="fa-solid fa-lock small"></i></button>
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#<?php echo "elim" . $idModal; ?>" class="btn rounded-3 btn-outline-danger border-0"><i class=" fa-solid fa-trash-can small"></i></button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- Modal verTodo-->
+                                        <div class="modal fade" id="<?php echo "ver" . $idModal; ?>" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalTitleId">Ver información personal</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            Add rows here
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+                                                        <button type="button" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal editar-->
+                                        <div class="modal fade" id="<?php echo "editar" . $idModal; ?>" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalTitleId">Editar información personal</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            Add rows here
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+                                                        <button type="button" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal cambiar password-->
+                                        <div class="modal fade" id="<?php echo "editPass" . $idModal; ?>" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalTitleId">Restablecer contraseña</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            Add rows here
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+                                                        <button type="button" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal eliminar perfil-->
+                                        <div class="modal fade" id="<?php echo "elim" . $idModal; ?>" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalTitleId">Eliminar usuario</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            Add rows here
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+                                                        <button type="button" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                <?php
+                                    }
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </div>
+
+
+
+
+
 
         </main>
 
@@ -73,7 +251,6 @@ if (isset($_SESSION['id_adm'])) {
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <?php if (isset($_SESSION['mensajeDePerfilDir'])) { ?>
-
             <script>
                 swal("<?php print $_SESSION['tituloDePerfilDir']; ?>", " <?php print $_SESSION['mensajeDePerfilDir']; ?> "
                     <?php if (isset($_SESSION['tipoPerfilDir'])) { ?>, "<?php print $_SESSION['tipoPerfilDir']; ?>"

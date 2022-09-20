@@ -103,24 +103,35 @@ class Admin
         $consult_2 = mysqli_query($conn, $sql_2);
         return $consult_2;
     }
-
-    function Get_busqueda_de_directivo($id_directivo)
+    function Get_egresados()
     {
         global $conn;
-        $sql_3 = "SELECT * FROM DIRECTIVOS WHERE IDENTIDAD = '$id_directivo';";
-        $consult_3 = mysqli_query($conn, $sql_3);
-        $result_3 = mysqli_fetch_array($consult_3);
-        return $result_3;
+        $sql_13 = "SELECT * FROM EGRESADOS;";
+        $consult_13 = mysqli_query($conn, $sql_13);
+        return $consult_13;
     }
 
-
-    function Get_busqueda_de_estudiante($id_estudiante)
+    function Get_busqueda_usuario($dato, $rol)
     {
         global $conn;
-        $sql_4 = "SELECT * FROM ESTUDIANTE WHERE IDENTIDAD = '$id_estudiante';";
+
+        $rolN = strtoupper($rol);
+
+        switch ($rolN) {
+            case 'ESTUDIANTE':
+                $table = "ESTUDIANTES";
+                break;
+            case 'DIRECTIVO':
+                $table = "DIRECTIVOS";
+                break;
+            case 'ADMIN':
+                $table = "ADMINS";
+                break;
+        }
+
+        $sql_4 = "SELECT * FROM $table WHERE (IDENTIDAD like LOWER('$dato%')) OR (NOMBRES like LOWER('$dato%')) OR (APELLIDOS like LOWER('$dato%'));";
         $consult_4 = mysqli_query($conn, $sql_4);
-        $result_4 = mysqli_fetch_array($consult_4);
-        return $result_4;
+        return $consult_4;
     }
 
     function Get_contar_los_postulados($id_tarea)
@@ -143,10 +154,6 @@ class Admin
         $N_POSTULACIONES = array('ACTIVOS' => $activos, 'TOTALES' =>  $total, 'INACTIVOS' => $inactivos);
 
         return $N_POSTULACIONES;
-    }
-
-    function Get_egresados()
-    {
     }
 
     function Set_cambiar_password_directivo($id_directivo, $newPassword)
@@ -310,13 +317,10 @@ class Admin
 
 if (isset($_SESSION['id_adm'])) {
 
+
     $Ferxxo = new Admin($ida);
     $DataAdm = $Ferxxo->get_mis_datos($ida);
     $n_modificaciones = $Ferxxo->get_mi_numero_de_modificaciones($ida);
-
-
-
-
 
     header("../../../Vista/perfiles/_admin/perfil_admin.php");
 } else {

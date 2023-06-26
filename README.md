@@ -15,4 +15,6 @@ Administrador: será el encargado de modificar datos errados de los directivos o
 
 Autor: Frank Giovany Muriel Velásquez.
 
-Dominio: https://controlserviciosocial.000webhostapp.com/
+```shh
+https://controlserviciosocial.000webhostapp.com
+```

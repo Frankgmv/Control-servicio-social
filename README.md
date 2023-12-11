@@ -45,7 +45,7 @@ Sitio Web [Control servicio social](https://controlserviciosocial.000webhostapp.
 
 
 > [!Tip]
-> ## ** Guia de sesión**
+> ## **Guia de inicio de sesión**
 > 1. #### Ve al formulario, selecciona el rol y luego dale en iniciar sesión
 >    - ![image](https://github.com/Frankgmv/Control-servicio-social/assets/91444397/7f433c1c-23f2-461f-9836-fcf07ef70146)
 > 2. Inserta tus credenciales

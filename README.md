@@ -5,9 +5,9 @@
 Un proyecto guardar horas de estudiantes basado en la problemática de la perdida de horas y a los fraudes que han habido frente a este tema de servicio social en los colegios o instituciones.
 
 >[!Note]
->#### Como se compone de
->Perfiles específicos los cuales tiene unas funcionalidades internar distintas los cuales son estudiantes, directivos y administradores.
->Estos son los cuales dispondrán de la >plataforma.
+>#### Como se compone
+>Perfiles específicos los cuales tiene unas funcionalidades internar distintas los cuales son estudiantes, directivos y administradores. <br>
+>Estos son los cuales dispondrán de la plataforma.
 
 ### Perfil de Estudiante
 - Recibir las tareas de enviadas por los directivos, podrán postularse y anular su postulación a estas tareas, para recibir unas horas en su perfil tendrá que realizarla luego el directivo que la envió tendrá el deber de dar por terminada la tarea y todo estudiante recibirá sus horas correspondientes.
@@ -31,7 +31,7 @@ Sitio Web [Control servicio social](https://controlserviciosocial.000webhostapp.
 > [!Tip]
 > ## **Guia para Registrarse**
 > 1. #### Ve al inicio de la sitio web, coloca el rol que deseas y dale en registrarte
->  - ![image](https://github.com/Frankgmv/Control-servicio-social/assets/91444397/223e4253-6860-4c02-9a16-4e385c04c084)
+>  - ![Inicial](https://github.com/Frankgmv/Control-servicio-social/assets/91444397/223e4253-6860-4c02-9a16-4e385c04c084)
 > 2. #### Rellena todos los campos vacios con tus datos personales
 >    - ![image](https://github.com/Frankgmv/Control-servicio-social/assets/91444397/9a8b0068-dc97-463c-a25d-8aff71625c42)
 > 3. #### En el campo de la clave especial inserte la clave según el perfil

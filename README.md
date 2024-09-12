@@ -57,7 +57,7 @@ Sitio Web [Control servicio social](https://controlserviciosocial.000webhostapp.
 -  Frank Mv <fgmv08@gmail.com>
 -  Coloca en el Asunto de tu correo
   ```ssh
- GitHun control servicio social / [tu nombre]
+ GitHub control servicio social / [tu nombre]
 ```
 
 ## Actualizaciones
